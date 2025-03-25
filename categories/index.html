@@ -1,12 +1,12 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="utf-8" />
-    <title>Categories | owl_d</title>
+    <title>Categories | OWL_D Blog</title>
     <meta name="author" content="owl_d" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
@@ -51,7 +51,7 @@
         <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
     <nav id="desktop-menu">
         <a class="title" href="/">
-            <span>OWL_D</span>
+            <span>OWL_D BLOG</span>
         </a>
         
         <a href="/">
@@ -83,7 +83,7 @@
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
             <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;OWL_D</span>
+            <span>&emsp;OWL_D BLOG</span>
         </div>
         <transition name="slide">
             <div class="items" v-show="showMenuItems">
@@ -147,6 +147,39 @@
     <div class="categories-tags">
         
         
+        
+        <span>
+            <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/" style="background: #fbbc05">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                網絡安全
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                基礎知識
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/%E6%BB%B2%E9%80%8F%E6%B8%AC%E8%A9%A6/" style="background: #00a596">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                滲透測試
+            </a>
+        </span>
+        
+        
     </div>
     
 </div>
@@ -155,7 +188,7 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2025 owl_d
+            2022 - 2025 OWL_D Blog
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>

@@ -1,12 +1,12 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | owl_d</title>
+    <title>Archives | OWL_D Blog</title>
     <meta name="author" content="owl_d" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
@@ -51,7 +51,7 @@
         <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
     <nav id="desktop-menu">
         <a class="title" href="/">
-            <span>OWL_D</span>
+            <span>OWL_D BLOG</span>
         </a>
         
         <a href="/">
@@ -83,7 +83,7 @@
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
             <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;OWL_D</span>
+            <span>&emsp;OWL_D BLOG</span>
         </div>
         <transition name="slide">
             <div class="items" v-show="showMenuItems">
@@ -147,6 +147,124 @@
     
     <div id="timeline-wrap" ref="timeline">
         
+        <div class="timeline" data-title="網絡安全入門：保護你的數位生活">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/3/24</div>
+                <a href="/2024/03/24/intro-to-cybersecurity/">
+                    <h3>網絡安全入門：保護你的數位生活</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            網絡安全
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/" style="color: #ea4335">
+                                網絡安全
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7/" style="color: #4285f4">
+                                隱私保護
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E5%AE%89%E5%85%A8%E6%84%8F%E8%AD%98/" style="color: #00a596">
+                                安全意識
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E5%85%A5%E9%96%80%E6%8C%87%E5%8D%97/" style="color: #4285f4">
+                                入門指南
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline" data-title="滲透測試基礎：保護系統的第一步">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/3/24</div>
+                <a href="/2024/03/24/pentesting-basics/">
+                    <h3>滲透測試基礎：保護系統的第一步</h3>
+                </a>
+                <div class="info">
+                    
+                    <span class="category">
+                        <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            網絡安全
+                        </a>
+                    </span>
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E6%BB%B2%E9%80%8F%E6%B8%AC%E8%A9%A6/" style="color: #ff7d73">
+                                滲透測試
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Kali-Linux/" style="color: #2dc100">
+                                Kali Linux
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #00a596">
+                                漏洞掃描
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #03a9f4">
+                                安全評估
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
         <div class="timeline" data-title="helloworld">
             <div class="timeline-tail"></div>
             <div class="timeline-content">
@@ -168,7 +286,7 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2025 owl_d
+            2022 - 2025 OWL_D Blog
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>
