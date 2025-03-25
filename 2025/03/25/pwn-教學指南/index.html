@@ -176,7 +176,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/HackMD/" style="color: #03a9f4">
+                <a href="/tags/HackMD/" style="color: #ff7d73">
                     HackMD
                 </a>
             </span>
@@ -186,8 +186,7 @@
     </div>
     
     <div class="content" v-pre>
-        <p>太棒了！我將整理一份完整的 PWN 教學指南，涵蓋從基礎到進階的技術，並結合 C&#x2F;C++ 與 Python 的實作。</p>
-<p>我會重點包括：</p>
+        <p>重點包括：</p>
 <ul>
 <li><strong>基礎知識與概念</strong>（PWN 是什麼、CTF 題型介紹）</li>
 <li><strong>必要技能</strong>（逆向工程、漏洞分析、各類漏洞原理）</li>
@@ -196,11 +195,12 @@
 <li><strong>進階技巧</strong>（ROP、Heap Exploitation、Kernel Exploitation 等）</li>
 <li><strong>學習資源</strong>（免費與付費資源，包括影片與文字教學）</li>
 </ul>
-<p>同時，我會重點介紹 <strong>Hack The Box</strong> 與 <strong>Pwnable.tw</strong> 平台的挑戰，並涵蓋 Linux 與 Windows 的 Kernel Exploitation。</p>
-<p>請稍等，我完成後會通知你！</p>
+<p>同時會重點介紹 <strong>Hack The Box</strong> 與 <strong>Pwnable.tw</strong> 平台的挑戰，並涵蓋 Linux 與 Windows 的 Kernel Exploitation。</p>
 <h1 id="PWN-教學指南"><a href="#PWN-教學指南" class="headerlink" title="PWN 教學指南"></a>PWN 教學指南</h1><p>本指南將帶你從新手一路進階學習 PWN（<strong>Pwn</strong> 即「<strong>擁有</strong> &#x2F; <strong>攻破</strong>」的黑客俚語）相關技術，包含必要基礎知識、常見漏洞類型、實用工具介紹、實戰範例解析以及進階技巧，並提供 C&#x2F;C++ 與 Python 的實作範例。同時，我們也會強調 <strong>Kernel Exploitation（內核利用）</strong> 技術，幫助你了解在 Linux 與 Windows 核心層面的漏洞利用方法。</p>
 <h2 id="1-基礎知識與概念"><a href="#1-基礎知識與概念" class="headerlink" title="1. 基礎知識與概念"></a>1. 基礎知識與概念</h2><h3 id="PWN-是什麼？"><a href="#PWN-是什麼？" class="headerlink" title="PWN 是什麼？"></a>PWN 是什麼？</h3><p>「PWN」原是黑客圈的俚語，意思是<strong>攻破裝置或系統並取得控制權</strong>。發音類似「砰」，象徵成功駭入系統的一聲巨響。在網路安全語境中，PWN 指透過漏洞利用、社交工程等手段，成功獲得裝置、系統或網路的未授權控制權。一旦<strong>PWN</strong> 了某系統，攻擊者便可執行任意惡意操作，例如竊取資料、植入惡意程式或癱瘓系統服務。</p>
 <h3 id="CTF-中-PWN-題型介紹"><a href="#CTF-中-PWN-題型介紹" class="headerlink" title="CTF 中 PWN 題型介紹"></a>CTF 中 PWN 題型介紹</h3><p>在 CTF（Capture The Flag）競賽中，PWN 題目通常提供一個已編譯好的<strong>二進位程式</strong>（例如 Linux ELF 或 Windows PE 檔案），該程式部署在目標伺服器上。參賽者需要對這個程式進行逆向分析和動態調試，找出其中的漏洞，透過網路與服務互動並加以利用。PWN 題目的目標通常是<strong>取得遠端系統的 shell 權限</strong>或直接讀取旗標檔案。常見的 PWN 題目漏洞包含：棧&#x2F;堆緩衝區溢位、整數溢位、格式化字串漏洞等。總之，在 CTF PWN 題中，你需要發揮二進位漏洞挖掘與利用能力，突破沙盒或權限限制拿到目標系統的控制權。</p>
+<span id="more"></span>
+
 <h2 id="2-必要技能"><a href="#2-必要技能" class="headerlink" title="2. 必要技能"></a>2. 必要技能</h2><p>要成為 PWN 攻防的好手，需要掌握幾項核心技能：</p>
 <h3 id="逆向工程（Reverse-Engineering）"><a href="#逆向工程（Reverse-Engineering）" class="headerlink" title="逆向工程（Reverse Engineering）"></a>逆向工程（Reverse Engineering）</h3><p>逆向工程是分析<strong>編譯後的二進位檔</strong>以還原程式邏輯的過程。在 PWN 解題中，逆向是第一步，但本身並非重點；重點在於藉由逆向獲取程式碼（例如反編譯出的近似原始碼或反組譯的組語）以理解程式行為。常用的逆向工具有 <strong>IDA Pro</strong>（互動式反組譯器）、<strong>Ghidra</strong>（免費開源的逆向框架）、<strong>Radare2</strong> 等。透過這些工具，我們可以查看目標程式的控制流程、關鍵函數實現以及可疑的輸入處理邏輯，為後續漏洞分析做準備。</p>
 <blockquote>
