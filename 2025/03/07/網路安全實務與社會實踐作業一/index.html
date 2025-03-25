@@ -3,7 +3,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="utf-8" />
-    <title>【網路安全實務與社會實踐】作業二 Write-up | OWL_D Blog</title>
+    <title>【網路安全實務與社會實踐】作業一 Write-up | OWL_D Blog</title>
     <meta name="author" content="owl_d" />
     <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
     <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
@@ -148,22 +148,22 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>【網路安全實務與社會實踐】作業二 Write-up</h1>
+        <h1>【網路安全實務與社會實踐】作業一 Write-up</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/3/25
+            2025/3/7
         </span>
         
         <span class="category">
-            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                未分類
+                資訊安全
             </a>
         </span>
         
@@ -176,8 +176,22 @@
             
             <span class="tag">
                 
-                <a href="/tags/HackMD/" style="color: #00a596">
-                    HackMD
+                <a href="/tags/CTF/" style="color: #ffa2c4">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/CyberSecurity/" style="color: #03a9f4">
+                    CyberSecurity
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/NCKUCTF/" style="color: #ff7d73">
+                    NCKUCTF
                 </a>
             </span>
             
@@ -186,17 +200,19 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="作業二-Write-up-by-owl-d"><a href="#作業二-Write-up-by-owl-d" class="headerlink" title="作業二 Write-up by owl_d"></a>作業二 Write-up by owl_d</h1><h3 id="pathwalker-waf2"><a href="#pathwalker-waf2" class="headerlink" title="pathwalker-waf2"></a>pathwalker-waf2</h3><p>發現這題的path traversal重點在這個區間</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">      if (isset($_GET[&#x27;page&#x27;])) &#123;</span><br><span class="line">        $safe_path = str_replace(&#x27;../&#x27;, &#x27;&#x27;, $_GET[&#x27;page&#x27;]);</span><br><span class="line">        echo file_get_contents(&quot;./page/&quot;.$safe_path.&quot;.php&quot;);</span><br><span class="line">      &#125;      </span><br><span class="line">    ?&gt;</span><br></pre></td></tr></table></figure>
-<p>程式只有把 ..&#x2F; 換掉<br>所以可以使用 …&#x2F;.&#x2F; 的方式來 bypass<br>…&#x2F;.&#x2F; 被換掉後會變成 ..&#x2F; 就一樣可以達成回到上一層的目的</p>
-<p><code>https://chall.nckuctf.org:28142/?page=..././..././..././..././var/www/html/flag</code><br>即取得flag</p>
-<p>p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ..&#x2F; 過濾掉</p>
+        <h1 id="【網路安全實務與社會實踐】作業一"><a href="#【網路安全實務與社會實踐】作業一" class="headerlink" title="【網路安全實務與社會實踐】作業一"></a>【網路安全實務與社會實踐】作業一</h1><blockquote>
+<p>此次 Lab 共為兩題</p>
+<ol>
+<li>phpisnice <a target="_blank" rel="noopener" href="https://class.nckuctf.org/challenges#phpisnice-12">https://class.nckuctf.org/challenges#phpisnice-12</a></li>
+<li>phpisbest <a target="_blank" rel="noopener" href="https://class.nckuctf.org/challenges#phpisbest-13">https://class.nckuctf.org/challenges#phpisbest-13</a></li>
+</ol>
+</blockquote>
+<h3 id="phpisnice"><a href="#phpisnice" class="headerlink" title="phpisnice"></a>phpisnice</h3><p>先看一下網頁給的資訊</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;flag.php&#x27;);</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A != $B)</span><br><span class="line">        if (strcmp($A, $B) == 0)</span><br><span class="line">            if (md5($A) == md5($B))</span><br><span class="line">                echo $flag;</span><br><span class="line">            else die(&#x27;ERROR: MD5(A) != MD5(B)&#x27;);</span><br><span class="line">        else die(&#x27;ERROR: strcmp(A, B) != 0&#x27;);</span><br><span class="line">    else die(&#x27;ERROR: A == B&#x27;);</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>可以看出題目要求：<code>要求找到一個值 A，使得 md5(A) == A</code><br>所以這題是標準的「md5碰撞」</p>
 <span id="more"></span>
 
-
-<h3 id="swirl"><a href="#swirl" class="headerlink" title="swirl"></a>swirl</h3><p>Stage 1:<br>payload: <code>?A[]=1&amp;B[]=2</code></p>
-<p>Stage 2:<br>payload: <code>?A=true&amp;B=false</code></p>
-<p>Stage 3:<br>payload: <code>....\config.php</code><br><img src="https://hackmd.io/_uploads/Hkv_1tA31e.png" alt="image"></p>
 
     </div>
     

