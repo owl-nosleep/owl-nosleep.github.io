@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <title>PWN 教學指南 | OWL_D Blog</title>
+    <meta name="author" content="owl_d" />
+    <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>OWL_D BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;OWL_D BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>PWN 教學指南</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                未分類
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/HackMD/" style="color: #03a9f4">
+                    HackMD
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>太棒了！我將整理一份完整的 PWN 教學指南，涵蓋從基礎到進階的技術，並結合 C&#x2F;C++ 與 Python 的實作。</p>
+<p>我會重點包括：</p>
+<ul>
+<li><strong>基礎知識與概念</strong>（PWN 是什麼、CTF 題型介紹）</li>
+<li><strong>必要技能</strong>（逆向工程、漏洞分析、各類漏洞原理）</li>
+<li><strong>工具介紹</strong>（GDB、IDA Pro、pwntools、Radare2 等）</li>
+<li><strong>實戰案例</strong>（著名攻擊案例與 CTF 題目解析）</li>
+<li><strong>進階技巧</strong>（ROP、Heap Exploitation、Kernel Exploitation 等）</li>
+<li><strong>學習資源</strong>（免費與付費資源，包括影片與文字教學）</li>
+</ul>
+<p>同時，我會重點介紹 <strong>Hack The Box</strong> 與 <strong>Pwnable.tw</strong> 平台的挑戰，並涵蓋 Linux 與 Windows 的 Kernel Exploitation。</p>
+<p>請稍等，我完成後會通知你！</p>
+<h1 id="PWN-教學指南"><a href="#PWN-教學指南" class="headerlink" title="PWN 教學指南"></a>PWN 教學指南</h1><p>本指南將帶你從新手一路進階學習 PWN（<strong>Pwn</strong> 即「<strong>擁有</strong> &#x2F; <strong>攻破</strong>」的黑客俚語）相關技術，包含必要基礎知識、常見漏洞類型、實用工具介紹、實戰範例解析以及進階技巧，並提供 C&#x2F;C++ 與 Python 的實作範例。同時，我們也會強調 <strong>Kernel Exploitation（內核利用）</strong> 技術，幫助你了解在 Linux 與 Windows 核心層面的漏洞利用方法。</p>
+<h2 id="1-基礎知識與概念"><a href="#1-基礎知識與概念" class="headerlink" title="1. 基礎知識與概念"></a>1. 基礎知識與概念</h2><h3 id="PWN-是什麼？"><a href="#PWN-是什麼？" class="headerlink" title="PWN 是什麼？"></a>PWN 是什麼？</h3><p>「PWN」原是黑客圈的俚語，意思是<strong>攻破裝置或系統並取得控制權</strong>。發音類似「砰」，象徵成功駭入系統的一聲巨響。在網路安全語境中，PWN 指透過漏洞利用、社交工程等手段，成功獲得裝置、系統或網路的未授權控制權。一旦<strong>PWN</strong> 了某系統，攻擊者便可執行任意惡意操作，例如竊取資料、植入惡意程式或癱瘓系統服務。</p>
+<h3 id="CTF-中-PWN-題型介紹"><a href="#CTF-中-PWN-題型介紹" class="headerlink" title="CTF 中 PWN 題型介紹"></a>CTF 中 PWN 題型介紹</h3><p>在 CTF（Capture The Flag）競賽中，PWN 題目通常提供一個已編譯好的<strong>二進位程式</strong>（例如 Linux ELF 或 Windows PE 檔案），該程式部署在目標伺服器上。參賽者需要對這個程式進行逆向分析和動態調試，找出其中的漏洞，透過網路與服務互動並加以利用。PWN 題目的目標通常是<strong>取得遠端系統的 shell 權限</strong>或直接讀取旗標檔案。常見的 PWN 題目漏洞包含：棧&#x2F;堆緩衝區溢位、整數溢位、格式化字串漏洞等。總之，在 CTF PWN 題中，你需要發揮二進位漏洞挖掘與利用能力，突破沙盒或權限限制拿到目標系統的控制權。</p>
+<h2 id="2-必要技能"><a href="#2-必要技能" class="headerlink" title="2. 必要技能"></a>2. 必要技能</h2><p>要成為 PWN 攻防的好手，需要掌握幾項核心技能：</p>
+<h3 id="逆向工程（Reverse-Engineering）"><a href="#逆向工程（Reverse-Engineering）" class="headerlink" title="逆向工程（Reverse Engineering）"></a>逆向工程（Reverse Engineering）</h3><p>逆向工程是分析<strong>編譯後的二進位檔</strong>以還原程式邏輯的過程。在 PWN 解題中，逆向是第一步，但本身並非重點；重點在於藉由逆向獲取程式碼（例如反編譯出的近似原始碼或反組譯的組語）以理解程式行為。常用的逆向工具有 <strong>IDA Pro</strong>（互動式反組譯器）、<strong>Ghidra</strong>（免費開源的逆向框架）、<strong>Radare2</strong> 等。透過這些工具，我們可以查看目標程式的控制流程、關鍵函數實現以及可疑的輸入處理邏輯，為後續漏洞分析做準備。</p>
+<blockquote>
+<p><em>技巧提示：</em> 初學者可先熟悉程式的基本架構和執行流程，例如函數調用約定、堆疊（棧）運作方式等，這對閱讀反組譯結果非常重要。</p>
+</blockquote>
+<h3 id="漏洞分析（Vulnerability-Analysis）"><a href="#漏洞分析（Vulnerability-Analysis）" class="headerlink" title="漏洞分析（Vulnerability Analysis）"></a>漏洞分析（Vulnerability Analysis）</h3><p>漏洞分析指的是審查與測試程式碼中潛藏的安全漏洞。在拿到 PWN 題目的二進位程式後，透過靜態分析（閱讀反組譯&#x2F;反組譯碼）或動態調試執行程式，找出程式中的漏洞點。大多數 PWN 題<strong>都存在已知類型的常見漏洞</strong>，因此預先了解這些漏洞類型有助於快速定位問題。分析時需要留意輸入輸出函數的使用、關鍵條件判斷以及任何可能導致記憶體錯誤的操作。一些需要熟練掌握的基礎知識包括：C&#x2F;C++ 常見危險函數（如 <code>gets</code>、<code>strcpy</code>、<code>sprintf</code> 等）、處理器架構與指令集基礎（了解組語指令對應的功能）、函數的棧框架結構等等。當懷疑某處存在漏洞時，可以使用調試工具進行動態驗證，例如對輸入進行Fuzz測試或觀察異常行為。</p>
+<h3 id="緩衝區溢位（Buffer-Overflow）"><a href="#緩衝區溢位（Buffer-Overflow）" class="headerlink" title="緩衝區溢位（Buffer Overflow）"></a>緩衝區溢位（Buffer Overflow）</h3><p><strong>緩衝區溢位</strong>是最經典的漏洞之一，包含<strong>棧溢位</strong>與<strong>堆溢位</strong>等形式。緩衝區是程式用來暫存資料的記憶體區域，當攻擊者輸入超過緩衝區大小的資料時，就會<strong>覆蓋相鄰的記憶體內容</strong>，導致意外行為。以<strong>棧溢位</strong>（Stack Overflow）為例：棧用于存放函數的局部變數、參數和返回位址等。如果程式對棧上的緩衝區（如一個陣列）寫入過長的字串而未檢查長度，多餘的資料可能覆蓋到<strong>返回位址</strong>。當函數返回時，CPU 會從棧中取出被覆蓋的返回位址並跳轉，這讓攻擊者有機會劫持程式流程，執行任意指令。下面是一個易受害的 C 程式範例與對應的漏洞利用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vuln.c - 演示棧緩衝區溢位漏洞</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">vuln</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">32</span>];</span><br><span class="line">    gets(buf);  <span class="comment">// 不安全：gets不會檢查輸入長度，容易造成溢位</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello, %s\n&quot;</span>, buf);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    vuln();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述程式中，<code>buf</code> 限定32字節，但使用 <code>gets</code> 讀取不限長度的輸入，攻擊者可輸入超長字串使資料溢出 <code>buf</code> 陣列，進而覆寫函數返回地址。例如，我們可以在 Python 利用 <strong>pwntools</strong> 編寫 exploit：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">elf = context.binary = ELF(<span class="string">&#x27;./vuln&#x27;</span>)</span><br><span class="line">p = process(<span class="string">&#x27;./vuln&#x27;</span>)</span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * <span class="number">40</span>            <span class="comment"># 假設需要40字節覆蓋返回位址</span></span><br><span class="line">payload += p32(elf.symbols[<span class="string">&#x27;win&#x27;</span>])  <span class="comment"># 將返回位址改寫為 `win` 函數的地址</span></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>此 payload 用 <code>A</code> 填充溢出區域並覆寫返回位址為程式中預先存在的 <code>win</code> 函數地址（假設該函數打開 shell）。當 exploit 成功時，即可從互動模式下拿到shell權限。</p>
+<p><strong>堆溢位</strong>（Heap Overflow）則發生在動態分配的記憶體區域（堆）上。當程式寫入資料時超出堆塊的大小，就會覆蓋相鄰的堆塊或其管理結構。與棧不同，堆上沒有直接的返回地址可覆寫，因此堆溢位通常需要<strong>利用堆管理器的元數據</strong>來實現利用。例如，攻擊者可能覆寫相鄰堆塊的大小欄位或鏈結指標，誘使記憶體配置器在後續操作（如 <code>free</code>）時寫入任意地址。一旦能控制寫入任意記憶位置或改變函數指標，便可以劫持控制流程。下面是一段簡單的堆溢位例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// heap_overflow.c - 演示堆溢位漏洞</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> *p = <span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line">    <span class="type">char</span> *q = <span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(p, <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>);  <span class="comment">// 向 p 指向的16字節緩衝區寫入過長字串</span></span><br><span class="line">    <span class="built_in">free</span>(q);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此程式中，<code>p</code> 溢位將覆蓋掉相鄰的 <code>q</code> 所在堆塊的元數據。如果運氣較差，可能直接導致程式崩潰；但精巧構造下，攻擊者可修改記憶體分配鏈表，使下一次 <code>malloc</code> 返回一個可控的地址，從而達成在任意記憶體位置寫入資料等效果。現實中的堆利用更加複雜，包括 <strong>fastbin attack</strong>、<strong>unlink 攻擊</strong>、<strong>House of系列技巧</strong> 等，這裡不展開細節。</p>
+<h3 id="格式化字串漏洞（Format-String-Vulnerability）"><a href="#格式化字串漏洞（Format-String-Vulnerability）" class="headerlink" title="格式化字串漏洞（Format String Vulnerability）"></a>格式化字串漏洞（Format String Vulnerability）</h3><p><strong>格式化字串漏洞</strong>是由於不安全地使用像 <code>printf</code> 這樣的格式化函數而引發的。典型情況是程式直接將使用者輸入當作 <code>printf</code> 的格式化字串參數，沒有使用格式限定符。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> user_input[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%99s&quot;</span>, user_input);</span><br><span class="line"><span class="built_in">printf</span>(user_input);  <span class="comment">// 潛在的格式化字串漏洞</span></span><br></pre></td></tr></table></figure>
+
+<p>上述程式中，<code>printf</code> 並未指定格式，若使用者輸入包含格式符（如 <code>%x</code>、<code>%n</code> 等），<code>printf</code> 會嘗試從堆疊讀取參數或寫入記憶體，引發危險。攻擊者可以利用特製的輸入字串 <strong>讀取或寫入任意記憶體地址</strong>，甚至直接修改程式流程。例如，輸入 <code>%8$x</code> 可以泄露棧上的第8個參數（往往是返回地址或關鍵資料），而 <code>%n</code> 可以將已輸出字元數寫入某個地址。如果我們找到了全局偏移表（GOT）中函數指標的位置，就能透過格式化字串把 GOT 條目改寫為惡意地址，進而劫持執行。</p>
+<p><em>實作範例：</em> 假設有個漏洞程式允許我們輸入格式字串並打印，我們發現它的 GOT 表中 <code>printf</code> 函數條目位於已知地址。我們可以構造輸入讓 <code>printf</code> 的 GOT 條目指向我們的 shellcode 或系統函數。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：&quot;%1337c%8$n&quot; + &lt;目標地址的二進位值&gt;</span><br></pre></td></tr></table></figure>
+
+<p>這將會在輸出1337個字元後，將值1337寫入我們提供的目標地址（透過 <code>%n</code>），從而改寫函數指標。一旦函數被調用，就會跳轉到我們所設定的地址執行（可能是之前放置的 shellcode 或 <code>system(&quot;/bin/sh&quot;)</code>）。格式化字串漏洞的利用相當靈活，但也需要精確的地址計算與輸出長度控制。</p>
+<h3 id="Use-After-Free（UAF）漏洞"><a href="#Use-After-Free（UAF）漏洞" class="headerlink" title="Use-After-Free（UAF）漏洞"></a>Use-After-Free（UAF）漏洞</h3><p><strong>Use-After-Free（重複釋放後使用）<strong>是指</strong>記憶體被釋放後仍然被使用</strong>的漏洞。典型原因是在釋放動態記憶體後，程式沒有將指標設為 NULL，導致指標成為懸空指標。如果此時該記憶體區域又被分配給其他物件並被惡意操控，其原先的使用者仍然通過懸空指標訪問它，就可能產生破壞性行為。換言之，UAF 漏洞發生時，程式<strong>誤用已失效的記憶體引用</strong>。這類漏洞常見於瀏覽器和操作系統核心中。</p>
+<p>具體利用上，攻擊者通常會：釋放一塊關鍵的記憶體（如物件或資料結構）、藉由另一途徑重新分配這塊記憶體給惡意數據（填充精心構造的內容），接著利用原本的懸空指標執行操作。由於指標所指向的內容已被我們控制，隨後的操作（如調用原物件的方法或函數指標）便等同於執行我們的惡意載荷。例如，在 C++ 程式中，如果一個物件被刪除後，其方法仍被呼叫，而此時那段記憶體可能已被另一個我們控制的物件佔據，就會導致程式跳轉到我們指定的位置執行。下方是一段簡化的 UAF 演示代碼：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*func_ptr)</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">shell</span><span class="params">()</span> &#123; system(<span class="string">&quot;/bin/sh&quot;</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    func_ptr *fp = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(func_ptr));</span><br><span class="line">    *fp = <span class="built_in">printf</span>;</span><br><span class="line">    <span class="built_in">free</span>(fp);</span><br><span class="line">    <span class="comment">// 假設此時 fp 所指向的記憶體被重分配給另一用途且我們可控</span></span><br><span class="line">    *fp = shell;  <span class="comment">// 懸空指標fp還在使用，將其當前指向的位置寫入shell地址</span></span><br><span class="line">    <span class="comment">// 再次使用 fp 指向的函數指標</span></span><br><span class="line">    (*fp)();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在這例子中，<code>fp</code> 原本指向 <code>printf</code>，釋放後我們假裝又把它改成指向 <code>shell</code> 函數地址。當再次調用 <code>(*fp)()</code> 時，其實就跳到了 <code>shell()</code> 函數，打開了一個 shell。這展示了UAF漏洞的威力。實務上，觸發 UAF 往往需要特定的程式執行序列（sequence）以及配合堆風水（Heap Feng Shui，即控制堆分配佈局）的技巧。</p>
+<h3 id="堆積溢位（Heap-Overflow）"><a href="#堆積溢位（Heap-Overflow）" class="headerlink" title="堆積溢位（Heap Overflow）"></a>堆積溢位（Heap Overflow）</h3><p>（<em>註：此處「堆積溢位」即前述的「堆溢位」</em>）我們已在<strong>緩衝區溢位</strong>部分介紹了堆溢位的概念。再總結一次：堆積溢位是指向<strong>堆上某個緩衝區寫入超過其長度的資料</strong>，導致溢出到相鄰的記憶體區塊。輕則造成程式當機，重則透過覆寫關鍵結構來<strong>攔截程式控制流</strong>。要利用堆溢位，攻擊者通常需要了解目標程式所使用的<strong>堆分配器（如glibc <code>malloc</code>）的內部機制</strong>。利用技術例如：</p>
+<ul>
+<li><strong>修改相鄰 chunk 的 metadata</strong>：例如將下一個 chunk 的 <code>size</code> 欄位設置為不合理的值，誘使 <code>malloc</code> 或 <code>free</code> 進行錯誤操作（典型案例：早期的 <strong>unlink() 攻擊</strong>，覆寫 chunk 的前向&#x2F;後向指標使 <code>free</code> 執行時寫入任意地址）。</li>
+<li><strong>Fake Chunk 技巧</strong>：構造假堆塊結構併入堆鏈表，使分配器返回一個指向我們控制區域的指標（如 <strong>House of Spirit</strong>、<strong>House of Force</strong> 等技巧）。</li>
+<li><strong>Use-After-Free 結合堆溢位</strong>：堆溢位可以與UAF結合，透過溢位覆寫釋放名單的指標，讓後續 <code>malloc</code> 返回一個攻擊者指定的位置。</li>
+</ul>
+<p>堆積漏洞的利用相當有挑戰性，往往需要針對不同操作系統、不同版本的堆分配器採取對應策略。建議深入研讀資料（如 <code>CTF-Wiki</code> 上的堆積利用章節）並多做歷屆 CTF 題目的堆積漏洞，以累積經驗。</p>
+<h2 id="3-工具介紹"><a href="#3-工具介紹" class="headerlink" title="3. 工具介紹"></a>3. 工具介紹</h2><p>善用工具可以極大地提高 PWN 分析與利用的效率。下面介紹幾款 PWN 領域常用的工具：</p>
+<h3 id="GDB（GNU-Debugger）"><a href="#GDB（GNU-Debugger）" class="headerlink" title="GDB（GNU Debugger）"></a>GDB（GNU Debugger）</h3><p><strong>GDB</strong> 是 GNU 提供的強大命令列調試器，也是類 Unix 系統下的標準除錯工具。透過 GDB，我們可以在程式執行時設置<strong>斷點</strong>、單步執行、檢查記憶體與暫存器內容、修改變數等。對 PWN 而言，GDB 尤其適合用來動態分析二進位程式的行為，例如觀察溢位時哪些位址被覆寫、函數返回地址的變化，以及利用時 shellcode 是否正確執行。建議搭配 <strong>GEF</strong> 或 <strong>Pwndbg</strong> 這類 GDB 外掛，它們能提供更直觀的資訊（如堆疊佈局、異色標高亮）以協助分析。例如，在發現可疑漏洞點後，可以用 GDB 附加程式並輸入特定數據來驗證是否發生溢位，再根據崩潰時的寄存器狀態調整 exploit 策略。</p>
+<h3 id="IDA-Pro"><a href="#IDA-Pro" class="headerlink" title="IDA Pro"></a>IDA Pro</h3><p><strong>IDA Pro</strong> 是業界領先的互動式反組譯器。它能將二進位檔案轉換成人類可讀的組合語彙並嘗試反編譯成較高階的表示形式。IDA 提供強大的<strong>圖形介面</strong>，能將程式控制流程以流程圖表示，方便分析函數的結構與跨參考。對 PWN 玩家而言，IDA 常用來靜態分析未知二進位：例如識別關鍵函數（<code>main</code>、<code>system</code>、<code>puts</code> 等）、找出程式比較輸入的條件、定位可能的漏洞函數（如使用 <code>strcpy</code>、<code>printf</code> 的地方）等。雖然 IDA Pro 是付費軟體，但有免費的 <strong>IDA Free</strong> 版本（功能受限）以及免費且開源的替代品 <strong>Ghidra</strong>。無論使用哪種工具，重點是熟悉反組譯結果的閱讀和各種資料結構、函數調用模式的辨識，這需要不斷練習。</p>
+<h3 id="Radare2"><a href="#Radare2" class="headerlink" title="Radare2"></a>Radare2</h3><p><strong>Radare2</strong>（簡稱 r2）是開源的逆向工程框架，功能涵蓋反彙編、反編譯、除錯等各方面。雖然介面主要是命令行並有一定學習曲線，但它<strong>高度可定制且腳本化</strong>，非常適合深度分析和挑戰性題目。Radare2 能在沒有圖形介面的環境下（如遠端伺服器）使用，也支援<strong>批量指令</strong>解析和自動化分析。對於不方便使用 IDA 的情況，radare2 是一個強大的備選。此外，r2 社群提供了豐富的插件和前端（如 Cutter 圖形界面）使其更易用。在 PWN 分析中，你可以用 r2 的調試功能一步步執行程式，或利用其腳本批量搜索二進位內的可疑字串、關鍵函數呼叫，以快速定位突破口。</p>
+<h3 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h3><p><strong>pwntools</strong> 是用 Python 編寫的 CTF 框架和 exploit 腳本開發庫，專為快速編寫和原型化漏洞利用而設計。pwntools 提供許多方便的函數：如 <code>remote()</code> 可直接連接遠程服務器、<code>process()</code> 啟動本地進程，<code>send()</code>&#x2F;<code>recv()</code> 方法方便與目標交互；內置的 <code>p32()</code>&#x2F;<code>u64()</code> 等函數可輕鬆在各數據型別與位元組序列間轉換；還有 <code>ROP</code> 類可協助自動生成 ROP鏈，<code>shellcraft</code> 模組能快速取得各種常用 shellcode。此外，pwntools 內建對 ELF檔的解析（例如 <code>elf.symbols</code> 可獲得符號表、<code>elf.got</code> 獲得 GOT 表地址）以及對 Linux 執行環境的檢測等。使用 pwntools，可以讓我們<strong>把重心放在漏洞利用邏輯</strong>上，而非底層通信與編碼細節。例如，上文緩衝區溢位的 Python exploit 就使用了 pwntools 提供的功能。總之，pwntools 幾乎是 PWN 選手人手必備的利器，能讓 exploit 腳本編寫事半功倍。</p>
+<h3 id="angr"><a href="#angr" class="headerlink" title="angr"></a>angr</h3><p><strong>angr</strong> 是一款強大的<strong>二進位分析平台</strong>，支援多架構，結合了靜態分析與動態符號執行等技術。簡而言之，angr 能夠模擬程式執行並將部分輸入建模為符號變數，透過約束求解器來探索程式的不同執行路徑。這在 CTF PWN 中可用來<strong>自動化分析</strong>某些類型的題目，例如破解驗證碼、解迷宮式的邏輯判斷等。有些 PWN 題目可能設計了複雜的驗證函數，使用 angr 可以快速找出使驗證通過的輸入。在漏洞利用方面，angr 也能協助發現可控的程式點或可能的 ROP gadget 序列。不過，由於符號執行對資源要求較高，對於空間巨大的問題（如任意長度輸入）通常無法直接求解，所以 angr 更適合解決<strong>程式邏輯題</strong>或<strong>自動化挖掘簡單漏洞</strong>，而非直接生成 exploit。實戰中，可將 angr 與其他分析結合：先用 angr 獲取有利資訊，再人工介入完成漏洞利用。</p>
+<h3 id="Ropper"><a href="#Ropper" class="headerlink" title="Ropper"></a>Ropper</h3><p><strong>Ropper</strong> 是一款用於分析二進位檔和搜索 ROP <strong>gadgets</strong> 的工具。ROP gadget 指程式片段中結尾為 <code>ret</code> 的短小指令序列，是構造 ROP 攻擊的基礎。Ropper 可以從給定的執行檔或庫中列出各種 gadget（如常見的 <code>pop rdi; ret</code> 等），協助攻擊者快速組裝所需的 ROP鏈。此外，Ropper 也能顯示檔案資訊、匯出反組譯代碼片段，並提供語意搜索功能來尋找特定功能的 gadget。例如，在沒有現成 <code>system(&quot;/bin/sh&quot;)</code> 函數可用時，我們可能需要利用 ROP 調用 <code>execve</code> 系統呼叫，Ropper 能幫助我們找出所需的寄存器置換指令（如將 <code>&quot;/bin/sh&quot;</code> 地址放入 <code>rdi</code> 的 gadget）。Ropper 的使用相對簡單，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ropper --file vuln_binary --search <span class="string">&quot;pop rdi&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>即可找到 <code>pop rdi; ret</code> 的指令位址。有了 Ropper 輔助，我們能更高效地完成 ROP 利用鏈的構造。類似的工具還有 <strong>ROPgadget</strong>、<strong>one_gadget</strong>（專找 <code>execve(&quot;/bin/sh&quot;)</code> 的gadget）等，都值得熟悉。</p>
+<h2 id="4-實戰案例與-CTF-題目解析"><a href="#4-實戰案例與-CTF-題目解析" class="headerlink" title="4. 實戰案例與 CTF 題目解析"></a>4. 實戰案例與 CTF 題目解析</h2><p>學習真實世界的經典攻擊案例與CTF題目，可以加深我們對漏洞利用的理解並舉一反三。以下介紹幾個著名的 PWN 攻擊事例和線上練習平台的經典題目：</p>
+<h3 id="歷史上著名的-PWN-攻擊案例"><a href="#歷史上著名的-PWN-攻擊案例" class="headerlink" title="歷史上著名的 PWN 攻擊案例"></a>歷史上著名的 PWN 攻擊案例</h3><ul>
+<li><p><strong>Morris 蠕蟲（1988年）</strong>：世界上第一隻網際網路蠕蟲病毒，由羅伯特·莫里斯釋放。Morris 蠕蟲利用了多個漏洞，最主要的是 UNIX <code>sendmail</code> 的除錯模式後門以及 <strong>finger 服務的緩衝區溢位漏洞</strong>。透過這些漏洞，蠕蟲能在無需授權的情況下在遠端執行任意指令碼，進而自我複製到其他機器。該事件造成當時大量計算機癱瘓，安全社群由此開始重視緩衝區溢位的危害並採取改進措施。</p>
+</li>
+<li><p><strong>EternalBlue &amp; WannaCry（2017年）</strong>：EternalBlue 是美國 NSA 開發的一個利用程式，針對 Windows 系統 SMB 協議中的一項漏洞（編號 CVE-2017-0144，俗稱 MS17-010）。該漏洞屬於<strong>Windows 核心中的緩衝區溢位</strong>，允許攻擊者對 445 埠發送特製封包，進而在目標電腦上執行任意程式碼。2017 年 5 月，勒索病毒 <strong>WannaCry</strong> 利用 EternalBlue 在全球大規模傳播，造成嚴重影響。該攻擊證明了內核遠程漏洞的破壞力：透過一個漏洞即可<strong>遠端取得 Windows 核心權限</strong>並植入蠕蟲式惡意程式。事後 Microsoft 緊急為不受支援的舊版系統發佈補丁，以遏制漏洞擴散。EternalBlue&#x2F;WannaCry 案例凸顯了及時安裝安全更新以及網路隔離的重要性。</p>
+</li>
+<li><p><strong>Dirty COW（2016年）</strong>：Dirty COW（CVE-2016-5195，「骯髒牛」漏洞）是一個潛伏長達9年的 Linux 本地提權漏洞。它源於 Linux 核心對複製寫入（Copy-On-Write）機制的實作缺陷，攻擊者可以利用競態條件以<strong>寫入本應唯讀的記憶體頁面</strong>。透過 Dirty COW，非特權用戶能在 Linux 系統上取得 root 權限。該漏洞被廣泛利用於 Android 裝置惡意軟體取得 root，以及各種越獄和提權攻擊。Dirty COW 的出現說明：即便是成熟的核心機制也可能有邏輯漏洞，且本地漏洞在多層防禦不當時同樣可造成嚴重後果。</p>
+</li>
+</ul>
+<p>上述只是冰山一角，還有諸如 <strong>Heartbleed（心裂洞）</strong> 漏洞（OpenSSL 記憶體洩露導致敏感資訊泄漏），<strong>Stuxnet</strong>（利用多個 0-day 攻擊工控系統）等都很有名。建議讀者查閱相關資料深入了解，這些案例能讓我們看到漏洞利用在現實中的模式與影響，有助於在 CTF 中舉一反三。</p>
+<h3 id="Hack-The-Box-平台經典題目解析"><a href="#Hack-The-Box-平台經典題目解析" class="headerlink" title="Hack The Box 平台經典題目解析"></a>Hack The Box 平台經典題目解析</h3><p><strong>Hack The Box (HTB)</strong> 是一個線上平台，提供各種虛擬機讓玩家滲透，以及獨立的 Challenge 題目（包含 Pwn 題型）。HTB 的 Pwn 挑戰通常比基礎題更複雜，可能結合多種漏洞或需要多步驟利用。例如：</p>
+<ul>
+<li><p><strong>Reg (HTB Pwn 挑戰)</strong>：這是一道退役的 HTB Pwn 題目。該題目要求利用格式化字串漏洞來竊取機密資訊並最終取得系統控制權。解題過程中，需要選手先利用格式化字串讀出程式記憶體中的關鍵地址（如函數指標或 libc 基址），再構造資料覆寫 GOT 表實現 ROP 攻擊拿下 shell。這道題目展示了 Pwn 題的典型套路：<strong>資訊洩露</strong> -&gt; <strong>計算位址</strong> -&gt; <strong>覆寫關鍵位址進行劫持</strong>，步驟環環相扣且需要精確。</p>
+</li>
+<li><p><strong>Overflow (Hypothetical)</strong>：HTB 也有一些以<em>溢位</em>為主題的挑戰，要求選手利用經典的棧溢位或堆溢位技巧。比如某題提供了一個簡單的計算服務，但存在棧緩衝區溢位。選手需要發現溢位點，並透過漏洞將程式返回地址改寫為 <code>system</code> 函數地址，同時在棧上準備好 <code>&quot;/bin/sh&quot;</code> 字串以成功彈出 shell。這類題目考察對 Linux 常見防禦（如 NX、ASLR）的繞過：可能需要通過資訊洩露拿到 libc 地址，再計算 <code>system</code> 和 <code>/bin/sh</code> 字串的位置來發動 <strong>ret2libc</strong> 攻擊。</p>
+</li>
+</ul>
+<p>HTB 的機器中也經常隱含 Pwn 技巧。例如 <strong>Cronos</strong> 機的提權部分涉及利用定製 SUID 程式的溢位來取得 root；<strong>Optimum</strong> 機需要利用可預測地址的緩衝區溢位來執行反向連接shell。練習 HTB 有助於將 Pwn 技巧應用到真實場景，因為有些機器的服務程式漏洞與真實世界 CVE 類似（只是做了安全處理或簡化）。</p>
+<p>總的來說，在 Hack The Box 練習 PWN，應培養<strong>從發現漏洞到鏈接利用的全流程思維</strong>。有時僅有一個漏洞還不夠，需要結合多個漏洞或資訊洩露才能成功利用。這和真實滲透過程相仿，因此 HTB 的經典題非常值得反覆鑽研。</p>
+<h3 id="Pwnable-tw-平台經典題目解析"><a href="#Pwnable-tw-平台經典題目解析" class="headerlink" title="Pwnable.tw 平台經典題目解析"></a>Pwnable.tw 平台經典題目解析</h3><p><strong>Pwnable.tw</strong> 是臺灣團隊建立的專門 PWN 題目平台，上面的題目難度從入門到高階一應俱全，非常適合系統性練習。以下舉幾個該平台的經典題：</p>
+<ul>
+<li><p><strong>start</strong>：這是 pwnable.tw 中的入門題目之一。程式非常短小，主要動作是讀取一段輸入並執行。題目的機制使得棧是可執行的（NX 保護關閉），因此選手可以將 shellcode 輸入並直接跳轉執行。在這題中，你需要發送一個含有 shellcode 的payload，並利用程式提供的資訊（例如程式回顯的棧地址）計算出精確的跳轉位置。整體步驟包括：溢出返回地址 -&gt; 跳到棧上的shellcode -&gt; 獲得shell。這題可以練習<strong>基礎的 Shellcode 注入</strong>和對 x86 組語的理解。</p>
+</li>
+<li><p><strong>orw (Open, Read, Write)</strong>：此題提供了一個服務，要求玩家利用僅允許的系統呼叫（open&#x2F;read&#x2F;write）來讀取 flag。程式本身存在漏洞，允許注入並執行我們的 shellcode。因此解題重點在於編寫一段 shellcode：打開 <code>/home/orw/flag</code> 檔案，讀出內容，然後將內容寫到標準輸出。這題沒有典型的「溢位」漏洞，而是<strong>考察對 Linux 系統呼叫的理解</strong>與 shellcode 編寫能力。在 PWN 中，有時我們拿到執行權後還需要自己做一些系統調用來完成任務，orw 就是這類「後利用」的經典練習。</p>
+</li>
+<li><p><strong>dubblesort</strong>：這是一題結合<strong>整數溢位</strong>與<strong>堆利用</strong>的高階挑戰。程式讓使用者輸入多個數字並進行排序，但是輸入數量的計算存在整數溢位，使攻擊者可以輸入超出正常範圍的數目。接著，程式在堆上分配陣列來儲存這些數字，導致<strong>堆溢位</strong>發生。利用這個漏洞，參賽者需要洩露 libc 位址並進行 ROP 攻擊。dubblesort 綜合了多種漏洞類型和利用技巧，是經典的高難度 Pwn 題之一。透過它可以學到如何鏈接多個bug：先利用整數溢位打破限制，然後堆溢位獲取資訊，再精確地執行 ROP get shell。</p>
+</li>
+</ul>
+<p>pwnable.tw 上還有很多知名題目，如 <strong>silver_bullet</strong>（考察 <code>C++ vtable</code> 覆寫的UAF漏洞）、<strong>hacknote</strong>（fastbin dup 技巧）、<strong>babyKernel</strong>（基本的Linux kernel exploit) 等等。建議有志於PWN的同學多加練習，循序漸進攻克不同類型的題目。在做題時，要養成良好習慣：閱讀題解總結經驗，整理筆記（如利用過程中的關鍵思想和步驟）。隨著題目數量的累積，你將會發現不同漏洞類型之間其實是相通的，融會貫通後解題思路會越來越清晰。</p>
+<h2 id="5-進階技巧"><a href="#5-進階技巧" class="headerlink" title="5. 進階技巧"></a>5. 進階技巧</h2><p>當你掌握了基本漏洞利用方法後，可以進一步學習一些<strong>進階的 PWN 技巧</strong>。這些技巧通常用於繞過現代系統的安全防護措施或針對更高難度的目標，如作業系統內核。以下逐一介紹：</p>
+<h3 id="ROP（Return-Oriented-Programming）"><a href="#ROP（Return-Oriented-Programming）" class="headerlink" title="ROP（Return-Oriented Programming）"></a>ROP（Return-Oriented Programming）</h3><p><strong>返回導向編程 (ROP)</strong> 是一種高級漏洞利用技術，可在啟用了如 NX（不可執行棧）等安全防護的情況下，仍讓攻擊者執行任意程式碼。ROP 的核心思想是：利用棧溢位等漏洞控制程式的返回地址，將其指向程式中現有的機器碼片段（稱為 <strong>gadget</strong>）並連續「跳躍」執行這些片段，以完成攻擊者的目標。每個 gadget 通常是結束於 <code>ret</code> 的一小段指令序列，例如 <code>pop rdi; ret</code> 可以用來設定參數寄存器，<code>syscall; ret</code> 可以用來直接觸發系統呼叫。攻擊者將多個gadget地址寫入棧上連續的返回位置，當函數結束時，CPU 會依序執行這些 gadget，猶如執行一段新的程式。由於這些指令片段都是<strong>存在於程式自身或其庫中的合法程式碼</strong>，因此可以繞過執行空間保護（例如 NX 禁止引入新的可執行程式碼）。ROP 常用來調用系統提供的函數（如 <code>execve</code> 開 shell）或關閉某些保護機制。</p>
+<p><em>舉例：</em> 考慮一個開啟 NX 的系統，上面只有標準的 C 函數庫。我們發現一個棧溢位漏洞但無法直接注入shellcode。此時可以採用 ROP，我們可能需要以下步驟：1）利用 <code>pop rdi; ret</code> gadget 將 <code>/bin/sh</code> 字串的地址載入 RDI；2）利用 <code>pop rsi; ret</code> 將 0 載入 RSI（表示空的 argv）；3）利用 <code>pop rdx; ret</code> 將 0 載入 RDX（空的 envp）；4）將 <code>execve</code> 函數的地址作為最後跳轉的目標。當這一連串 gadget 執行完畢時，就等同於呼叫了 <code>execve(&quot;/bin/sh&quot;, NULL, NULL)</code>，從而獲得 shell。這個過程中用到的所有指令序列都已經存在於 libc 或程式本身，我們只是巧妙地串聯它們。ROP 技術需要我們<strong>搜集目標程式&#x2F;系統中的可用 gadget</strong>，這可以利用上文提到的 Ropper 等工具輔助完成。</p>
+<p>ROP 相關進階話題還有很多，例如 <strong>Sigreturn Oriented Programming (SROP)</strong>、ROP 混淆技術、針對 CFI（控制流完整性）的對抗等。對初學者而言，首先應該練習在各種不同架構（x86&#x2F;x64）的環境下構造基本的 ROP，理解函數呼叫和系統呼叫在 ROP 中如何實現。一旦熟悉了 ROP，你就有能力應對開啟 NX 的絕大多數用戶態漏洞利用場景。</p>
+<h3 id="Heap-Exploitation（堆積利用）"><a href="#Heap-Exploitation（堆積利用）" class="headerlink" title="Heap Exploitation（堆積利用）"></a>Heap Exploitation（堆積利用）</h3><p>堆積利用指專門針對**堆區漏洞（如堆溢位、UAF、雙重釋放等）**的利用技巧集合。與棧攻擊相比，堆利用更為複雜，因為堆的分配和釋放有專門的管理機制，而攻擊者需要針對這些機制設計攻擊步驟。以下是常見的堆利用技巧：</p>
+<ul>
+<li><p><strong>Fastbin Attack</strong>：針對 glibc 的 fastbin（小塊快速鏈表）機制，透過手段如<strong>雙重釋放 (double free)</strong> 或<strong>Off-by-one 溢位</strong>來製造一個重複的 fastbin 節點，最終實現將任意地址插入 free 後待分配的鏈表。攻擊者隨後呼叫 <code>malloc</code>，就可能得到一塊指向該任意地址的返回區塊，然後對其寫入資料，完成任意地址寫入的目的。</p>
+</li>
+<li><p><strong>Unlink 攻擊</strong>：針對較早版本 glibc 的 unlink 機制（處理大塊合併），通過覆寫相鄰 chunk 的 <code>size</code> 和鏈表指針，使得在 <code>free</code> 時繞過安全檢查並執行 <code>*(fd+0xC) = bk; *(bk+0x8) = fd</code> 操作（經典 unlink marco），從而將我們控制的數值寫入我們控制的地址。這曾是經典的堆溢位利用方法之一（如今新版本的安全檢查已加強，此技巧作為歷史遺產仍值得了解）。</p>
+</li>
+<li><p><strong>House of Series</strong>：一系列創新的堆利用技巧的統稱，如 House of Force、House of Spirit、House of Orange 等。以 <strong>House of Force</strong> 為例，它利用 top chunk 溢位（頂部未分配區域的溢位）來修改 top chunk 大小，然後調用 <code>malloc</code> 請求一個超大記憶體塊，使分配器將 top chunk 視為一部分切割出來並返回一塊指向任意位置的區域。這可用來直接覆蓋全局變數或函數指標。</p>
+</li>
+<li><p><strong>tcache Attack</strong>：針對現代 glibc 引入的 tcache 機制（Thread Cache），有對應的 <strong>tcache poisoning</strong> 攻擊。攻擊者通過修改 tcache 單鏈表中的 FD 指針，將任意地址插入其中，下一次分配就會返回該地址。同樣地，可以達成任意地址寫入。許多當前 CTF 題目都圍繞 tcache 的管理展開，因為這是新的攻防熱點。</p>
+</li>
+</ul>
+<p>要精通堆利用，建議深入研讀各版本 glibc 的 malloc 原始碼或參考教材例如《深入理解 Linux 記憶體分配》、CTF Wiki 等資源。其中每種技巧都有其適用條件和限制，需要靈活判斷題目所處環境採用何種策略。同時，善用調試工具（如 GDB 的 <code>heap</code> 指令模組或者 <code>Libc malloc debug</code> 功能）來觀察攻擊前後堆狀態的變化，這對理解堆利用非常有幫助。</p>
+<h3 id="Kernel-Exploitation（內核利用）"><a href="#Kernel-Exploitation（內核利用）" class="headerlink" title="Kernel Exploitation（內核利用）"></a>Kernel Exploitation（內核利用）</h3><p><strong>內核利用</strong>是指針對作業系統核心（如 Linux Kernel、Windows Kernel）漏洞的利用技術。與用戶態漏洞不同，內核漏洞通常能提供<strong>更高的權限（例如從一般用戶提權至 root&#x2F;系統）</strong>，但同時也面臨更多的保護（例如內核地址空間隔離、嚴格的記憶體保護機制）以及 Debug 難度較高。這部分我們分別介紹 Linux 和 Windows 內核利用的要點：</p>
+<ul>
+<li><p><strong>Linux Kernel Exploitation</strong>：在 Linux 中，常見內核漏洞包括 UAF、越界訪問、未初始化記憶體引用以及競態條件等。利用這些漏洞的最終目的通常是取得 root 權限（本地提權）或執行任意內核程式碼。Linux 內核為每個進程維護了關鍵的<strong>結構體 task_struct</strong>，其中包含一個 <code>cred</code> 指標，指向該進程的憑據結構體（存放 UID、權限位元等）。因此許多 Linux kernel exploit 的思路是利用漏洞來<strong>修改當前進程的 cred 結構</strong>，將其 UID 設為0或賦予所有 capabilities，從而提升權限。另一種思路是覆寫函數指標（例如檔案操作表、序列文件操作等結構中的函數指標），當內核稍後調用這些函數時跳轉到我們準備的shellcode。</p>
+<p>需要注意的是，現代 Linux 增加了不少內核層面的防禦，如 KASLR（內核地址隨機）、SMEP（禁止內核執行用戶空間記憶體）、SMAP（禁止內核讀寫用戶空間記憶體）等。繞過這些保護通常需要結合 ROP 技術。例如，如果 SMEP 開啟，攻擊者無法直接讓內核跳到用戶空間的shellcode執行，此時可以透過 ROP 先暫時關閉 SMEP 位元，再跳回用戶空間執行payload。又或者，在 KASLR 開啟時，可能需要利用資訊洩露漏洞獲取內核基址。總之，Linux 核心利用是一門專業性很強的領域，需要深入理解作業系統原理和底層結構。但其回報也是豐厚的，內核提權成功意味著完全控制整套系統。</p>
+</li>
+<li><p><strong>Windows Kernel Exploitation</strong>：Windows 的內核利用與 Linux 有許多不同。Windows 將每個進程的許可權資訊存放在 <strong>_EPROCESS 結構</strong> 中，其中有一個重要成員是 <strong>Access Token</strong>（訪問權杖），標識該進程的身份和權限。常見的 Windows 提權漏洞利用技巧即為「<strong>Token Stealing</strong>」，即<strong>竊取 SYSTEM 進程的權杖並複製到當前進程</strong>。實現方式通常是：利用漏洞在內核中取得讀寫任意記憶體的能力，然後尋找系統進程（PID 4，System）的 EPROCESS 結構，複製其 Token 欄位值到當前進程的 EPROCESS 結構中。完成後，攻擊進程就擁有了 SYSTEM 權限，可啟動系統命令提示字元或其他高權限操作。</p>
+<p>Windows 核心的保護也在加強，如最新的 Windows 10&#x2F;11 部分引入了內核 ASLR、控制流保護（CFG）等。另外，Windows 核心除錯相對麻煩，需要用 KD&#x2F;Windbg 串連兩台機器進行 Symbol 對應調試。不過對於 CTF 而言，大多數 Windows Pwn 題目會相對簡化環境，或直接考察概念。例如一些模擬的驅動程式漏洞題，可能讓選手對模擬的設備驅動發送 IOCTL 呼叫，引發越界寫，再通過 token stealing 技巧提權。學習 Windows exploit，可以參考 HackSys Extreme Vulnerable Driver（HEVD）這個著名的練習項目，它涵蓋各種 Windows 核心漏洞（緩衝區溢位、UAF、競態等等）的示範，並附有詳細的利用教學。</p>
+</li>
+</ul>
+<p>無論是 Linux 還是 Windows，內核利用都需要在<strong>內核態環境</strong>下執行shellcode或ROP，這跟用戶態有很大差異。例如內核態不能直接使用大部分 C 函數，很多時候需要調用內核提供的 API（Linux 下呼叫 <code>commit_creds(prepare_kernel_cred(0))</code> 就是一種通用提權方法）。同時，一旦內核崩潰，整個系統都會當機，所以試錯成本更高。因此從事內核漏洞利用，一定要有紮實的系統原理基礎並小心驗證每一步。雖然難度高，但內核漏洞在實戰攻防和比賽中價值很大，值得進一步鑽研。</p>
+<h2 id="6-學習資源"><a href="#6-學習資源" class="headerlink" title="6. 學習資源"></a>6. 學習資源</h2><p>學習 PWN 需要理論和實踐並重，以下是一些優質的學習資源，包括書籍、線上課程和練習平台：</p>
+<h3 id="推薦書籍"><a href="#推薦書籍" class="headerlink" title="推薦書籍"></a>推薦書籍</h3><ul>
+<li><strong>《CTF競賽權威指南 (Pwn 篇)》</strong>：專門面向 CTF PWN 初學者的中文書籍，內容涵蓋 Linux 二進位安全各方面，包含12章從基礎到實戰。書中以歷年真題為例講解漏洞原理和利用技巧，非常實用。</li>
+<li><strong>《Hacking: The Art of Exploitation》</strong>（《駭客攻防實錄》）: 經典入門書，涵蓋程式基礎、漏洞示例和 Exploit 編寫。附帶的 LiveCD 環境方便讀者動手實驗。</li>
+<li><strong>《Shellcoder’s Handbook》</strong>（《殼程式設計師手冊》）: 側重於漏洞利用技巧的書籍，包括對 Windows&#x2F;Linux 平台的溢位利用、Shellcode 編寫、繞過防禦等深入討論。</li>
+<li><strong>《漏洞攻防學》（中文）</strong>：國內作者著作，理論結合實例講解了溢位、格式化字串、Heap、Race Condition 等漏洞原理與利用。</li>
+<li><strong>《Modern Binary Exploitation》</strong>：這其實是一門課程講義（來自 RPISEC），網上可免費獲取PDF。內容通俗易懂，環環相扣地介紹了 Linux x86 平台從簡單溢位到ROP、Heap的各種技巧。</li>
+<li><strong>《逆向工程核心原理》</strong>：注重逆向分析本身的書籍，但對理解彙編和系統底層運作非常有幫助，間接提高 PWN 分析能力。</li>
+<li><strong>《Windows Kernel Exploitation》</strong>：英文書，詳細介紹 Windows 內核漏洞的原理與利用（建議在掌握一般 PWN 技巧後再閱讀）。</li>
+</ul>
+<h3 id="免費與付費的線上課程"><a href="#免費與付費的線上課程" class="headerlink" title="免費與付費的線上課程"></a>免費與付費的線上課程</h3><ul>
+<li><strong>pwn.college</strong>：由美國亞利桑那州立大學開設的線上課程平台，涵蓋現代 binary exploitation 知識。內容從 C基礎、Assembly開始，逐步深入到各類漏洞實戰，每章附有練習題和遠端評測環境，非常適合自學且完全免費。</li>
+<li><strong>Bilibili 網路安全課程</strong>：B站上有許多優質的 PWN 教學影片。例如 XCTF 主辦方推出的「XMCVE 2020 CTF Pwn入門課程」、知名UP主 LiveOverflow 的安全系列（雖是英語視頻但多有中字）等。視頻教學直觀易懂，建議跟著視頻操作一遍來加深印象。</li>
+<li><strong>Coursera&#x2F;慕課平台課程</strong>：很多線上教育平台提供計算機安全或軟體安全課程，其中一些涵蓋緩衝區溢位和基本漏洞利用。如 Coursera 上的「Software Security」課程包含 Exploitation 實驗。中國的大學MOOC也有相關課程可以旁聽。</li>
+<li><strong>線下培訓與付費課</strong>：如果希望更系統深入，Offensive Security 的**EXP-301（Windows Exploit Development）<strong>和</strong>EXP-401（Advanced Windows Exploitation）**是不錯的進階課程（付費且需要基礎）；國內一些安全公司&#x2F;團隊也偶爾舉辦漏洞利用培訓班，可關注相關消息。</li>
+</ul>
+<h3 id="CTF-練習平台"><a href="#CTF-練習平台" class="headerlink" title="CTF 練習平台"></a>CTF 練習平台</h3><ul>
+<li><strong>Hack The Box</strong>：前文已介紹，適合綜合練習滲透技巧。可註冊免費帳號練習部分公開的 Pwn 挑戰和機器，進一步也有進階的付費進階內容。</li>
+<li><strong>pwnable.tw</strong>：專注 PWN 的免費平台，題目質量高且解題後通常有他人提供的 Writeup 可供學習對照。</li>
+<li><strong>pwnable.kr</strong>：韓國的 PWN 練習站點，也有一系列有趣的題目從易到難，例如 ASCII, Coin1, fd, etc. 特別適合入門者。</li>
+<li><strong>OverTheWire – Wargames</strong>：提供多個主題的闖關遊戲，其中 <strong>Nebula</strong>、<strong>Protostar</strong>、<strong>Narnia</strong> 等都包含大量與二進位漏洞相關的關卡，適合作為進入PWN世界的第一站。</li>
+<li><strong>CTFtime</strong>：這不是平台，而是一個追蹤全球 CTF 賽事的網站。透過 CTFtime 可以參加線上的CTF比賽，在實戰中磨練PWN技能。此外，CTFtime 上匯總了歷年比賽題目的 Writeups 和題目檔案，你可以下載來自行嘗試練習，是取之不盡的資源寶庫。</li>
+<li><strong>實體攻防平台</strong>：比如 <strong>VulnHub</strong> 提供各種易受攻擊的VM下載，你可以本地跑起來實踐。此外像是 <strong>云靶場</strong> 平台也有PWN相關的試題可線上練習。</li>
+</ul>
+<p>最後，學習 PWN 最重要的是<strong>多練習、多思考、多請教</strong>。遇到難題時，參考別人的解題思路（Writeup）是非常有幫助的，要善於從中提煉方法論。而在攻克新題目時，要學會將已有的技巧靈活運用、組合，有創新思維。隨著經驗的積累，你會逐漸掌握「看透」二進位程式的本領，任何棘手的漏洞最終都將被你一一攻破。祝你在 PWN 的學習之旅中不斷突破，自我「PWN」self，成為真正的漏洞利用大師！</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 OWL_D Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;owl_d
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

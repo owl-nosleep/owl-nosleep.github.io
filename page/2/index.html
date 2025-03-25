@@ -3,7 +3,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="utf-8" />
-    <title>滲透測試基礎：保護系統的第一步 | OWL_D Blog</title>
+    <title>OWL_D Blog</title>
     <meta name="author" content="owl_d" />
     <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
     <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
@@ -34,9 +34,7 @@
 
 
 
-
-
-
+<script src="/js/lib/home.js"></script>
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -146,17 +144,39 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>滲透測試基礎：保護系統的第一步</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/3/24
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/background.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>OWL_D Blog</h1>
+                <h3>網絡安全與技術探索</h3>
+                <h5>專注於網絡安全、滲透測試和技術分享的技術部落格</h5>
+            </div>
         </span>
+    </div>
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2024/03/24/pentesting-basics/">
+        <h2 class="post-title">滲透測試基礎：保護系統的第一步</h2>
+    </a>
+    <div class="category-and-date">
         
         <span class="category">
             <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/">
@@ -167,47 +187,19 @@
             </a>
         </span>
         
-        
-        <span class="tags">
+        <span class="date">
             <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
+                <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/%E6%BB%B2%E9%80%8F%E6%B8%AC%E8%A9%A6/" style="color: #00a596">
-                    滲透測試
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Kali-Linux/" style="color: #03a9f4">
-                    Kali Linux
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #ff7d73">
-                    漏洞掃描
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #ffa2c4">
-                    安全評估
-                </a>
-            </span>
-            
+            2024/3/24
         </span>
         
+        
     </div>
-    
-    <div class="content" v-pre>
-        <h1 id="滲透測試基礎：保護系統的第一步"><a href="#滲透測試基礎：保護系統的第一步" class="headerlink" title="滲透測試基礎：保護系統的第一步"></a>滲透測試基礎：保護系統的第一步</h1><p>滲透測試，也稱為道德黑客（Ethical Hacking），是一種模擬真實攻擊者手段的安全評估方法，旨在發現系統中的安全漏洞並在攻擊者利用之前修復它們。本文將介紹滲透測試的基本概念、方法論和常用工具。</p>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="滲透測試基礎：保護系統的第一步"><a href="#滲透測試基礎：保護系統的第一步" class="headerlink" title="滲透測試基礎：保護系統的第一步"></a>滲透測試基礎：保護系統的第一步</h1><p>滲透測試，也稱為道德黑客（Ethical Hacking），是一種模擬真實攻擊者手段的安全評估方法，旨在發現系統中的安全漏洞並在攻擊者利用之前修復它們。本文將介紹滲透測試的基本概念、方法論和常用工具。</p>
 <h2 id="滲透測試的定義與重要性"><a href="#滲透測試的定義與重要性" class="headerlink" title="滲透測試的定義與重要性"></a>滲透測試的定義與重要性</h2><p>滲透測試是一種授權的、合法的安全評估活動，旨在評估組織的安全控制措施的有效性。通過模擬真實攻擊者的技術和方法，滲透測試人員能夠：</p>
 <ul>
 <li>發現系統中的安全漏洞</li>
@@ -295,13 +287,233 @@
 <p>在下一篇文章中，我們將深入探討特定類型的滲透測試技術和更高級的漏洞利用方法。你有興趣了解哪些特定領域的滲透測試？歡迎在評論區分享你的想法！ </p>
 </blockquote>
 
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%BB%B2%E9%80%8F%E6%B8%AC%E8%A9%A6/" style="color: #ffa2c4">滲透測試</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Kali-Linux/" style="color: #ff7d73">Kali Linux</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #00a596">漏洞掃描</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #ff7d73">安全評估</a>
+        </span>
+        
+    </div>
+    <a href="/2024/03/24/pentesting-basics/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2024/03/24/intro-to-cybersecurity/">
+        <h2 class="post-title">網絡安全入門：保護你的數位生活</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                網絡安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/3/24
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="網絡安全入門：保護你的數位生活"><a href="#網絡安全入門：保護你的數位生活" class="headerlink" title="網絡安全入門：保護你的數位生活"></a>網絡安全入門：保護你的數位生活</h1><p>在當今高度互聯的世界中，網絡安全不再只是IT專業人士的專屬領域，而是每個數位公民都應當具備的基本素養。本文將帶你了解網絡安全的基本概念，並提供一些實用的保護措施。</p>
+<h2 id="網絡安全的重要性"><a href="#網絡安全的重要性" class="headerlink" title="網絡安全的重要性"></a>網絡安全的重要性</h2><p>隨著我們的生活越來越依賴互聯網，我們的個人數據也越來越容易受到威脅。從網路銀行到社交媒體，從雲端存儲到智能家居，我們的數字足跡無處不在。如果這些數據落入惡意攻擊者手中，可能導致:</p>
+<ul>
+<li>身份被盜用</li>
+<li>財務損失</li>
+<li>隱私泄露</li>
+<li>名譽損害</li>
+</ul>
+<h2 id="常見的網絡威脅"><a href="#常見的網絡威脅" class="headerlink" title="常見的網絡威脅"></a>常見的網絡威脅</h2><h3 id="1-釣魚攻擊"><a href="#1-釣魚攻擊" class="headerlink" title="1. 釣魚攻擊"></a>1. 釣魚攻擊</h3><p>釣魚攻擊是最常見的網絡威脅之一。攻擊者會偽裝成可信實體，通過電子郵件、短信或社交媒體誘導用戶提供敏感信息，如密碼、信用卡號碼或個人身份信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 釣魚郵件通常具有這些特徵:</span></span><br><span class="line">- 緊急性：聲稱你的帳戶將被鎖定或有其他緊急情況</span><br><span class="line">- 拼寫和語法錯誤</span><br><span class="line">- 要求提供敏感信息</span><br><span class="line">- 未經請求的附件或可疑連結</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-惡意軟件"><a href="#2-惡意軟件" class="headerlink" title="2. 惡意軟件"></a>2. 惡意軟件</h3><p>惡意軟件是設計用來損害電腦系統的軟件，包括:</p>
+<ul>
+<li><strong>病毒</strong>: 將自身附加到合法程序上</li>
+<li><strong>蠕蟲</strong>: 自我複製並通過網絡傳播</li>
+<li><strong>木馬</strong>: 偽裝成有用的程序，實際執行惡意操作</li>
+<li><strong>勒索軟件</strong>: 加密用戶文件並要求支付贖金</li>
+</ul>
+<h3 id="3-弱密碼攻擊"><a href="#3-弱密碼攻擊" class="headerlink" title="3. 弱密碼攻擊"></a>3. 弱密碼攻擊</h3><p>許多人使用簡單、可預測的密碼，或在多個網站上重複使用相同的密碼。攻擊者可以利用這種習慣，通過暴力破解或字典攻擊來獲取密碼。</p>
+<h2 id="基本保護措施"><a href="#基本保護措施" class="headerlink" title="基本保護措施"></a>基本保護措施</h2><h3 id="使用強密碼和密碼管理器"><a href="#使用強密碼和密碼管理器" class="headerlink" title="使用強密碼和密碼管理器"></a>使用強密碼和密碼管理器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 強密碼的特點:</span></span><br><span class="line">- 至少<span class="number">12</span>個字符</span><br><span class="line">- 包含大小寫字母、數字和特殊符號</span><br><span class="line">- 避免使用個人信息</span><br><span class="line">- 每個帳戶使用不同密碼</span><br></pre></td></tr></table></figure>
+
+<p>使用密碼管理器如 1Password、Bitwarden 或 LastPass 可以幫助你生成和存儲複雜密碼。</p>
+<h3 id="啟用雙因素認證-2FA"><a href="#啟用雙因素認證-2FA" class="headerlink" title="啟用雙因素認證(2FA)"></a>啟用雙因素認證(2FA)</h3><p>雙因素認證在你的密碼之外提供了第二層保護。即使攻擊者獲得了你的密碼，沒有第二個因素(如手機認證碼)，也無法訪問你的帳戶。</p>
+<h3 id="保持軟件更新"><a href="#保持軟件更新" class="headerlink" title="保持軟件更新"></a>保持軟件更新</h3><p>定期更新你的操作系統、應用程序和防病毒軟件，以修補已知的安全漏洞。</p>
+<h3 id="網絡瀏覽安全"><a href="#網絡瀏覽安全" class="headerlink" title="網絡瀏覽安全"></a>網絡瀏覽安全</h3><ul>
+<li>確認網站使用HTTPS(在地址欄有鎖頭圖標)</li>
+<li>不要點擊可疑電子郵件中的鏈接</li>
+<li>使用VPN保護公共Wi-Fi連接</li>
+<li>考慮使用隱私保護瀏覽器擴展</li>
+</ul>
+<h2 id="進階保護措施"><a href="#進階保護措施" class="headerlink" title="進階保護措施"></a>進階保護措施</h2><p>如果你想更深入地保護你的數字生活，可以考慮:</p>
+<ul>
+<li>數據加密</li>
+<li>網絡防火牆</li>
+<li>定期備份重要數據</li>
+<li>使用開源軟件(更容易被社區審查安全問題)</li>
+</ul>
+<h2 id="如何應對安全事件"><a href="#如何應對安全事件" class="headerlink" title="如何應對安全事件"></a>如何應對安全事件</h2><p>即使採取了預防措施，安全事件仍可能發生。如果你認為自己是網絡攻擊的受害者:</p>
+<ol>
+<li>立即更改重要帳戶的密碼</li>
+<li>通知相關機構(銀行、工作單位等)</li>
+<li>監控你的帳戶是否有異常活動</li>
+<li>考慮凍結信用報告以防身份盜用</li>
+</ol>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>網絡安全是一個持續的過程，而不是一次性的任務。通過養成良好的安全習慣，你可以顯著降低成為網絡攻擊受害者的風險。記住，在數字世界中，最好的防禦是保持警惕和知情。</p>
+<p>在未來的文章中，我們將深入探討特定的網絡安全主題，包括密碼學基礎、網絡滲透測試、漏洞挖掘等。敬請期待！</p>
+<hr>
+<blockquote>
+<p>你有哪些網絡安全方面的問題或困惑？歡迎在評論區分享，我們可以在未來的文章中進行探討。 </p>
+</blockquote>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/" style="color: #00a596">網絡安全</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7/" style="color: #ffa2c4">隱私保護</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%AE%89%E5%85%A8%E6%84%8F%E8%AD%98/" style="color: #ff7d73">安全意識</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%85%A5%E9%96%80%E6%8C%87%E5%8D%97/" style="color: #00a596">入門指南</a>
+        </span>
+        
+    </div>
+    <a href="/2024/03/24/intro-to-cybersecurity/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    
+    <a class="page-num" href="/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">2</span>
+    
+    
+    
+    
+</div>
+
     </div>
     
-    
-    
-    
-    
-    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">owl_d</div>
+        <div class="description">
+            <p>OWL_D 網絡安全技術部落格<br>專注於分享網絡安全、滲透測試<br>與各種技術心得</p>
+
+        </div>
+        
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/owl-nosleep">
+                    <i
+                        class="fa-brands fa-github fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://hackmd.io/@owld">
+                    <i
+                        class="fa-solid fa-pen-to-square fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://linkedin.com">
+                    <i
+                        class="fa-brands fa-linkedin fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://nckuctf.org/?fbclid=IwY2xjawJPDglleHRuA2FlbQIxMAABHd3AvtQdToPPmnDnaLx3ePSAbRUlekigYijFd-nWQGAMIxUNrurDdgna1Q_aem_M-BXAmjsy2TwTzx69YNlFw">NCKUCTF</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
     
 </div>
 
@@ -333,12 +545,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>

