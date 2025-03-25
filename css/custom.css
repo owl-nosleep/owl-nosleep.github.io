@@ -126,12 +126,54 @@ body {
 pre {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  max-width: 100%;
+  overflow-x: auto;
+  word-wrap: normal;
+  white-space: pre;
 }
 
 code {
   font-family: 'Fira Code', 'Source Code Pro', Consolas, Monaco, 'Andale Mono', monospace;
   border-radius: 4px;
   padding: 2px 5px;
+}
+
+/* 內嵌代碼 */
+p code, li code, table code {
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* 獨立代碼區塊 */
+pre code {
+  white-space: pre;
+  overflow-x: auto;
+  display: block;
+  padding: 1em;
+  max-width: 100%;
+}
+
+/* 長代碼區塊的水平滾動容器 */
+.article .content figure.highlight {
+  width: 100%;
+  margin: 1.5em 0;
+  overflow-x: auto;
+  position: relative;
+}
+
+.article .content figure.highlight pre {
+  padding: 1em;
+  overflow-x: auto;
+  border-radius: 8px;
+  background-color: #f6f8fa;
+}
+
+/* 表格溢出控制 */
+.article .content table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+  max-width: 100%;
 }
 
 /* 頁腳樣式 */
