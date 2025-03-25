@@ -183,7 +183,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/TSCCTF/" style="color: #ffa2c4">
+                <a href="/tags/TSCCTF/" style="color: #00a596">
                     TSCCTF
                 </a>
             </span>
@@ -195,15 +195,13 @@
     <div class="content" v-pre>
         <h1 id="2025-TSCCTF-owl-d-writeup"><a href="#2025-TSCCTF-owl-d-writeup" class="headerlink" title="2025 TSCCTF owl_d writeup"></a>2025 TSCCTF owl_d writeup</h1><h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h2><h3 id="Give-you-a-free-flag"><a href="#Give-you-a-free-flag" class="headerlink" title="Give you a free flag"></a>Give you a free flag</h3><p><img src="https://hackmd.io/_uploads/HyswtsHwJe.png" alt="image"><br>反白就可以找到flag</p>
 <h3 id="Please-join-our-discord"><a href="#Please-join-our-discord" class="headerlink" title="Please join our discord"></a>Please join our discord</h3><p><img src="https://hackmd.io/_uploads/SJgaKoHP1l.png" alt="image"><br>在announcement這裡<br>（我找了一天 哭）</p>
+<span id="more"></span>
+
+
 <h3 id="Feedback-Form"><a href="#Feedback-Form" class="headerlink" title="Feedback Form"></a>Feedback Form</h3><p>填問卷</p>
 <h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="What-Happened"><a href="#What-Happened" class="headerlink" title="What_Happened"></a>What_Happened</h3><p>丟到Ghidra去分析<br>先看一下Defined Strings有沒有特別的<br><img src="https://hackmd.io/_uploads/SynloiHv1l.png" alt="image"><br>發現右下角有一段跟flag相關<br>點兩下go to發現main function<br><img src="https://hackmd.io/_uploads/SkzvisrDkl.png" alt="image"><br>在他附近也可以馬上看到Decrypted Flag的相關函數<br><img src="https://hackmd.io/_uploads/r1Er3sHw1l.png" alt="image"><br>所以可以看出是用XOR解密，接下來把encrypted flag找出來就好</p>
 <p><img src="https://hackmd.io/_uploads/B1BKnirPyg.png" alt="image"><br>找到之後全部對0xAA做XOR，最後就可以得到</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TSC&#123;I_Think_you_Fix_2ome_3rror&#125;</span><br></pre></td></tr></table></figure>
-
-
-<span id="more"></span>
-
-
 
 <h3 id="Chill-Checker"><a href="#Chill-Checker" class="headerlink" title="Chill Checker"></a>Chill Checker</h3><p>丟到Ghidra做分析<br>一樣先看Defined Strings有沒有重要的東西<br><img src="https://hackmd.io/_uploads/r1ZTpiHDJl.png" alt="image"><br>有跟flag相關的當然就直接go to過去了<br>在那附近會先看到generate_flag()</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">void generate_flag(char *param_1)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  byte local_a8 [64];</span><br><span class="line">  byte local_68 [64];</span><br><span class="line">  undefined8 local_28;</span><br><span class="line">  undefined8 local_20;</span><br><span class="line">  undefined local_18;</span><br><span class="line">  int local_10;</span><br><span class="line">  int local_c;</span><br><span class="line">  </span><br><span class="line">  local_28 = 0x64237d2d32191407;</span><br><span class="line">  local_20 = 0x2e6c286a162e760c;</span><br><span class="line">  local_18 = 0x2e;</span><br><span class="line">  local_10 = 0x11;</span><br><span class="line">  snprintf((char *)local_68,0x32,&quot;%s%s%c&quot;,param_1,param_1,(ulong)(uint)(int)*param_1);</span><br><span class="line">  for (local_c = 0; local_c &lt; local_10; local_c = local_c + 1) &#123;</span><br><span class="line">    local_a8[local_c] = local_68[local_c] ^ *(byte *)((long)&amp;local_28 + (long)local_c);</span><br><span class="line">  &#125;</span><br><span class="line">  local_a8[local_10] = 0;</span><br><span class="line">  printf(&quot;Your flag is: %s\n&quot;,local_a8);</span><br><span class="line">  return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
