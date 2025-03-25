@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <title>【網路安全實務與社會實踐】作業二 Write-up | OWL_D Blog</title>
     <meta name="author" content="owl_d" />
-    <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
-    <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
+    <meta name="description" content="專注於網路安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網路安全, 滲透測試, CTF, 技術分享, 資安" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
@@ -47,7 +47,7 @@
             <div id="loading" v-show="loading">
                 <div id="loading-circle">
                     <h2>LOADING</h2>
-                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <p>載入過慢請開啟緩存 瀏覽器預設開啟</p>
                     <img src="/images/loading.gif" />
                 </div>
             </div>
@@ -176,21 +176,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/CTF/" style="color: #00bcd4">
+                <a href="/tags/CTF/" style="color: #ffa2c4">
                     CTF
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/CyberSecurity/" style="color: #ff7d73">
+                <a href="/tags/CyberSecurity/" style="color: #00a596">
                     CyberSecurity
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/NCKUCTF/" style="color: #00a596">
+                <a href="/tags/NCKUCTF/" style="color: #ffa2c4">
                     NCKUCTF
                 </a>
             </span>
@@ -205,6 +205,8 @@
 <p>程式只有把 ..&#x2F; 換掉<br>所以可以使用 …&#x2F;.&#x2F; 的方式來 bypass<br>…&#x2F;.&#x2F; 被換掉後會變成 ..&#x2F; 就一樣可以達成回到上一層的目的</p>
 <p><code>https://chall.nckuctf.org:28142/?page=..././..././..././..././var/www/html/flag</code><br>即取得flag</p>
 <p>p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ..&#x2F; 過濾掉</p>
+<span id="more"></span>
+
 <h3 id="swirl"><a href="#swirl" class="headerlink" title="swirl"></a>swirl</h3><p>Stage 1: </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;config.php&#x27;);</span><br><span class="line">echo &#x27;&lt;h1&gt;👻 Stage 1 / 4&lt;/h1&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A != $B)</span><br><span class="line">        if (strcmp($A, $B) == 0)</span><br><span class="line">            if (md5($A) === md5($B))</span><br><span class="line">                echo &quot;&lt;a href=$stage2&gt;Go to stage2&lt;/a&gt;&quot;;</span><br><span class="line">            else die(&#x27;ERROR: MD5(A) != MD5(B)&#x27;);</span><br><span class="line">        else die(&#x27;ERROR: strcmp(A, B) != 0&#x27;);</span><br><span class="line">    else die(&#x27;ERROR: A == B&#x27;);</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
 <p>弱型態比較，可以使用 md5(array型態) &#x3D; NULL 的性質來達成<br>payload: <code>?A[]=1&amp;B[]=2</code></p>

