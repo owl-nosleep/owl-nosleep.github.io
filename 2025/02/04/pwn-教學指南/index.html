@@ -176,14 +176,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/Self-learning/" style="color: #03a9f4">
+                <a href="/tags/Self-learning/" style="color: #ffa2c4">
                     Self-learning
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/pwn/" style="color: #ffa2c4">
+                <a href="/tags/pwn/" style="color: #03a9f4">
                     pwn
                 </a>
             </span>
@@ -230,7 +230,7 @@
 
 <p>上述程式中，<code>printf</code> 並未指定格式，若使用者輸入包含格式符（如 <code>%x</code>、<code>%n</code> 等），<code>printf</code> 會嘗試從堆疊讀取參數或寫入記憶體，引發危險。攻擊者可以利用特製的輸入字串 <strong>讀取或寫入任意記憶體地址</strong>，甚至直接修改程式流程。例如，輸入 <code>%8$x</code> 可以泄露棧上的第8個參數（往往是返回地址或關鍵資料），而 <code>%n</code> 可以將已輸出字元數寫入某個地址。如果我們找到了全局偏移表（GOT）中函數指標的位置，就能透過格式化字串把 GOT 條目改寫為惡意地址，進而劫持執行。</p>
 <p><em>實作範例：</em> 假設有個漏洞程式允許我們輸入格式字串並打印，我們發現它的 GOT 表中 <code>printf</code> 函數條目位於已知地址。我們可以構造輸入讓 <code>printf</code> 的 GOT 條目指向我們的 shellcode 或系統函數。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：&quot;%1337c%8$n&quot; + &lt;目標地址的二進位值&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：<span class="string">&quot;<span class="variable">%133</span>7c%8<span class="variable">$n</span>&quot;</span> + &lt;目標地址的二進位值&gt;</span><br></pre></td></tr></table></figure>
 
 <p>這將會在輸出1337個字元後，將值1337寫入我們提供的目標地址（透過 <code>%n</code>），從而改寫函數指標。一旦函數被調用，就會跳轉到我們所設定的地址執行（可能是之前放置的 shellcode 或 <code>system(&quot;/bin/sh&quot;)</code>）。格式化字串漏洞的利用相當靈活，但也需要精確的地址計算與輸出長度控制。</p>
 <h3 id="Use-After-Free（UAF）漏洞"><a href="#Use-After-Free（UAF）漏洞" class="headerlink" title="Use-After-Free（UAF）漏洞"></a>Use-After-Free（UAF）漏洞</h3><p><strong>Use-After-Free（重複釋放後使用）<strong>是指</strong>記憶體被釋放後仍然被使用</strong>的漏洞。典型原因是在釋放動態記憶體後，程式沒有將指標設為 NULL，導致指標成為懸空指標。如果此時該記憶體區域又被分配給其他物件並被惡意操控，其原先的使用者仍然通過懸空指標訪問它，就可能產生破壞性行為。換言之，UAF 漏洞發生時，程式<strong>誤用已失效的記憶體引用</strong>。這類漏洞常見於瀏覽器和操作系統核心中。</p>
