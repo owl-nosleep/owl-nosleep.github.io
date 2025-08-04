@@ -1,0 +1,11 @@
+# GitHub Pages Source Configuration
+# This file ensures GitHub Pages uses GitHub Actions for deployment
+# 
+# 部署資訊：
+# - 架構: Astro
+# - 主題: Fuwari  
+# - 部署方式: GitHub Actions
+# - 最後更新: 2025-08-04 21:23
+
+name: github-pages-source
+source: github-actions
