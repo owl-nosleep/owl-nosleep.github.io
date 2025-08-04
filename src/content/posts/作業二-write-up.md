@@ -9,7 +9,7 @@ draft: false
 # 作業二 Write-up by owl_d
 ### pathwalker-waf2
 發現這題的path traversal重點在這個區間
-```mar=
+```php
 <?php
       if (isset($_GET['page'])) {
         $safe_path = str_replace('../', '', $_GET['page']);
@@ -30,7 +30,7 @@ p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ../ 過濾掉
 
 ### swirl
 Stage 1: 
-```mar=
+```php
 <?php
 include('config.php');
 echo '<h1>👻 Stage 1 / 4</h1>';
@@ -57,7 +57,7 @@ payload: `?A[]=1&B[]=2`
 
 
 Stage 2:
-```mar=
+```php
 <?php
 include('config.php');
 echo '<h1>👻 Stage 2 / 4</h1>';

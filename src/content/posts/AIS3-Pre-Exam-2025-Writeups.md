@@ -204,7 +204,7 @@ check_format() 只允許數字和標點符號，過濾掉字母
 "`Format number : %3$,%15$d\n`"
 這樣 `%15$d` 就是一個有效的格式說明符，可以讀取第 15 個參數的值。
 
-```python=
+```python
 #!/usr/bin/env python3
 import socket
 import re
@@ -499,7 +499,7 @@ LCG 的關係式如下：
 
 實驗發現，當 k=7 時，可以成功找到 p 和 q。
 
-```python!=
+```python
 from Crypto.Util.number import long_to_bytes, isPrime
 
 def legendre_symbol(a, p):
@@ -796,7 +796,7 @@ conn.close()
 
 網站原始碼有幾行比較有趣的內容
 
-```=js
+```javascript
 67940: ($0) => { const val = document.getElementById('flagInput').value; stringToUTF8(val, $0, 64); }
 68027: ($0) => { document.getElementById('result').textContent = $0 ? 'Success' : 'Wrong flag'; }
 ```
@@ -809,7 +809,7 @@ Exported functions:
 
 WebAssembly:
 
-```=js
+```javascript
 function findWasmBinary() {
     return locateFile('index.wasm');
 }
@@ -817,7 +817,7 @@ function findWasmBinary() {
 
 把index.js轉成index.wasm後可以發現：
 
-```=wasm
+```wasm
 (local.set $l23 (call $f13 (local.get $l22)))  ; strlen函数
 (local.set $l24 (i32.const 40))                ; 檢查長度40
 (local.set $l25 (i32.ne (local.get $l23) (local.get $l24)))  ; 比較長度
