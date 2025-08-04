@@ -1,0 +1,2 @@
+# This file disables Jekyll processing for GitHub Pages
+# to ensure Astro static files are served correctly
