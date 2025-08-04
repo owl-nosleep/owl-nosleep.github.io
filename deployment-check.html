@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro 部署測試</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #bee5eb;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Astro 部落格部署測試</h1>
+    
+    <div class="success">
+        <h2>✅ 部署成功！</h2>
+        <p>如果您看到這個頁面，表示 Astro 部落格已經成功部署到 GitHub Pages。</p>
+        <p><strong>部署時間：</strong> <span id="timestamp"></span></p>
+    </div>
+    
+    <div class="info">
+        <h3>📋 部署資訊</h3>
+        <ul>
+            <li><strong>架構：</strong> Astro Static Site Generator</li>
+            <li><strong>主題：</strong> Fuwari</li>
+            <li><strong>域名：</strong> owld.tw</li>
+            <li><strong>部署方式：</strong> GitHub Actions + GitHub Pages</li>
+        </ul>
+    </div>
+    
+    <div class="info">
+        <h3>🔗 相關連結</h3>
+        <ul>
+            <li><a href="/">回到首頁</a></li>
+            <li><a href="/about/">關於頁面</a></li>
+            <li><a href="/archive/">文章歸檔</a></li>
+        </ul>
+    </div>
+    
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString('zh-TW');
+    </script>
+</body>
+</html>
