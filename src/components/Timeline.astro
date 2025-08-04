@@ -1,132 +1,132 @@
 ---
 interface Experience {
-  year: string;
-  title: string;
-  description: string;
-  type: 'achievement' | 'education' | 'competition' | 'certification';
+	year: string;
+	title: string;
+	description: string;
+	type: "achievement" | "education" | "competition" | "certification";
 }
 
 const experiences: Experience[] = [
-  {
-    year: "2019",
-    title: "資策會-台灣少年駭客人才培育營 THITCAMP",
-    description: "IOT Hacking",
-    type: "education"
-  },
-  {
-    year: "2021",
-    title: "NYCU Fintech陽明交通大學財經資訊營隊",
-    description: "Rank #1",
-    type: "achievement"
-  },
-  {
-    year: "2021",
-    title: "Facebook Hacker Cup",
-    description: "Qualified",
-    type: "competition"
-  },
-  {
-    year: "2022",
-    title: "成為白帽駭客2_跟著方丈學滲透測試實務",
-    description: "2022學員",
-    type: "education"
-  },
-  {
-    year: "2024",
-    title: "CEH Certificate",
-    description: "Score: 121/125",
-    type: "certification"
-  },
-  {
-    year: "2025",
-    title: "Google資安人才培育計畫",
-    description: "2025 學員",
-    type: "education"
-  },
-  {
-    year: "2025",
-    title: "成大遊戲設計課程 - 視窗程式設計",
-    description: "期末最佳專題",
-    type: "achievement"
-  },
-  {
-    year: "2025",
-    title: "成大資安社",
-    description: "副社長",
-    type: "achievement"
-  },
-  {
-    year: "2025",
-    title: "Devcore Conference",
-    description: "Participant",
-    type: "education"
-  },
-  {
-    year: "2025",
-    title: "AIS3",
-    description: "軟體組",
-    type: "education"
-  },
-  {
-    year: "2025",
-    title: "成大資安課程：網路安全實務與社會實踐",
-    description: "Rank #1（Writeups已公布網站）",
-    type: "achievement"
-  },
-  {
-    year: "2025",
-    title: "TSCCTF",
-    description: "Qualified Rank #4",
-    type: "competition"
-  },
-  {
-    year: "2025",
-    title: "picoCTF",
-    description: "Rank #262（Contributed 4910 points）",
-    type: "competition"
-  },
-  {
-    year: "2025",
-    title: "AIS3 pre-exam",
-    description: "Rank #60",
-    type: "competition"
-  },
-  {
-    year: "2025",
-    title: "InfoSec CTF",
-    description: "總排 Rank #7 / 大專組 Rank #4",
-    type: "competition"
-  }
+	{
+		year: "2019",
+		title: "資策會-台灣少年駭客人才培育營 THITCAMP",
+		description: "IOT Hacking",
+		type: "education",
+	},
+	{
+		year: "2021",
+		title: "NYCU Fintech陽明交通大學財經資訊營隊",
+		description: "Rank #1",
+		type: "achievement",
+	},
+	{
+		year: "2021",
+		title: "Facebook Hacker Cup",
+		description: "Qualified",
+		type: "competition",
+	},
+	{
+		year: "2022",
+		title: "成為白帽駭客2_跟著方丈學滲透測試實務",
+		description: "2022學員",
+		type: "education",
+	},
+	{
+		year: "2024",
+		title: "CEH Certificate",
+		description: "Score: 121/125",
+		type: "certification",
+	},
+	{
+		year: "2025",
+		title: "Google資安人才培育計畫",
+		description: "2025 學員",
+		type: "education",
+	},
+	{
+		year: "2025",
+		title: "成大遊戲設計課程 - 視窗程式設計",
+		description: "期末最佳專題",
+		type: "achievement",
+	},
+	{
+		year: "2025",
+		title: "成大資安社",
+		description: "副社長",
+		type: "achievement",
+	},
+	{
+		year: "2025",
+		title: "Devcore Conference",
+		description: "Participant",
+		type: "education",
+	},
+	{
+		year: "2025",
+		title: "AIS3",
+		description: "軟體組",
+		type: "education",
+	},
+	{
+		year: "2025",
+		title: "成大資安課程：網路安全實務與社會實踐",
+		description: "Rank #1（Writeups已公布網站）",
+		type: "achievement",
+	},
+	{
+		year: "2025",
+		title: "TSCCTF",
+		description: "Qualified Rank #4",
+		type: "competition",
+	},
+	{
+		year: "2025",
+		title: "picoCTF",
+		description: "Rank #262（Contributed 4910 points）",
+		type: "competition",
+	},
+	{
+		year: "2025",
+		title: "AIS3 pre-exam",
+		description: "Rank #60",
+		type: "competition",
+	},
+	{
+		year: "2025",
+		title: "InfoSec CTF",
+		description: "總排 Rank #7 / 大專組 Rank #4",
+		type: "competition",
+	},
 ];
 
 const getTypeIcon = (type: string) => {
-  switch (type) {
-    case 'achievement':
-      return '🏆';
-    case 'education':
-      return '📚';
-    case 'competition':
-      return '🎯';
-    case 'certification':
-      return '📜';
-    default:
-      return '✨';
-  }
+	switch (type) {
+		case "achievement":
+			return "🏆";
+		case "education":
+			return "📚";
+		case "competition":
+			return "🎯";
+		case "certification":
+			return "📜";
+		default:
+			return "✨";
+	}
 };
 
 const getTypeColor = (type: string) => {
-  switch (type) {
-    case 'achievement':
-      return 'text-yellow-600 dark:text-yellow-400';
-    case 'education':
-      return 'text-blue-600 dark:text-blue-400';
-    case 'competition':
-      return 'text-green-600 dark:text-green-400';
-    case 'certification':
-      return 'text-purple-600 dark:text-purple-400';
-    default:
-      return 'text-gray-600 dark:text-gray-400';
-  }
+	switch (type) {
+		case "achievement":
+			return "text-yellow-600 dark:text-yellow-400";
+		case "education":
+			return "text-blue-600 dark:text-blue-400";
+		case "competition":
+			return "text-green-600 dark:text-green-400";
+		case "certification":
+			return "text-purple-600 dark:text-purple-400";
+		default:
+			return "text-gray-600 dark:text-gray-400";
+	}
 };
 ---
 
