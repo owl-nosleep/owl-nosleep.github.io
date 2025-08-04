@@ -71,7 +71,7 @@ for length_to_guess in range(1, MAX_LENGTH_TO_CHECK + 1):
 得到長度是 20
 接下來可以一個一個去爆
 
-```=py
+```python
 import requests
 import string
 import time
@@ -124,7 +124,7 @@ else:
 
 Script (前半段來自 CryptoCat 的 pwn 影片教學腳本模板):
 
-```=py
+```python
 from pwn import *
 
 # Allows you to switch between local/GDB/remote from terminal
@@ -175,7 +175,7 @@ io.interactive()
 
 漏洞點：
 
-```cpp=
+```cpp
 char format[0x10] = {0};
 printf("What format do you want ? ");
 read(0, format, 0xf);
@@ -190,7 +190,7 @@ printf(buffer, "Welcome", "~~~", number);
 
 程序會讀取 flag 到 stack 上的 buf[256] 變數中。
 
-```cpp=
+```cpp
 if (!isdigit(c) && !ispunct(c)) {
     printf("Error format !\n");
     exit(1);
@@ -339,7 +339,7 @@ http://chals1.ais3.org:20872/..%2f..%2f..%2fproc
 * 接著，它會讓你輸入任何你想要的文字。伺服器會用同一組金鑰 A 和 B 來加密你輸入的文字，然後把加密結果顯示給你看。
 * 這就是一個典型的「選擇明文攻擊 (Chosen-Plaintext Attack)」機會。因為我們可以自己設計輸入的「明文」，觀察加密後的「密文」，藉此推敲出秘密金鑰。
 
-```=python
+```python
 import numpy as np
 from pwn import *
 
@@ -677,7 +677,7 @@ ECDSA 簽章的公式為 s = k^{-1} * (h + r * sk) % order，其中 sk 是私鑰
 4. 提交驗證：將偽造的簽章 (r_flag, s_flag) 和訊息 "give_me_flag" 傳送給伺服器的 verify 功能。
 5. 取得 Flag：如果簽章正確，伺服器就會把 Flag 給我們。
 
-```=py
+```python
  #!/usr/bin/env python3
 
 import hashlib
@@ -843,7 +843,7 @@ function findWasmBinary() {
 * 循環左移：使用函數f8對8字節數據進行循環左移
 * 比較：將變換後的結果與對應的期望值比較
 
-```=py
+```python
 def ror64(value, shift):
     value = value & 0xFFFFFFFFFFFFFFFF  
     shift = shift % 64
