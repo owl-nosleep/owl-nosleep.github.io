@@ -1,30 +1,15 @@
 ---
-import { readFile } from 'node:fs/promises';
-import { parse } from 'yaml';
 import { marked } from 'marked';
+import { experiences, type Experience } from '../data/experiences';
 
-interface Experience {
-	year: string;
-	title: string;
-	description: string;
-	type: "achievement" | "education" | "competition" | "certification";
-	content?: string;
-	order?: number;
-	contentHtml?: string;
-}
-
-// 讀取 YAML 檔案
-const yamlContent = await readFile(new URL('../../public/data/experiences.yaml', import.meta.url), 'utf-8');
-const data = parse(yamlContent);
-
-// 處理經歷資料
-const experiences: Experience[] = data.experiences.map((exp: any) => ({
+// 處理經歷資料，添加 HTML 內容
+const processedExperiences = experiences.map((exp) => ({
 	...exp,
 	contentHtml: exp.content ? marked.parse(exp.content) : ''
 }));
 
 // 按年份分組活動
-const groupedExperiences = experiences.reduce((acc, exp) => {
+const groupedExperiences = processedExperiences.reduce((acc, exp) => {
 	if (!acc[exp.year]) {
 		acc[exp.year] = [];
 	}
@@ -77,35 +62,48 @@ const getTypeColor = (type: string) => {
   </h2>
   
   <div class="timeline-wrapper">
-    {sortedYears.map((year, yearIndex) => (
-      <div class="year-section">
-        <!-- 年份標題 -->
-        <div class="year-header">
-          <div class="year-badge">
-            <span class="year-text">{year}</span>
+    {sortedYears.length > 0 ? (
+      sortedYears.map((year, yearIndex) => (
+        <div class="year-section">
+          <!-- 年份標題 -->
+          <div class="year-header">
+            <div class="year-badge">
+              <span class="year-text">{year}</span>
+            </div>
+            <div class="year-line"></div>
           </div>
-          <div class="year-line"></div>
-        </div>
-        
-        <!-- 該年份的活動列表 -->
-        <div class="activities-list">
-          {groupedExperiences[year].map((exp, activityIndex) => (
-            <div class="activity-item">
-              <div class="activity-connector"></div>
-              <div class="activity-card">
-                <div class="activity-header">
-                  <span class="type-icon">{getTypeIcon(exp.type)}</span>
-                  <h3 class="activity-title">{exp.title}</h3>
-                  <div class="type-badge">
-                    <span class={`badge ${exp.type}`}>
-                      {exp.type === 'achievement' ? '成就' :
-                       exp.type === 'education' ? '學習' :
-                       exp.type === 'competition' ? '競賽' : '認證'}
-                    </span>
+          
+          <!-- 該年份的活動列表 -->
+          <div class="activities-list">
+            {groupedExperiences[year].map((exp, activityIndex) => (
+              <div class="activity-item">
+                <div class="activity-connector"></div>
+                <div class="activity-card">
+                  <div class="activity-header">
+                    <span class="type-icon">{getTypeIcon(exp.type)}</span>
+                    <h3 class="activity-title">{exp.title}</h3>
+                    <div class="type-badge">
+                      <span class={`badge ${exp.type}`}>
+                        {exp.type === 'achievement' ? '成就' :
+                         exp.type === 'education' ? '學習' :
+                         exp.type === 'competition' ? '競賽' : '認證'}
+                      </span>
+                    </div>
                   </div>
+                  <p class="activity-description">{exp.description}</p>
                 </div>
-                <p class="activity-description">{exp.description}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      ))
+    ) : (
+      <div class="no-data-message">
+        <p class="text-center text-gray-500 dark:text-gray-400 py-8">
+          📋 暫無經歷資料
+        </p>
+      </div>
+    )}
             </div>
           ))}
         </div>
