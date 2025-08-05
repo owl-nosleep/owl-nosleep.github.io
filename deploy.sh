@@ -54,58 +54,38 @@ check_requirements() {
     print_success "所有需求已滿足"
 }
 
-# 檢查環境變數
+# 檢查環境變數（已移除管理介面，不再需要）
 check_env_vars() {
-    print_status "檢查環境變數..."
-    
-    if [ ! -f ".env" ]; then
-        print_error ".env 檔案不存在，請先建立並設置管理員認證"
-        exit 1
-    fi
-    
-    # 檢查必要的環境變數
-    if ! grep -q "ADMIN_USERNAME=" .env; then
-        print_error ".env 檔案中缺少 ADMIN_USERNAME"
-        exit 1
-    fi
-    
-    if ! grep -q "ADMIN_PASSWORD=" .env; then
-        print_error ".env 檔案中缺少 ADMIN_PASSWORD"
-        exit 1
-    fi
-    
-    # 檢查密碼強度
-    password=$(grep "ADMIN_PASSWORD=" .env | cut -d'=' -f2)
-    if [ ${#password} -lt 8 ]; then
-        print_warning "建議使用至少 8 個字符的密碼"
-    fi
-    
-    print_success "環境變數檢查完成"
+    print_status "跳過環境變數檢查（已移除管理介面功能）..."
+    print_success "環境變數檢查跳過"
 }
 
-# 安全檢查
+# 安全檢查（已移除管理介面）
 security_check() {
     print_status "執行安全檢查..."
     
-    # 檢查 .env 是否在 .gitignore 中
-    if ! grep -q "\.env" .gitignore; then
-        print_error ".env 檔案未加入 .gitignore，存在安全風險"
-        exit 1
+    # 確認沒有敏感檔案被 Git 追蹤
+    if [ -f ".env" ] && git ls-files | grep -q "\.env$"; then
+        print_warning ".env 檔案被 Git 追蹤，但已無關緊要（無管理介面）"
     fi
     
-    # 檢查是否有敏感檔案被 Git 追蹤
-    if git ls-files | grep -q "\.env$"; then
-        print_error ".env 檔案已被 Git 追蹤，請立即移除"
-        exit 1
-    fi
-    
-    # 檢查舊的管理員路徑是否已移除
+    # 確認管理員路徑已完全移除
     if [ -d "src/pages/admin" ]; then
-        print_error "發現不安全的舊管理員路徑 src/pages/admin，請刪除"
+        print_error "發現舊的管理員路徑 src/pages/admin，請刪除"
         exit 1
     fi
     
-    print_success "安全檢查通過"
+    if [ -d "src/pages/api" ]; then
+        print_error "發現管理 API 路徑 src/pages/api，請刪除"
+        exit 1
+    fi
+    
+    if [ -f "src/utils/auth.ts" ]; then
+        print_error "發現認證工具文件 src/utils/auth.ts，請刪除"
+        exit 1
+    fi
+    
+    print_success "安全檢查通過 - 無管理介面相關代碼"
 }
 
 # 建構專案
@@ -150,15 +130,14 @@ post_deploy_verification() {
     echo ""
     echo "請手動驗證以下項目："
     echo "✓ 網站首頁正常載入"
+    echo "✓ 背景橫幅顯示和滾動淡化效果正常"
     echo "✓ 時間軸頁面顯示正確"
     echo "✓ 深色/淺色模式切換正常"
-    echo "✓ 管理員頁面需要認證才能訪問"
-    echo "✓ API 端點受到保護"
+    echo "✓ 搜索功能正常工作"
+    echo "✓ 所有博客文章正常顯示"
     echo ""
     
-    print_warning "請記得在 Vercel Dashboard 設置環境變數："
-    echo "- ADMIN_USERNAME"
-    echo "- ADMIN_PASSWORD"
+    print_success "無需設置環境變數 - 已移除管理介面功能"
 }
 
 # 主要執行流程

@@ -4,11 +4,12 @@ published: 2025-02-01T00:00:00.000Z
 description: ""
 tags: []
 category: "general"
-draft: false
+draft: true
 ---
-## <font color="#b46cfc"> Common cybersecurity terminology</font>
+## `<font color="#b46cfc">` Common cybersecurity terminology`</font>`
 
 ### 1. 網絡安全的核心目標
+
 - **保密性 (Confidentiality)、完整性 (Integrity)、可用性 (Availability)**
   - 確保資訊、系統和數據僅供授權用戶存取，保持數據正確且隨時可用。
 
@@ -17,363 +18,272 @@ draft: false
 ### 2. 關鍵術語與概念
 
 - **Compliance（合規性）**
+
   - 定義：遵循內部標準與外部規範的過程。
   - 目的：幫助組織避免罰款與安全漏洞，確保遵守法規要求。
-
 - **Security Frameworks（安全框架）**
-  - 定義：用於構建計畫、制定策略以減少風險和保護數據與隱私的指南。
-  
-- **Security Controls（安全控制）**
-  - 定義：具體的防護措施，設計來降低特定安全風險，通常與安全框架搭配使用，建立穩固的安全防護基礎。
 
+  - 定義：用於構建計畫、制定策略以減少風險和保護數據與隱私的指南。
+- **Security Controls（安全控制）**
+
+  - 定義：具體的防護措施，設計來降低特定安全風險，通常與安全框架搭配使用，建立穩固的安全防護基礎。
 - **Security Posture（安全狀態）**
+
   - 定義：組織管理與保護其關鍵資產及數據的能力，以及對安全威脅的反應能力。
   - 目標：擁有強健的安全狀態能夠降低整體風險。
-
 - **Threat Actor（威脅行為者）**
-  - 定義：任何可能對組織構成安全風險的人或團體，可能針對計算機、應用程式、網絡或數據進行攻擊。
 
+  - 定義：任何可能對組織構成安全風險的人或團體，可能針對計算機、應用程式、網絡或數據進行攻擊。
 - **Internal Threat（內部威脅）**
+
   - 定義：來自組織內部的人員（例如現職或前職員、供應商、合作夥伴），可能因為意外或惡意行為導致安全風險。
   - 範例：員工無意中點擊惡意郵件鏈結，或故意進行未授權數據存取。
-
 - **Network Security（網絡安全）**
-  - 定義：保護組織網絡基礎設施，防止未經授權的訪問，涵蓋數據、服務、系統與設備。
 
+  - 定義：保護組織網絡基礎設施，防止未經授權的訪問，涵蓋數據、服務、系統與設備。
 - **Cloud Security（雲安全）**
+
   - 定義：確保存放於雲端的資產正確配置，並僅限授權用戶存取。
   - 特點：隨著雲端服務的普及，專注於保護數據、應用程式與基礎設施成為日益重要的子領域。
-
 - **Programming（編程）**
+
   - 定義：創建一組指令讓計算機執行特定任務的過程。
   - 應用：自動化重複任務（例如篩選惡意域名）、監控網絡流量及提醒可疑活動。
 
 ---
 
-
 <!--more-->
 
-
-
-
 ### 3. 學習與應用的重要性
+
 - **掌握術語與概念**
   - 熟悉這些關鍵術語有助於安全分析師識別常見的威脅、風險與漏洞，並更有效地制定防禦策略。
 - **持續學習**
   - 建議定期參考如美國國家標準與技術研究院（NIST）的術語詞彙表，或其他權威機構提供的網絡安全詞彙資源，以便隨時更新最新資訊與趨勢。
 
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Common cybersecurity terminology</font>
+## `<font color="#b46cfc">` Common cybersecurity terminology`</font>`
 
 ### 一、可轉移技能
+
 這些技能來自其他領域的經驗，但在網絡安全職場同樣非常重要，能幫助你在團隊中協作並有效解決問題：
 
-- **溝通能力**  
-  - 與不同背景的人（技術與非技術）進行清晰有效的溝通，理解彼此的問題與關切，有助於迅速解決安全事件。
+- **溝通能力**
 
-- **問題解決能力**  
+  - 與不同背景的人（技術與非技術）進行清晰有效的溝通，理解彼此的問題與關切，有助於迅速解決安全事件。
+- **問題解決能力**
+
   - 主動發現並處理安全問題，如辨識攻擊模式並找出最有效的解決方案。
   - 在解決問題時，不畏風險並勇於嘗試，同時理解有時候需要妥協，找出次優方案。
+- **時間管理**
 
-- **時間管理**  
   - 具備高度緊迫感，能夠適當地優先處理任務，以減少安全漏洞和潛在損失。
   - 集中精力解決最緊急的安全問題，從而降低風險。
+- **成長心態**
 
-- **成長心態**  
   - 在不斷變化的網絡安全領域中，保持學習熱情與好奇心，持續更新知識與技能，適應新技術與新威脅。
+- **多元觀點**
 
-- **多元觀點**  
   - 尊重團隊中不同的意見與背景，通過多元化的觀點來共同尋找更完善的安全解決方案。
 
 ---
 
 ### 二、技術技能
+
 這些技能專門針對網絡安全工作中的工具與流程，需要學習特定的程序語言、工具和方法：
 
-- **編程語言**  
+- **編程語言**
+
   - 例如 Python 等語言，能用來自動化重複性任務，如搜尋惡意數據、整理並分析資訊，提升工作效率並降低人為錯誤。
+- **安全信息與事件管理 (SIEM) 工具**
 
-- **安全信息與事件管理 (SIEM) 工具**  
   - 收集和分析日誌數據，監控關鍵活動，並提供針對特定風險與威脅的警報，協助快速發現潛在入侵事件。
+- **入侵檢測系統 (IDS)**
 
-- **入侵檢測系統 (IDS)**  
   - 用於監控系統活動，及時發出可疑或未授權訪問的警報，是保護組織資產的重要工具。
+- **威脅趨勢認知**
 
-- **威脅趨勢認知**  
   - 持續關注最新的攻擊趨勢、威脅行為者、惡意軟件與攻擊手法，能及早識別新型威脅（例如新型勒索軟件變種），並採取有效防禦措施。
+- **事件響應**
 
-- **事件響應**  
   - 依照既定政策與流程處理安全事件，如接收到惡意軟件攻擊警報後，迅速展開調查、定位根本原因並制定修復計畫，確保事故不再擴大。
 
 ---
 
 ### 三、額外說明
-- **專業認證：CompTIA Security+**  
+
+- **專業認證：CompTIA Security+**
   - 課程內容同時幫助你為業界知名的 CompTIA Security+ 考試做準備，成功完成證書課程後可享有考試優惠及相關練習材料，進一步提升你在求職市場中的競爭力。
 
+## `<font color="#b46cfc">` Glossary terms from module 1`</font>`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Glossary terms from module 1</font>
-
-- **Cybersecurity (or security)**  
-  保護網絡、設備、人員與數據，確保資訊的**保密性、完整性和可用性**，防止未經授權的存取或犯罪利用。
-
-- **Cloud security**  
-  確保存放在雲端中的資產**正確配置**，並僅限授權用戶存取這些資產的過程。
-
-- **Internal threat**  
-  指可能對組織構成安全風險的**現任或前任員工、外部供應商或信任夥伴**。
-
-- **Network security**  
-  保護組織網絡基礎設施，防止未經授權存取的實踐與措施。
-
-- **Personally identifiable information (PII)**  
-  可用來**推斷個人身份**的任何資訊。
-
-- **Security posture**  
-  組織管理和保護其關鍵資產與數據、防範安全威脅並因應變化的能力。
-
-- **Sensitive personally identifiable information (SPII)**  
-  一種特殊類型的 PII，需要**更嚴格的處理規範**來保護。
-
-- **Technical skills**  
-  需要掌握**特定工具、程序和政策**知識的技能。
-
-- **Threat**  
-  任何可能對資產產生負面影響的情況或事件。
-
-- **Threat actor**  
-  任何對組織構成安全風險的**個人或團體**。
-
-- **Transferable skills**  
+- **Cybersecurity (or security)**保護網絡、設備、人員與數據，確保資訊的**保密性、完整性和可用性**，防止未經授權的存取或犯罪利用。
+- **Cloud security**確保存放在雲端中的資產**正確配置**，並僅限授權用戶存取這些資產的過程。
+- **Internal threat**指可能對組織構成安全風險的**現任或前任員工、外部供應商或信任夥伴**。
+- **Network security**保護組織網絡基礎設施，防止未經授權存取的實踐與措施。
+- **Personally identifiable information (PII)**可用來**推斷個人身份**的任何資訊。
+- **Security posture**組織管理和保護其關鍵資產與數據、防範安全威脅並因應變化的能力。
+- **Sensitive personally identifiable information (SPII)**一種特殊類型的 PII，需要**更嚴格的處理規範**來保護。
+- **Technical skills**需要掌握**特定工具、程序和政策**知識的技能。
+- **Threat**任何可能對資產產生負面影響的情況或事件。
+- **Threat actor**任何對組織構成安全風險的**個人或團體**。
+- **Transferable skills**
   從其他領域獲得，並可應用於不同職業的**通用技能**。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Common attacks and their effectiveness</font>
+## `<font color="#b46cfc">` Common attacks and their effectiveness`</font>`
 
 ### 1. 魚叉攻擊（Phishing）
-- **定義：**  
-  利用數位通信手段欺騙使用者，誘使其洩漏敏感數據或執行惡意軟件。
+
+- **定義：**利用數位通信手段欺騙使用者，誘使其洩漏敏感數據或執行惡意軟件。
 - **常見類型：**
-  - **商業電子郵件詐騙（Business Email Compromise, BEC）：**  
-    偽裝成可信來源，發送看似合法的請求，以獲取金錢或敏感資訊。
-  - **魚叉式網絡釣魚（Spear Phishing）：**  
-    針對特定使用者或群體發起攻擊，郵件看似來自可信來源。
-  - **大魚攻擊（Whaling）：**  
-    特別針對公司高層，目的是竊取關鍵敏感資料。
-  - **語音網絡釣魚（Vishing）：**  
-    通過語音通信手段，冒充可信來源以獲取敏感信息。
-  - **短信網絡釣魚（Smishing）：**  
+  - **商業電子郵件詐騙（Business Email Compromise, BEC）：**偽裝成可信來源，發送看似合法的請求，以獲取金錢或敏感資訊。
+  - **魚叉式網絡釣魚（Spear Phishing）：**針對特定使用者或群體發起攻擊，郵件看似來自可信來源。
+  - **大魚攻擊（Whaling）：**特別針對公司高層，目的是竊取關鍵敏感資料。
+  - **語音網絡釣魚（Vishing）：**通過語音通信手段，冒充可信來源以獲取敏感信息。
+  - **短信網絡釣魚（Smishing）：**
     利用短信發送欺騙信息，誘使使用者提供敏感資訊或下載惡意軟件。
 
 ---
 
 ### 2. 惡意軟件（Malware）
-- **定義：**  
-  設計用來損害設備或網絡的軟件，通常以金錢利益或情報優勢為目的。
+
+- **定義：**設計用來損害設備或網絡的軟件，通常以金錢利益或情報優勢為目的。
 - **常見類型：**
-  - **病毒（Viruses）：**  
-    需要使用者啟動（如打開附件或下載文件），並在系統中隱藏自身以破壞數據或軟件。
-  - **蠕蟲（Worms）：**  
-    自我複製並能自行擴散到其他設備，不需使用者下載即可自動傳播。
-  - **勒索軟件（Ransomware）：**  
-    加密組織數據並要求贖金以恢復存取權。
-  - **間諜軟件（Spyware）：**  
+  - **病毒（Viruses）：**需要使用者啟動（如打開附件或下載文件），並在系統中隱藏自身以破壞數據或軟件。
+  - **蠕蟲（Worms）：**自我複製並能自行擴散到其他設備，不需使用者下載即可自動傳播。
+  - **勒索軟件（Ransomware）：**加密組織數據並要求贖金以恢復存取權。
+  - **間諜軟件（Spyware）：**
     收集並出售個人信息，可能進一步存取使用者設備以竊取隱私數據。
 
 ---
 
 ### 3. 社交工程（Social Engineering）
-- **定義：**  
-  利用操縱技巧及人為失誤獲取私人信息、存取權或財物。攻擊者通常藉由建立虛假的信任環境來欺騙目標。
+
+- **定義：**利用操縱技巧及人為失誤獲取私人信息、存取權或財物。攻擊者通常藉由建立虛假的信任環境來欺騙目標。
 - **常見攻擊方式：**
-  - **社交媒體釣魚：**  
-    從社交媒體蒐集目標信息，再發起攻擊。
-  - **水坑攻擊（Watering Hole Attack）：**  
-    攻擊特定群體常訪問的網站，藉此感染目標。
-  - **USB誘餌（USB Baiting）：**  
-    故意留下帶有惡意軟件的 USB 隨身碟，誘使使用者插入並感染系統。
-  - **實體社交工程：**  
+  - **社交媒體釣魚：**從社交媒體蒐集目標信息，再發起攻擊。
+  - **水坑攻擊（Watering Hole Attack）：**攻擊特定群體常訪問的網站，藉此感染目標。
+  - **USB誘餌（USB Baiting）：**故意留下帶有惡意軟件的 USB 隨身碟，誘使使用者插入並感染系統。
+  - **實體社交工程：**
     攻擊者假冒員工、客戶或供應商，試圖取得實體場所的未授權存取。
 - **成功原因（社交工程原則）：**
-  - **權威：**  
-    利用人們對權威的尊重。
-  - **脅迫：**  
-    採取恐嚇和欺壓手段，迫使受害者服從。
-  - **共識/社會認同：**  
-    利用人們對他人行為的認同感，讓目標相信攻擊者具有合法性。
-  - **稀缺：**  
-    創造物資或服務有限的印象，迫使目標迅速行動。
-  - **熟悉感：**  
-    建立虛假的情感連結，使受害者放鬆警惕。
-  - **信任：**  
-    隨著時間累積，攻擊者利用已建立的信任來獲取更多敏感信息。
-  - **緊迫性：**  
+  - **權威：**利用人們對權威的尊重。
+  - **脅迫：**採取恐嚇和欺壓手段，迫使受害者服從。
+  - **共識/社會認同：**利用人們對他人行為的認同感，讓目標相信攻擊者具有合法性。
+  - **稀缺：**創造物資或服務有限的印象，迫使目標迅速行動。
+  - **熟悉感：**建立虛假的情感連結，使受害者放鬆警惕。
+  - **信任：**隨著時間累積，攻擊者利用已建立的信任來獲取更多敏感信息。
+  - **緊迫性：**
     急迫的情況迫使受害者迅速回應，往往不做充分思考。
 
 ---
 
 ### 4. 關鍵總結
-- **多樣化攻擊手法：**  
-  不論是技術手段（如病毒、蠕蟲、勒索軟件）還是社會工程（利用人性弱點），都顯示出攻擊者在不斷進化其策略與技術。
-- **防禦重點：**  
-  理解各種攻擊方式及其運作原理，有助於制定更完善的防禦策略，保護組織與個人免受潛在風險侵害。
-- **社交工程的致命性：**  
+
+- **多樣化攻擊手法：**不論是技術手段（如病毒、蠕蟲、勒索軟件）還是社會工程（利用人性弱點），都顯示出攻擊者在不斷進化其策略與技術。
+- **防禦重點：**理解各種攻擊方式及其運作原理，有助於制定更完善的防禦策略，保護組織與個人免受潛在風險侵害。
+- **社交工程的致命性：**
   由於其針對人性的弱點而非單純技術漏洞，因此往往效果顯著，需加強使用者教育與意識提升。
 
-
-
-
-
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Determine the type of attack</font>
+## `<font color="#b46cfc">` Determine the type of attack`</font>`
 
 ### 1. 密碼攻擊（Password Attack）
-- **定義：**  
-  試圖破解密碼以存取受密碼保護的設備、系統、網絡或數據。
-- **常見方法：**  
-  - 暴力破解（Brute Force）  
+
+- **定義：**試圖破解密碼以存取受密碼保護的設備、系統、網絡或數據。
+- **常見方法：**
+  - 暴力破解（Brute Force）
   - 彩虹表（Rainbow Table）
-- **所屬安全領域：**  
+- **所屬安全領域：**
   通訊與網絡安全
 
 ---
 
 ### 2. 社交工程攻擊（Social Engineering Attack）
-- **定義：**  
-  利用操縱和欺騙技術，利用人為失誤或信任漏洞，從而獲取敏感資訊或未授權存取。
-- **常見方法：**  
-  - 網絡釣魚（Phishing）  
-  - 短信釣魚（Smishing）  
-  - 語音釣魚（Vishing）  
-  - 魚叉式網絡釣魚（Spear Phishing）  
-  - 大魚攻擊（Whaling）  
-  - 社交媒體釣魚  
-  - 商業電子郵件詐騙（Business Email Compromise, BEC）  
-  - 水坑攻擊（Watering Hole Attack）  
-  - USB誘餌（USB Baiting）  
+
+- **定義：**利用操縱和欺騙技術，利用人為失誤或信任漏洞，從而獲取敏感資訊或未授權存取。
+- **常見方法：**
+  - 網絡釣魚（Phishing）
+  - 短信釣魚（Smishing）
+  - 語音釣魚（Vishing）
+  - 魚叉式網絡釣魚（Spear Phishing）
+  - 大魚攻擊（Whaling）
+  - 社交媒體釣魚
+  - 商業電子郵件詐騙（Business Email Compromise, BEC）
+  - 水坑攻擊（Watering Hole Attack）
+  - USB誘餌（USB Baiting）
   - 實體社交工程（Physical Social Engineering）
-- **所屬安全領域：**  
+- **所屬安全領域：**
   安全與風險管理
 
 ---
 
 ### 3. 物理攻擊（Physical Attack）
-- **定義：**  
-  直接針對實體設備或環境發起攻擊，影響數位與實體資產。
-- **常見方法：**  
-  - 惡意 USB 線  
-  - 惡意隨身碟（Flash Drive）  
+
+- **定義：**直接針對實體設備或環境發起攻擊，影響數位與實體資產。
+- **常見方法：**
+  - 惡意 USB 線
+  - 惡意隨身碟（Flash Drive）
   - 卡片複製與資料盜刷（Card Cloning and Skimming）
-- **所屬安全領域：**  
+- **所屬安全領域：**
   資產安全
 
 ---
 
 ### 4. 對抗性人工智能（Adversarial Artificial Intelligence）
-- **定義：**  
-  利用人工智能和機器學習技術的弱點來發起更有效率的攻擊。
-- **所屬安全領域：**  
+
+- **定義：**利用人工智能和機器學習技術的弱點來發起更有效率的攻擊。
+- **所屬安全領域：**
   同時屬於通訊與網絡安全以及身份與存取管理
 
 ---
 
 ### 5. 供應鏈攻擊（Supply-Chain Attack）
-- **定義：**  
-  針對系統、應用、硬件或軟件在供應鏈過程中的漏洞進行攻擊，使得惡意軟件能夠在多個組織之間擴散。
-- **影響範圍：**  
-  可能影響多個組織及其員工，造成廣泛的安全風險。
-- **所屬安全領域：**  
+
+- **定義：**針對系統、應用、硬件或軟件在供應鏈過程中的漏洞進行攻擊，使得惡意軟件能夠在多個組織之間擴散。
+- **影響範圍：**可能影響多個組織及其員工，造成廣泛的安全風險。
+- **所屬安全領域：**
   可涉及安全與風險管理、安全架構與工程以及安全運營等多個領域
 
 ---
 
 ### 6. 密碼學攻擊（Cryptographic Attack）
-- **定義：**  
-  針對安全通信中所使用的加密技術進行攻擊，以破壞資料的保密性。
-- **常見方法：**  
-  - 生日攻擊（Birthday Attack）  
-  - 碰撞攻擊（Collision Attack）  
+
+- **定義：**針對安全通信中所使用的加密技術進行攻擊，以破壞資料的保密性。
+- **常見方法：**
+  - 生日攻擊（Birthday Attack）
+  - 碰撞攻擊（Collision Attack）
   - 降級攻擊（Downgrade Attack）
-- **所屬安全領域：**  
+- **所屬安全領域：**
   通訊與網絡安全
 
 ---
 
 ### 關鍵總結
-- **分類與應用：**  
-  各類攻擊方式可根據其目標和技術特點歸入不同的 CISSP 安全域（如通訊與網絡安全、資產安全、安全與風險管理等）。這有助於組織根據不同風險制定相應的防禦策略。
-- **整體防禦觀念：**  
+
+- **分類與應用：**各類攻擊方式可根據其目標和技術特點歸入不同的 CISSP 安全域（如通訊與網絡安全、資產安全、安全與風險管理等）。這有助於組織根據不同風險制定相應的防禦策略。
+- **整體防禦觀念：**
   了解並區分這些攻擊類型有助於安全團隊識別威脅來源，並針對性地部署防禦措施，從而提升整體安全態勢。
 
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Understand attackers</font>
+## `<font color="#b46cfc">` Understand attackers`</font>`
 
 ### 1. 威脅行為者類型
 
 - **先進持續性威脅 (APTs)**
-  - **特點：**  
-    擁有高度專業技術，能長時間滲透組織網絡而不被察覺。
-  - **動機與目的：**  
-    - 破壞關鍵基礎設施（如電網、自然資源）  
+
+  - **特點：**擁有高度專業技術，能長時間滲透組織網絡而不被察覺。
+  - **動機與目的：**
+    - 破壞關鍵基礎設施（如電網、自然資源）
     - 獲取智慧財產（例如商業機密或專利）
-
 - **內部威脅**
-  - **定義：**  
-    現任或前任員工、外部供應商或信任夥伴，濫用其合法存取權來竊取或洩露數據。
-  - **可能動機：**  
-    - 破壞  
-    - 貪污  
-    - 間諜活動  
-    - 未經授權的數據存取或洩露
 
+  - **定義：**現任或前任員工、外部供應商或信任夥伴，濫用其合法存取權來竊取或洩露數據。
+  - **可能動機：**
+    - 破壞
+    - 貪污
+    - 間諜活動
+    - 未經授權的數據存取或洩露
 - **黑客行動者 (Hacktivists)**
-  - **定義：**  
+
+  - **定義：**
     以政治議程為驅動力的威脅行為者，利用數位技術達成政治示威、宣傳、社會改變或獲得名聲等目的。
 
 ---
@@ -381,148 +291,86 @@ draft: false
 ### 2. 黑客類型
 
 - **授權黑客（Ethical Hackers）**
-  - **定義：**  
+
+  - **定義：**
     遵循道德準則與法律，受僱於組織進行風險評估與防禦測試，目的是保護組織免受惡意攻擊。
-
 - **半授權黑客（Semi-Authorized Hackers）**
-  - **定義：**  
+
+  - **定義：**
     通常作為研究人員，負責搜尋漏洞，但不會利用發現的漏洞來進行惡意攻擊。
-
 - **未授權黑客（Unauthorized / Unethical Hackers）**
-  - **定義：**  
-    不遵守法律與道德規範，利用技術竊取或販售機密數據，以獲取金錢利益或其他好處。
 
+  - **定義：**
+    不遵守法律與道德規範，利用技術竊取或販售機密數據，以獲取金錢利益或其他好處。
 - **其他黑客分類**
-  - **新手或缺乏經驗的威脅行為者：**  
-    可能以學習黑客技能、報復或利用現有惡意軟件及腳本等方式發起攻擊。
-  - **受雇黑客：**  
-    根據合同完成特定任務，他們可能從事合法或非法工作，根據動機可視為倫理或不倫理黑客。
-  - **自認為義務警察的黑客：**  
+
+  - **新手或缺乏經驗的威脅行為者：**可能以學習黑客技能、報復或利用現有惡意軟件及腳本等方式發起攻擊。
+  - **受雇黑客：**根據合同完成特定任務，他們可能從事合法或非法工作，根據動機可視為倫理或不倫理黑客。
+  - **自認為義務警察的黑客：**
     自稱為「義警」，其主要目標是保護大眾免受不倫理黑客的侵害。
 
 ---
 
 ### 3. 關鍵總結
 
-- **定義區分：**  
+- **定義區分：**
+
   - **威脅行為者**：以惡意意圖為主，任何對組織安全構成風險的人或群體。
   - **黑客**：根據技術技能與動機來劃分，可能出於保護、研究、金錢利益或其他目的。
-
-- **了解攻擊者的動機與意圖的重要性：**  
+- **了解攻擊者的動機與意圖的重要性：**
   有助於安全團隊更有效地識別、預防及應對各類攻擊，保護組織及其服務對象免受潛在威脅。
 
 ---
 
 ### 4. 參考資源
 
-- **延伸閱讀：**  
+- **延伸閱讀：**
   可觀看「Hacking Google」系列視頻，深入了解安全團隊如何對抗這些攻擊者，提升防禦能力。
 
+## `<font color="#b46cfc">` Glossary terms from module 2`</font>`
 
-
-
-
-
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Glossary terms from module 2</font>
-
-- **Adversarial artificial intelligence (AI)**  
-  一種利用人工智能 (AI) 和機器學習 (ML) 技術，操縱這些技術以更高效率發動攻擊的方法。
-
-- **Business Email Compromise (BEC)**  
-  一種網絡釣魚攻擊，攻擊者冒充可信來源發送電子郵件，旨在獲取經濟利益。
-
-- **CISSP**  
-  Certified Information Systems Security Professional（認證資訊系統安全專業人員），是全球公認且備受青睞的資訊安全認證，由國際資訊系統安全認證聯盟頒發。
-
-- **Computer virus**  
-  指用以干擾計算機運作並損害數據與軟件的惡意程式碼（參見「Virus」定義）。
-
-- **Cryptographic attack**  
-  針對發送者與接收者之間安全通信所採用的加密技術進行攻擊的行為。
-
-- **Hacker**  
-  指利用電腦進行系統、網絡或數據未經授權存取的個人。
-
-- **Malware**  
-  專門設計來損害設備或網絡的惡意軟件。
-
-- **Password attack**  
-  針對受密碼保護的設備、系統、網絡或數據進行未經授權存取的嘗試。
-
-- **Phishing**  
-  利用數位通信欺騙使用者，誘使其透露敏感數據或安裝惡意軟件的攻擊手法。
-
-- **Physical attack**  
-  同時影響數位與實體環境的安全事件，其目標通常不僅限於網絡系統。
-
-- **Physical social engineering**  
-  攻擊者冒充員工、客戶或供應商等角色，企圖獲取實體場所的未授權存取權限。
-
-- **Social engineering**  
-  利用操縱技術與人為錯誤，竊取私人信息、存取權或財物的攻擊手法。
-
-- **Social media phishing**  
-  攻擊者在社交媒體上收集目標詳細信息後，發起針對性的攻擊。
-
-- **Spear phishing**  
-  針對特定使用者或群體發起的惡意電子郵件攻擊，其內容通常看似來自可信來源。
-
-- **Supply-chain attack**  
-  針對系統、應用、硬件和/或軟件在供應鏈過程中存在漏洞進行的攻擊，藉此部署惡意軟件。
-
-- **USB baiting**  
-  攻擊者故意留置含有惡意軟件的 USB 隨身碟，誘使員工撿拾並接入系統，從而在無意中感染網絡。
-
-- **Virus**  
-  參見「Computer virus」，即干擾計算機運作並損害數據與軟件的惡意程式碼。
-
-- **Vishing**  
-  利用電子語音通信方式，通過冒充可信來源來獲取敏感信息的攻擊手法。
-
-- **Watering hole attack**  
+- **Adversarial artificial intelligence (AI)**一種利用人工智能 (AI) 和機器學習 (ML) 技術，操縱這些技術以更高效率發動攻擊的方法。
+- **Business Email Compromise (BEC)**一種網絡釣魚攻擊，攻擊者冒充可信來源發送電子郵件，旨在獲取經濟利益。
+- **CISSP**Certified Information Systems Security Professional（認證資訊系統安全專業人員），是全球公認且備受青睞的資訊安全認證，由國際資訊系統安全認證聯盟頒發。
+- **Computer virus**指用以干擾計算機運作並損害數據與軟件的惡意程式碼（參見「Virus」定義）。
+- **Cryptographic attack**針對發送者與接收者之間安全通信所採用的加密技術進行攻擊的行為。
+- **Hacker**指利用電腦進行系統、網絡或數據未經授權存取的個人。
+- **Malware**專門設計來損害設備或網絡的惡意軟件。
+- **Password attack**針對受密碼保護的設備、系統、網絡或數據進行未經授權存取的嘗試。
+- **Phishing**利用數位通信欺騙使用者，誘使其透露敏感數據或安裝惡意軟件的攻擊手法。
+- **Physical attack**同時影響數位與實體環境的安全事件，其目標通常不僅限於網絡系統。
+- **Physical social engineering**攻擊者冒充員工、客戶或供應商等角色，企圖獲取實體場所的未授權存取權限。
+- **Social engineering**利用操縱技術與人為錯誤，竊取私人信息、存取權或財物的攻擊手法。
+- **Social media phishing**攻擊者在社交媒體上收集目標詳細信息後，發起針對性的攻擊。
+- **Spear phishing**針對特定使用者或群體發起的惡意電子郵件攻擊，其內容通常看似來自可信來源。
+- **Supply-chain attack**針對系統、應用、硬件和/或軟件在供應鏈過程中存在漏洞進行的攻擊，藉此部署惡意軟件。
+- **USB baiting**攻擊者故意留置含有惡意軟件的 USB 隨身碟，誘使員工撿拾並接入系統，從而在無意中感染網絡。
+- **Virus**參見「Computer virus」，即干擾計算機運作並損害數據與軟件的惡意程式碼。
+- **Vishing**利用電子語音通信方式，通過冒充可信來源來獲取敏感信息的攻擊手法。
+- **Watering hole attack**
   攻擊者針對特定群體常訪問的網站進行攻擊，藉由感染該網站以進一步滲透目標系統。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Controls, Framework, and Compliance</font>
+## `<font color="#b46cfc">` Controls, Framework, and Compliance`</font>`
 
 ### 1. 安全控制、框架與合規性的關係
 
-- **CIA 三要素**  
-  - **保密性 (Confidentiality)**、**完整性 (Integrity)**、**可用性 (Availability)**：這三個基本原則幫助組織在建立系統和安全政策時考量風險，並設置相應的安全控制措施。
+- **CIA 三要素**
 
-- **安全控制 (Security Controls)**  
+  - **保密性 (Confidentiality)**、**完整性 (Integrity)**、**可用性 (Availability)**：這三個基本原則幫助組織在建立系統和安全政策時考量風險，並設置相應的安全控制措施。
+- **安全控制 (Security Controls)**
+
   - 定義：為降低特定安全風險而設計的防護措施。
   - 功能：與安全框架一起使用，確保安全目標和流程得以正確實施，並幫助組織達到合規要求。
+- **安全框架 (Security Frameworks)**
 
-- **安全框架 (Security Frameworks)**  
   - 定義：提供指南與結構化的方法來建立安全計畫，從而降低風險與威脅。
   - 核心組成部分：
     1. **識別與記錄安全目標**
     2. **設定達成安全目標的指導原則**
     3. **實施強化的安全流程**
     4. **監控與傳達成果**
+- **合規性 (Compliance)**
 
-- **合規性 (Compliance)**  
   - 定義：遵循內部標準與外部規範或法律的過程。
   - 目標：透過符合規定來降低整體風險。
 
@@ -532,39 +380,40 @@ draft: false
 
 ### 2. 常見的控制措施、框架與合規標準
 
-- **NIST（美國國家標準與技術研究院）**  
-  - 提供多個自願性合規框架，幫助全球組織管理風險。  
+- **NIST（美國國家標準與技術研究院）**
+
+  - 提供多個自願性合規框架，幫助全球組織管理風險。
   - **範例**：NIST Cybersecurity Framework (CSF) 與 NIST Risk Management Framework (RMF)。
+- **FERC-NERC（聯邦能源管理委員會 - 北美電力可靠性公司）**
 
-- **FERC-NERC（聯邦能源管理委員會 - 北美電力可靠性公司）**  
-  - 適用於與美國及北美電網相關的電力機構。  
+  - 適用於與美國及北美電網相關的電力機構。
   - 要求：準備、緩解並報告可能影響電網的安全事件，遵守關鍵基礎設施保護標準（CIP）。
+- **FedRAMP®（聯邦風險與授權管理計畫）**
 
-- **FedRAMP®（聯邦風險與授權管理計畫）**  
   - 用於標準化美國聯邦政府與第三方雲端服務的安全評估、授權和監控流程。
+- **CIS®（互聯網安全中心）**
 
-- **CIS®（互聯網安全中心）**  
   - 非營利組織，提供一套實用的安全控制措施，幫助組織建立防禦計畫並應對安全事件。
+- **GDPR（歐盟一般數據保護條例）**
 
-- **GDPR（歐盟一般數據保護條例）**  
   - 保護歐盟居民數據處理及隱私權，要求組織對數據使用保持透明，發生數據洩露時必須在72小時內通知受影響者。
+- **PCI DSS（支付卡產業數據安全標準）**
 
-- **PCI DSS（支付卡產業數據安全標準）**  
   - 國際安全標準，確保處理信用卡數據的環境安全，降低信用卡詐騙風險。
+- **HIPAA（健康保險攜帶性與責任法案）**
 
-- **HIPAA（健康保險攜帶性與責任法案）**  
-  - 美國法律，保護患者健康信息（PHI）。  
-  - 三大規範：隱私規則、安全規則、洩露通知規則。  
+  - 美國法律，保護患者健康信息（PHI）。
+  - 三大規範：隱私規則、安全規則、洩露通知規則。
   - 相關框架：HITRUST®，協助機構達到 HIPAA 合規要求。
+- **ISO（國際標準化組織）**
 
-- **ISO（國際標準化組織）**  
   - 建立跨國界的技術、製造與管理標準，幫助組織改善流程與服務。
+- **SOC 報告（System and Organizations Controls）**
 
-- **SOC 報告（System and Organizations Controls）**  
-  - 由美國註冊會計師協會 (AICPA) 制定，用於評估組織的財務合規性與風險控制。  
+  - 由美國註冊會計師協會 (AICPA) 制定，用於評估組織的財務合規性與風險控制。
   - 包含：SOC 1 與 SOC 2 報告，涵蓋用戶訪問權限、保密性、隱私、完整性、可用性與安全性等方面。
+- **其他法規與建議**
 
-- **其他法規與建議**  
   - 建議持續關注變更頻繁的法規，如 Gramm-Leach-Bliley Act 與 Sarbanes-Oxley Act。
   - **美國總統行政命令 14028**：針對改善國家網絡安全而發布，主要針對聯邦機構及與美國關鍵基礎設施相關的第三方。
 
@@ -576,21 +425,10 @@ draft: false
 - **持續更新**：作為安全分析師或相關專業人員，需持續追蹤並更新最新的框架、控制措施與合規法規，應對不斷變化的網絡安全威脅。
 - **組織安全文化**：透過系統化的安全框架與嚴謹的合規標準，組織能夠建立完善的安全生命周期管理，有效應對風險並保障各方利益。
 
-
-
-
-
-
-
-
-
-
-
-## <font color="#b46cfc">Ethical concepts that guide cybersecurity decisions</font>
-
-
+## `<font color="#b46cfc">`Ethical concepts that guide cybersecurity decisions`</font>`
 
 ### 1. 安全倫理的基本概念
+
 - **安全倫理**：作為安全專業人員，在做出決策時必須保持公正、無偏見，並確保私人數據的安全與保密。
 - **重要性**：良好的倫理觀念幫助專業人士在面對不斷變化的攻擊手法與威脅時，能夠合法且道德地作出正確回應，保護組織和個人利益。
 
@@ -599,6 +437,7 @@ draft: false
 ### 2. 關於反擊（Counterattacks）的法律與倫理考量
 
 #### 美國立場
+
 - **法律規定**：根據《1986年電腦詐欺與濫用法》與《2015年網絡安全信息共享法》等法律，美國禁止對威脅者進行反擊。
 - **理由**：
   - 反擊被視為私自行使執法權（類似義務警察行為），可能引發進一步的攻擊與衝突升級。
@@ -606,6 +445,7 @@ draft: false
 - **例外情況**：只有經授權的聯邦政府員工或軍方人員被允許執行反擊措施。
 
 #### 國際立場
+
 - **國際法院指導原則**（ICJ）認為可進行反擊的情況需滿足：
   1. 反擊僅針對發起攻擊的一方；
   2. 反擊以直接溝通要求停止攻擊為目的；
@@ -618,10 +458,12 @@ draft: false
 ### 3. 核心倫理原則與方法論
 
 #### 保密性（Confidentiality）
+
 - **定義**：僅允許授權人員訪問特定資產或數據。
 - **倫理要求**：尊重個人隱私，保護私人資產與數據不被未授權存取。
 
 #### 隱私保護（Privacy Protection）
+
 - **定義**：防止個人信息被未經授權的使用。
 - **數據類型**：
   - **PII（Personally Identifiable Information）**：可用來識別個人身份的信息，如姓名、電話號碼。
@@ -629,131 +471,64 @@ draft: false
 - **安全專業倫理義務**：保護個人隱私、識別並修補安全漏洞、管理組織風險、並將安全措施與業務目標相結合。
 
 #### 法律（Laws）
+
 - **定義**：社會公認並由執法機構強制執行的規則。
 - **安全專業人員責任**：
+
   - 保護組織、內部基礎設施及相關人員。
   - 必須保持公正、誠實、負責任，並尊重法律。
   - 透明且依據證據行事，持續學習與提升技能以改善整體網絡安全環境。
-
 - **實例說明**：
+
   - **HIPAA（健康保險攜帶性與責任法案）**：保護患者健康信息（PHI），禁止未經同意分享。安全專業人員需確保組織符合法律及倫理要求，在數據洩露時及時通知受影響者。
 
 ---
 
 ### 4. 主要結論
+
 - **倫理在日常工作中的重要性**：未來安全專業人員必須深刻理解並堅守倫理和法律，才能在面對安全威脅或洩露事件時作出正確決策。
 - **合法與道德的界限**：由於反擊行為在多數情況下既不合法也不具備良好的倫理基礎，因此專業人員應專注於防禦與保護，而非主動進行反擊。
 - **持續學習與更新**：隨著攻擊手法不斷演變，保持對最新法律、規範及倫理原則的了解是確保組織安全的重要保障。
 
+## `<font color="#b46cfc">` Glossary terms from module 3`</font>`
 
-
-
-
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Glossary terms from module 3</font>
-
-- **Asset**  
-  *An item perceived as having value to an organization*  
-  資產：指被視為對組織具有價值的項目。
-
-- **Availability**  
-  *The idea that data is accessible to those who are authorized to access it*  
-  可用性：數據能夠被獲得授權的人員存取的概念。
-
-- **Compliance**  
-  *The process of adhering to internal standards and external regulations*  
-  合規性：遵循內部標準與外部法規的過程。
-
-- **Confidentiality**  
-  *The idea that only authorized users can access specific assets or data*  
-  保密性：只有授權用戶能夠存取特定資產或數據的概念。
-
-- **Confidentiality, Integrity, Availability (CIA) Triad**  
-  *A model that helps inform how organizations consider risk when setting up systems and security policies*  
-  保密性、完整性、可用性（CIA）三要素：幫助組織在建立系統和安全政策時評估風險的一種模型。
-
-- **Hacktivist**  
-  *A person who uses hacking to achieve a political goal*  
-  黑客行動者：利用駭客技術來實現政治目標的人。
-
-- **Health Insurance Portability and Accountability Act (HIPAA)**  
-  *A U.S. federal law established to protect patients' health information*  
-  健康保險攜帶性與責任法案（HIPAA）：美國聯邦法律，旨在保護患者的健康信息。
-
-- **Integrity**  
-  *The idea that the data is correct, authentic, and reliable*  
-  完整性：數據正確、真實及可靠的概念。
-
-- **National Institute of Standards and Technology (NIST) Cyber Security Framework (CSF)**  
-  *A voluntary framework that consists of standards, guidelines, and best practices to manage cybersecurity risk*  
-  美國國家標準與技術研究院（NIST）網絡安全框架（CSF）：一個自願性框架，由標準、指南及最佳實踐組成，用以管理網絡安全風險。
-
-- **Privacy Protection**  
-  *The act of safeguarding personal information from unauthorized use*  
-  隱私保護：保護個人信息免受未經授權使用的行為。
-
-- **Protected Health Information (PHI)**  
-  *Information that relates to the past, present, or future physical or mental health or condition of an individual*  
-  受保護的健康信息（PHI）：與個體過去、現在或未來的身體或心理健康狀況相關的信息。
-
-- **Security Architecture**  
-  *A type of security design composed of multiple components, such as tools and processes, that are used to protect an organization from risks and external threats*  
-  安全架構：由多個組件（如工具與流程）構成的一種安全設計，用以保護組織免受風險和外部威脅。
-
-- **Security Controls**  
-  *Safeguards designed to reduce specific security risks*  
-  安全控制：設計用來降低特定安全風險的防護措施。
-
-- **Security Ethics**  
-  *Guidelines for making appropriate decisions as a security professional*  
-  安全倫理：供安全專業人員參考，協助其做出適當決策的指導原則。
-
-- **Security Frameworks**  
-  *Guidelines used for building plans to help mitigate risk and threats to data and privacy*  
-  安全框架：用來建立計畫以降低數據和隱私風險與威脅的指導原則。
-
-- **Security Governance**  
-  *Practices that help support, define, and direct security efforts of an organization*  
-  安全治理：幫助支持、定義和指導組織安全工作的各項實踐和措施。
-
-- **Sensitive Personally Identifiable Information (SPII)**  
-  *A specific type of PII that falls under stricter handling guidelines*  
+- **Asset***An item perceived as having value to an organization*資產：指被視為對組織具有價值的項目。
+- **Availability***The idea that data is accessible to those who are authorized to access it*可用性：數據能夠被獲得授權的人員存取的概念。
+- **Compliance***The process of adhering to internal standards and external regulations*合規性：遵循內部標準與外部法規的過程。
+- **Confidentiality***The idea that only authorized users can access specific assets or data*保密性：只有授權用戶能夠存取特定資產或數據的概念。
+- **Confidentiality, Integrity, Availability (CIA) Triad***A model that helps inform how organizations consider risk when setting up systems and security policies*保密性、完整性、可用性（CIA）三要素：幫助組織在建立系統和安全政策時評估風險的一種模型。
+- **Hacktivist***A person who uses hacking to achieve a political goal*黑客行動者：利用駭客技術來實現政治目標的人。
+- **Health Insurance Portability and Accountability Act (HIPAA)***A U.S. federal law established to protect patients' health information*健康保險攜帶性與責任法案（HIPAA）：美國聯邦法律，旨在保護患者的健康信息。
+- **Integrity***The idea that the data is correct, authentic, and reliable*完整性：數據正確、真實及可靠的概念。
+- **National Institute of Standards and Technology (NIST) Cyber Security Framework (CSF)***A voluntary framework that consists of standards, guidelines, and best practices to manage cybersecurity risk*美國國家標準與技術研究院（NIST）網絡安全框架（CSF）：一個自願性框架，由標準、指南及最佳實踐組成，用以管理網絡安全風險。
+- **Privacy Protection***The act of safeguarding personal information from unauthorized use*隱私保護：保護個人信息免受未經授權使用的行為。
+- **Protected Health Information (PHI)***Information that relates to the past, present, or future physical or mental health or condition of an individual*受保護的健康信息（PHI）：與個體過去、現在或未來的身體或心理健康狀況相關的信息。
+- **Security Architecture***A type of security design composed of multiple components, such as tools and processes, that are used to protect an organization from risks and external threats*安全架構：由多個組件（如工具與流程）構成的一種安全設計，用以保護組織免受風險和外部威脅。
+- **Security Controls***Safeguards designed to reduce specific security risks*安全控制：設計用來降低特定安全風險的防護措施。
+- **Security Ethics***Guidelines for making appropriate decisions as a security professional*安全倫理：供安全專業人員參考，協助其做出適當決策的指導原則。
+- **Security Frameworks***Guidelines used for building plans to help mitigate risk and threats to data and privacy*安全框架：用來建立計畫以降低數據和隱私風險與威脅的指導原則。
+- **Security Governance***Practices that help support, define, and direct security efforts of an organization*安全治理：幫助支持、定義和指導組織安全工作的各項實踐和措施。
+- **Sensitive Personally Identifiable Information (SPII)**
+  *A specific type of PII that falls under stricter handling guidelines*
   敏感個人識別信息（SPII）：屬於個人識別信息（PII）中需要更嚴格處理的那一類數據。
-  
-  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-## <font color="#b46cfc"> Tools for protecting business operations</font>
+
+## `<font color="#b46cfc">` Tools for protecting business operations`</font>`
 
 ### 1. 進階安全分析師的工具箱
 
-- **工具箱多樣性**：  
+- **工具箱多樣性**：
   每個組織依據其安全需求提供不同的工具，初階安全分析師應熟悉業界標準工具，並能迅速學習與應用類似工具。
 
 ---
 
 ### 2. SIEM 工具（Security Information and Event Management）
 
-- **主要功能**：  
+- **主要功能**：
+
   - 收集與分析系統日誌數據，監控關鍵活動。
   - 提供可視化儀表板，根據類別展示數據，讓分析師可以快速定位與篩選出特定的威脅、風險和漏洞。
-  
-- **部署選項**：  
+- **部署選項**：
+
   - 支持內部部署（on-premise）與雲端部署（cloud-hosted）。
   - 組織可根據團隊專業能力與需求選擇適合的部署方式，通常雲端版本因設置、使用與維護較為簡便，較適合經驗較少的團隊。
 
@@ -761,7 +536,7 @@ draft: false
 
 ### 3. 網絡協議分析工具（Packet Sniffers）
 
-- **功能概述**：  
+- **功能概述**：
   - 捕獲並分析網絡中的數據流量。
   - 記錄各設備間的數據傳輸，有助於後續診斷網絡問題及安全事件調查。
 
@@ -769,16 +544,18 @@ draft: false
 
 ### 4. Playbooks（行動指南）
 
-- **定義與用途**：  
+- **定義與用途**：
+
   - Playbooks 是描述操作步驟的手冊，用於指導安全團隊在遇到安全事件或執行特定安全任務時的操作流程。
   - 幫助確保調查或事件回應過程中遵循標準化流程，降低出錯風險並確保操作合規。
+- **常見類型**：
 
-- **常見類型**：  
-  1. **Chain of Custody Playbook**  
+  1. **Chain of Custody Playbook**
+
      - 用於記錄與追蹤證據的所有移動與控制過程。
      - 確保在進行數位取證調查時，每一筆證據的收集、儲存與傳遞都有明確記錄，保持證據的完整性與合法性。
-  
-  2. **Protecting and Preserving Evidence Playbook**  
+  2. **Protecting and Preserving Evidence Playbook**
+
      - 關注如何正確處理易失性（volatile）與脆弱的數位證據。
      - 根據「波動性順序」（order of volatility）確定優先保存的數據，避免因設備關機或操作不當而導致數據丟失或變更。
      - 強調製作數據副本，確保原始數據在調查過程中不受破壞。
@@ -787,7 +564,7 @@ draft: false
 
 ### 5. 補充資源
 
-- **進一步學習與工具**：  
+- **進一步學習與工具**：
   - 建議參考 Google Cybersecurity Action Team 的 Threat Horizon Report，瞭解雲端企業面臨的威脅戰略情報。
   - CISA（Cybersecurity & Infrastructure Security Agency）提供免費網絡安全服務與工具列表，幫助了解更多開源網絡安全工具。
 
@@ -797,115 +574,108 @@ draft: false
 
 透過上述工具與行動指南，安全分析師能夠更有效地監控系統、分析數據、以及在事件發生時迅速做出正確反應。這些工具和方法不僅有助於減少安全風險，同時也確保在進行數位取證調查時，證據能夠得到妥善保存與管理，從而保護企業運營的整體安全。
 
-
-
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Use tools to protect business operations</font>
-
+## `<font color="#b46cfc">` Use tools to protect business operations`</font>`
 
 ### 1. 編程與自動化
-- **編程的作用**  
+
+- **編程的作用**
+
   - 利用編程語言（如 Python）撰寫指令，讓計算機自動執行各項任務。
   - 自動化減少人工手動操作，降低人為錯誤風險，提高效率。
+- **SQL 與數據庫管理**
 
-- **SQL 與數據庫管理**  
   - 使用 SQL（結構化查詢語言）與數據庫互動，管理和查詢龐大的數據集合。
 
 ---
 
 ### 2. 操作系統
-- **定義與功能**  
+
+- **定義與功能**
+
   - 操作系統是用戶與計算機硬件之間的接口，決定了系統的使用體驗與功能。
-  
-- **常見操作系統**  
+- **常見操作系統**
+
   - **Linux**：開源操作系統，允許社群貢獻和定制，常透過命令行介面進行操作。
   - **macOS 與 Windows**：提供不同的用戶體驗與功能選項，根據組織需求選擇使用。
 
 ---
 
 ### 3. 其他安全工具
-- **Web 漏洞檢測**  
+
+- **Web 漏洞檢測**
+
   - 網絡漏洞是 web 應用中的弱點，可能讓惡意攻擊者利用，導致未經授權訪問、數據竊取或惡意軟件入侵。
   - 參考 OWASP Top 10 可掌握當前最關鍵的 web 安全風險。
+- **防病毒軟件**
 
-- **防病毒軟件**  
   - 用於檢測、預防和清除病毒與惡意軟件，有時稱為反惡意軟件。
   - 掃描記憶體中可能存在的惡意模式，保護系統免受已知威脅侵害。
+- **入侵檢測系統 (IDS)**
 
-- **入侵檢測系統 (IDS)**  
   - IDS 監控系統活動及網絡數據包，並及時發出可能存在入侵或未授權存取的警報。
   - 透過捕獲小數據包來分析網絡流量，幫助快速識別潛在風險。
+- **加密技術**
 
-- **加密技術**  
   - 加密將可讀數據轉換成密文，保護數據免遭未經授權者窺探。
   - 注意區分：編碼主要用於數據格式轉換與共享，而加密則專注於確保資料保密性。
+- **滲透測試 (Penetration Testing)**
 
-- **滲透測試 (Penetration Testing)**  
   - 模擬攻擊以評估系統、網絡及應用中的漏洞與弱點。
   - 可幫助識別內部和外部的安全威脅，從而改進防禦措施。
 
 ---
 
 ### 4. 總結
-- **工具多元化**  
+
+- **工具多元化**
+
   - 每個組織根據自身需求選擇不同的工具來保護其運營安全。
   - 安全分析師掌握多種工具與技術（如編程、自動化、操作系統、漏洞檢測、加密和滲透測試），能夠更有效地保護企業和用戶數據。
+- **提高效率與降低風險**
 
-- **提高效率與降低風險**  
   - 利用自動化與工具協助處理重複性任務，降低人為錯誤，並快速反應安全威脅，確保企業運營持續安全。
 
 ---
 
 這些工具和技術是保護企業運營的基石，幫助安全專業人員更有效率地檢測、分析及防禦潛在威脅，從而確保整個組織的安全性和穩定運作。
 
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Create a cybersecurity portfolio</font>
-
+## `<font color="#b46cfc">` Create a cybersecurity portfolio`</font>`
 
 ### 1. 什麼是作品集？為什麼需要建立作品集？
-- **定義**：  
-  作品集是安全專業人員用來展示自己教育背景、技能與知識的文件或項目集合，比起簡歷（通常只有1～2頁）能更深入展現個人能力和專業熱情。
-- **必要性**：  
+
+- **定義**：作品集是安全專業人員用來展示自己教育背景、技能與知識的文件或項目集合，比起簡歷（通常只有1～2頁）能更深入展現個人能力和專業熱情。
+- **必要性**：
   當你申請網絡安全相關工作時，作品集能讓潛在雇主看到你已經掌握的技能和實際經驗，提升你獲得面試機會與職位的可能性。
 
 ---
 
 ### 2. 建立作品集的選項
+
 你可以根據自身需求和偏好，選擇不同的方式來展示你的作品集：
 
-- **選項 1：Documents Folder**  
+- **選項 1：Documents Folder**
+
   - **描述**：在電腦硬碟上建立並管理文件夾，將所有專業文件、圖片和相關資料分類存放。
   - **建議**：建立主文件夾（例如「Professional Documents」），並依內容再分成子文件夾，如「Resume」、「Education」、「Portfolio Documents」、「Cybersecurity Tools」、「Programming」等。
+- **選項 2：Google Drive 或 Dropbox**
 
-- **選項 2：Google Drive 或 Dropbox**  
   - **描述**：利用雲端存儲平台來管理與共享你的文件。這類平台具備自動更新與文件共享功能，使你能輕鬆與雇主分享最新的作品集內容。
   - **優點**：隨時隨地存取與更新，且便於組織與分享文件。
+- **選項 3：Google Sites**
 
-- **選項 3：Google Sites**  
-  - **描述**：使用 Google Sites 或類似網站托管服務，創建一個自訂化的作品集網站。  
+  - **描述**：使用 Google Sites 或類似網站托管服務，創建一個自訂化的作品集網站。
   - **特點**：提供可自定義佈局、響應式網頁（適應各種裝置與螢幕大小）與內嵌多媒體內容的功能。完成後，你會獲得一個唯一的網址，可附加在履歷中供雇主訪問。
+- **選項 4：Git Repository**
 
-- **選項 4：Git Repository**  
   - **描述**：利用 Git 平台（例如 GitHub、GitLab 或 Bitbucket）建立專案庫來存放你的文件、實驗室練習成果和截圖。
   - **特點**：使用 Markdown 格式撰寫與展示內容，方便展示你的技術技能與版本控制經驗，並可持續更新。
 
 ---
 
 ### 3. 作品集可以包含哪些項目？
+
 在證書課程中，你會有多次機會創建各種項目，這些項目可以納入你的作品集，例如：
+
 - 撰寫專業陳述（Professional Statement）
 - 進行安全審核（Security Audit）
 - 分析網絡結構與安全性
@@ -916,62 +686,30 @@ draft: false
 - 導入與解析文字檔的安全案例
 - 創建或修訂履歷
 
-> **注意**：  
+> **注意**：
 > 請勿將任何私人、受版權保護或機密文件納入公開的作品集；若使用線上工具建立作品集，完成前請將其設定為「私人」。
 
 ---
 
 ### 4. 重點總結
-- **作品集的重要性**：  
-  它能夠向雇主展示你的專業背景、實際技能和學習成果，是一個比簡歷更詳細、更具說服力的專業展示工具。
-- **多樣化的展示方式**：  
-  根據個人習慣和需求，選擇適合的方式（文件夾、雲端平台、網站或 Git 倉庫）來構建和管理你的作品集。
-- **持續更新與完善**：  
+
+- **作品集的重要性**：它能夠向雇主展示你的專業背景、實際技能和學習成果，是一個比簡歷更詳細、更具說服力的專業展示工具。
+- **多樣化的展示方式**：根據個人習慣和需求，選擇適合的方式（文件夾、雲端平台、網站或 Git 倉庫）來構建和管理你的作品集。
+- **持續更新與完善**：
   隨著學習和工作經歷的增加，持續更新你的作品集內容，這將大幅提高你在求職市場中的競爭力。
 
+## `<font color="#b46cfc">` Glossary terms from module 4`</font>`
 
-
-
-
-
-
-
-
-
-## <font color="#b46cfc"> Glossary terms from module 4</font>
-
-- **Antivirus software (防毒軟件)**  
-  一種用來預防、檢測並清除惡意軟件和病毒的軟件程式。
-
-- **Database (數據庫)**  
-  一個有組織的資訊或數據集合。
-
-- **Data point (數據點)**  
-  一個具體的資訊單位或數據片段。
-
-- **Intrusion detection system (IDS) (入侵檢測系統)**  
-  一種應用程式，用來監控系統活動並對可能的入侵行為發出警報。
-
-- **Linux**  
-  一種開源操作系統，允許公眾存取其原始碼並對其進行改進。
-
-- **Log (日誌)**  
-  記錄組織系統內發生事件的記錄文件。
-
-- **Network protocol analyzer (packet sniffer) (網絡協議分析器 / 數據包嗅探器)**  
-  一種工具，用來捕獲並分析網絡中的數據流量。
-
-- **Order of volatility (波動性順序)**  
-  一個排列順序，用以確定在處理過程中必須依次保存的數據順序，從最易流失到較穩定的數據。
-
-- **Programming (編程)**  
-  一個過程，用來為計算機創建一組特定的指令以執行任務。
-
-- **Protecting and preserving evidence (保護和保存證據)**  
-  正確處理易碎且易失的數位證據的過程，以確保其完整性和可用性。
-
-- **Security information and event management (SIEM) (安全信息與事件管理)**  
-  一種應用程式，用來收集和分析日誌數據，以監控組織內的關鍵活動。
-
-- **SQL (Structured Query Language) (結構化查詢語言)**  
+- **Antivirus software (防毒軟件)**一種用來預防、檢測並清除惡意軟件和病毒的軟件程式。
+- **Database (數據庫)**一個有組織的資訊或數據集合。
+- **Data point (數據點)**一個具體的資訊單位或數據片段。
+- **Intrusion detection system (IDS) (入侵檢測系統)**一種應用程式，用來監控系統活動並對可能的入侵行為發出警報。
+- **Linux**一種開源操作系統，允許公眾存取其原始碼並對其進行改進。
+- **Log (日誌)**記錄組織系統內發生事件的記錄文件。
+- **Network protocol analyzer (packet sniffer) (網絡協議分析器 / 數據包嗅探器)**一種工具，用來捕獲並分析網絡中的數據流量。
+- **Order of volatility (波動性順序)**一個排列順序，用以確定在處理過程中必須依次保存的數據順序，從最易流失到較穩定的數據。
+- **Programming (編程)**一個過程，用來為計算機創建一組特定的指令以執行任務。
+- **Protecting and preserving evidence (保護和保存證據)**正確處理易碎且易失的數位證據的過程，以確保其完整性和可用性。
+- **Security information and event management (SIEM) (安全信息與事件管理)**一種應用程式，用來收集和分析日誌數據，以監控組織內的關鍵活動。
+- **SQL (Structured Query Language) (結構化查詢語言)**
   一種用來建立、與數據庫互動及從數據庫中請求資訊的查詢語言。
