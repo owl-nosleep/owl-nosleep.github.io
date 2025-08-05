@@ -67,10 +67,18 @@ export const experiences: Experience[] = [
 	},
 	{
 		year: "2025",
+		title: "TSCCTF",
+		description: "Qualified Rank #4",
+		type: "competition",
+		order: 3,
+		content: "在 TSCCTF 競賽中獲得第四名，成功晉級，展示了出色的 CTF 解題能力。"
+	},
+	{
+		year: "2025",
 		title: "成大資安社",
 		description: "副社長",
-		type: "education",
-		order: 3,
+		type: "achievement",
+		order: 4,
 		content: "擔任成大資安社副社長，負責組織各種資安活動和分享會，促進校園資安知識交流。"
 	},
 	{
@@ -78,39 +86,15 @@ export const experiences: Experience[] = [
 		title: "Devcore Conference",
 		description: "Participant",
 		type: "education",
-		order: 4,
-		content: "參加 Devcore 資安會議，了解最新資安技術趨勢和攻防實務。"
-	},
-	{
-		year: "2025",
-		title: "AIS3",
-		description: "軟體組",
-		type: "education",
 		order: 5,
-		content: "參加 AIS3 (Advanced Information Security Summer School) 課程，專注於軟體安全領域的深入研究與實踐。"
-	},
-	{
-		year: "2025",
-		title: "成大資安課程：網路安全實務與社會實踐",
-		description: "Rank #1（Writeups已公布網站）優質好課 推",
-		type: "achievement",
-		order: 6,
-		content: "在成大網路安全實務課程中獲得第一名，並發布了詳細的解題 Writeups。"
-	},
-	{
-		year: "2025",
-		title: "TSCCTF",
-		description: "Qualified Rank #4",
-		type: "competition",
-		order: 7,
-		content: "在 TSCCTF 競賽中獲得第四名，成功晉級，展示了出色的 CTF 解題能力。"
+		content: "參加 Devcore 資安會議，了解最新資安技術趨勢和攻防實務。"
 	},
 	{
 		year: "2025",
 		title: "picoCTF",
 		description: "Rank #262（Contributed 4910 points）",
 		type: "competition",
-		order: 8,
+		order: 6,
 		content: "參加全球知名的 picoCTF 資安競賽，貢獻 4910 分並獲得全球第 262 名的好成績。"
 	},
 	{
@@ -118,15 +102,31 @@ export const experiences: Experience[] = [
 		title: "AIS3 pre-exam",
 		description: "Rank #60",
 		type: "competition",
-		order: 9,
+		order: 7,
 		content: "參加 AIS3 pre-exam 初試，獲得第 60 名的成績，展示了在 CTF 領域的解題能力。"
+	},
+	{
+		year: "2025",
+		title: "成大資安課程：網路安全實務與社會實踐",
+		description: "Rank #1（Writeups已公布網站）優質好課 推",
+		type: "achievement",
+		order: 8,
+		content: "在成大網路安全實務課程中獲得第一名，並發布了詳細的解題 Writeups。"
 	},
 	{
 		year: "2025",
 		title: "InfoSec CTF",
 		description: "總排 Rank #7 / 大專組 Rank #4",
 		type: "competition",
-		order: 10,
+		order: 9,
 		content: "在 InfoSec CTF 競賽中表現優異，獲得總排名第 7 名及大專組第 4 名的好成績。"
+	},
+	{
+		year: "2025",
+		title: "AIS3",
+		description: "軟體組",
+		type: "education",
+		order: 10,
+		content: "參加 AIS3 (Advanced Information Security Summer School) 課程，專注於軟體安全領域的深入研究與實踐。"
 	}
 ];
