@@ -1,103 +1,44 @@
 ---
+import { readFile } from 'node:fs/promises';
+import { parse } from 'yaml';
+import { marked } from 'marked';
+
 interface Experience {
 	year: string;
 	title: string;
 	description: string;
 	type: "achievement" | "education" | "competition" | "certification";
+	content?: string;
+	order?: number;
+	contentHtml?: string;
 }
 
-const experiences: Experience[] = [
-	{
-		year: "2019",
-		title: "資策會-台灣少年駭客人才培育營 THITCAMP",
-		description: "IOT Hacking",
-		type: "education",
-	},
-	{
-		year: "2021",
-		title: "NYCU Fintech陽明交通大學財經資訊營隊",
-		description: "Rank #1",
-		type: "achievement",
-	},
-	{
-		year: "2021",
-		title: "Facebook Hacker Cup",
-		description: "Qualified",
-		type: "competition",
-	},
-	{
-		year: "2022",
-		title: "成為白帽駭客2_跟著方丈學滲透測試實務",
-		description: "2022學員",
-		type: "education",
-	},
-	{
-		year: "2024",
-		title: "CEH Certificate",
-		description: "Score: 121/125",
-		type: "certification",
-	},
-	{
-		year: "2025",
-		title: "Google資安人才培育計畫",
-		description: "2025 學員",
-		type: "education",
-	},
-	{
-		year: "2025",
-		title: "成大遊戲設計課程 - 視窗程式設計",
-		description: "期末最佳專題",
-		type: "achievement",
-	},
-	{
-		year: "2025",
-		title: "成大資安社",
-		description: "副社長",
-		type: "achievement",
-	},
-	{
-		year: "2025",
-		title: "Devcore Conference",
-		description: "Participant",
-		type: "education",
-	},
-	{
-		year: "2025",
-		title: "AIS3",
-		description: "軟體組",
-		type: "education",
-	},
-	{
-		year: "2025",
-		title: "成大資安課程：網路安全實務與社會實踐",
-		description: "Rank #1（Writeups已公布網站）",
-		type: "achievement",
-	},
-	{
-		year: "2025",
-		title: "TSCCTF",
-		description: "Qualified Rank #4",
-		type: "competition",
-	},
-	{
-		year: "2025",
-		title: "picoCTF",
-		description: "Rank #262（Contributed 4910 points）",
-		type: "competition",
-	},
-	{
-		year: "2025",
-		title: "AIS3 pre-exam",
-		description: "Rank #60",
-		type: "competition",
-	},
-	{
-		year: "2025",
-		title: "InfoSec CTF",
-		description: "總排 Rank #7 / 大專組 Rank #4",
-		type: "competition",
-	},
-];
+// 讀取 YAML 檔案
+const yamlContent = await readFile(new URL('../../public/data/experiences.yaml', import.meta.url), 'utf-8');
+const data = parse(yamlContent);
+
+// 處理經歷資料
+const experiences: Experience[] = data.experiences.map((exp: any) => ({
+	...exp,
+	contentHtml: exp.content ? marked.parse(exp.content) : ''
+}));
+
+// 按年份分組活動
+const groupedExperiences = experiences.reduce((acc, exp) => {
+	if (!acc[exp.year]) {
+		acc[exp.year] = [];
+	}
+	acc[exp.year].push(exp);
+	return acc;
+}, {} as Record<string, Experience[]>);
+
+// 在每個年份內按 order 排序
+Object.keys(groupedExperiences).forEach(year => {
+	groupedExperiences[year].sort((a, b) => (a.order || 0) - (b.order || 0));
+});
+
+// 按年份升序排列（早到晚）
+const sortedYears = Object.keys(groupedExperiences).sort((a, b) => parseInt(a) - parseInt(b));
 
 const getTypeIcon = (type: string) => {
 	switch (type) {
@@ -131,53 +72,42 @@ const getTypeColor = (type: string) => {
 ---
 
 <div class="timeline-container">
-  <h2 class="text-2xl font-bold mb-8 text-center">🚀 我的經歷時間線</h2>
+  <h2 class="text-3xl font-bold mb-12 text-center bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+    ✨ 我的經歷時間線
+  </h2>
   
-  <div class="relative">
-    <!-- 中央漸變時間線 -->
-    <div class="timeline-line absolute left-1/2 transform -translate-x-1/2 h-full w-1 rounded-full shadow-lg"></div>
-    
-    {experiences.map((exp, index) => (
-      <div class={`timeline-item flex items-center mb-12 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-        <!-- 增強的年份圓點 -->
-        <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-white dark:bg-gray-800 border-4 border-blue-500 rounded-full flex items-center justify-center shadow-xl z-10">
-          <div class="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+  <div class="timeline-wrapper">
+    {sortedYears.map((year, yearIndex) => (
+      <div class="year-section">
+        <!-- 年份標題 -->
+        <div class="year-header">
+          <div class="year-badge">
+            <span class="year-text">{year}</span>
+          </div>
+          <div class="year-line"></div>
         </div>
         
-        <!-- 增強的內容卡片 -->
-        <div class={`timeline-content w-5/12 ${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'}`}>
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-            <!-- 年份標籤 -->
-            <div class="timeline-year text-sm font-bold text-blue-600 dark:text-blue-400 mb-3 flex items-center">
-              <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-              {exp.year}
+        <!-- 該年份的活動列表 -->
+        <div class="activities-list">
+          {groupedExperiences[year].map((exp, activityIndex) => (
+            <div class="activity-item">
+              <div class="activity-connector"></div>
+              <div class="activity-card">
+                <div class="activity-header">
+                  <span class="type-icon">{getTypeIcon(exp.type)}</span>
+                  <h3 class="activity-title">{exp.title}</h3>
+                  <div class="type-badge">
+                    <span class={`badge ${exp.type}`}>
+                      {exp.type === 'achievement' ? '成就' :
+                       exp.type === 'education' ? '學習' :
+                       exp.type === 'competition' ? '競賽' : '認證'}
+                    </span>
+                  </div>
+                </div>
+                <p class="activity-description">{exp.description}</p>
+              </div>
             </div>
-            
-            <!-- 標題 -->
-            <h3 class="timeline-title text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center leading-snug">
-              <span class="mr-3 text-2xl filter drop-shadow-lg">{getTypeIcon(exp.type)}</span>
-              <span class="flex-1">{exp.title}</span>
-            </h3>
-            
-            <!-- 描述 -->
-            <p class={`timeline-description text-sm ${getTypeColor(exp.type)} font-medium mb-4 leading-relaxed`}>
-              {exp.description}
-            </p>
-            
-            <!-- 增強的類型標籤 -->
-            <div class="mt-4">
-              <span class={`type-badge inline-block px-4 py-2 text-xs font-bold rounded-full shadow-md ${
-                exp.type === 'achievement' ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-white' :
-                exp.type === 'education' ? 'bg-gradient-to-r from-blue-400 to-indigo-400 text-white' :
-                exp.type === 'competition' ? 'bg-gradient-to-r from-green-400 to-emerald-400 text-white' :
-                'bg-gradient-to-r from-purple-400 to-pink-400 text-white'
-              }`}>
-                {exp.type === 'achievement' ? '🏆 成就' :
-                 exp.type === 'education' ? '📚 學習' :
-                 exp.type === 'competition' ? '🎯 競賽' : '📜 認證'}
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     ))}
@@ -188,187 +118,362 @@ const getTypeColor = (type: string) => {
   .timeline-container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 3rem 1rem;
   }
 
-  .timeline-item {
+  .timeline-wrapper {
     position: relative;
-    min-height: 120px;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
   }
 
-  .timeline-item:nth-child(odd) {
-    animation-delay: 0.1s;
+  .year-section {
+    margin-bottom: 4rem;
   }
 
-  .timeline-item:nth-child(even) {
-    animation-delay: 0.2s;
+  .year-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
   }
 
-  .timeline-content {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .year-badge {
+    flex-shrink: 0;
+    margin-right: 2rem;
+  }
+
+  .year-text {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 800;
+    font-size: 1.5rem;
+    border-radius: 2rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    text-align: center;
     position: relative;
     overflow: hidden;
+    
+    /* Glassmorphism 效果 */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(0, 0, 0, 0.85);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3);
   }
 
-  .timeline-content::before {
+  /* 玻璃反光效果 */
+  .year-text::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    transition: left 0.8s;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.6s ease;
   }
 
-  .timeline-content:hover::before {
+  .year-text:hover::before {
     left: 100%;
   }
 
-  .timeline-content:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  /* 暗色模式下的玻璃效果 */
+  :global(.dark) .year-text {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
   }
 
-  .timeline-dot {
+  /* 懸停效果 */
+  .year-text:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.1),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+
+  :global(.dark) .year-text:hover {
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+
+  .year-line {
+    flex: 1;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+    border-radius: 2px;
+    opacity: 0.3;
+  }
+
+  .activities-list {
+    padding-left: 2rem;
+    position: relative;
+  }
+
+  .activities-list::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, 
+      oklch(0.7 0.15 var(--hue) / 0.3),
+      oklch(0.7 0.15 var(--hue) / 0.1),
+      oklch(0.7 0.15 var(--hue) / 0.3)
+    );
+    border-radius: 2px;
+  }
+
+  .activity-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+  }
+
+  .activity-connector {
+    position: absolute;
+    left: -8px;
+    top: 1rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid var(--card-bg);
+    z-index: 2;
     transition: all 0.3s ease;
-    animation: pulse 2s infinite;
+    
+    /* 玻璃效果的圓點 */
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.1),
+      0 0 0 2px oklch(0.7 0.15 var(--hue) / 0.3);
   }
 
-  .timeline-item:hover .timeline-dot {
-    transform: translate(-50%, -50%) scale(1.3);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  :global(.dark) .activity-connector {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-color: var(--card-bg);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      0 0 0 2px oklch(0.7 0.15 var(--hue) / 0.4);
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .activity-item:hover .activity-connector {
+    transform: scale(1.2);
+    background: oklch(0.7 0.15 var(--hue) / 0.8);
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.2),
+      0 0 0 3px oklch(0.7 0.15 var(--hue) / 0.3);
   }
 
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
-    }
-    50% {
-      box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
-    }
+  :global(.dark) .activity-item:hover .activity-connector {
+    background: oklch(0.7 0.15 var(--hue) / 0.9);
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.4),
+      0 0 0 3px oklch(0.7 0.15 var(--hue) / 0.4);
   }
 
-  .timeline-year {
-    animation: slideInLeft 0.6s ease-out;
+  .activity-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.08),
+      0 1px 4px rgba(0, 0, 0, 0.04);
   }
 
-  .timeline-title {
-    animation: slideInRight 0.8s ease-out;
+  :global(.dark) .activity-card {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.2),
+      0 1px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .timeline-description {
-    animation: fadeIn 1s ease-out;
+  .activity-item:hover .activity-card {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.12),
+      0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
-  @keyframes slideInLeft {
-    from { transform: translateX(-20px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+  :global(.dark) .activity-item:hover .activity-card {
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
-  @keyframes slideInRight {
-    from { transform: translateX(20px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+  .activity-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  .type-icon {
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    flex-shrink: 0;
+  }
+
+  .activity-title {
+    flex: 1;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  :global(.dark) .activity-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .type-badge {
+    flex-shrink: 0;
+  }
+
+  .badge {
+    padding: 0.375rem 0.875rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .badge.achievement {
+    background: linear-gradient(135deg, 
+      rgba(251, 191, 36, 0.9), 
+      rgba(245, 158, 11, 0.9)
+    );
+  }
+
+  .badge.education {
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.9), 
+      rgba(29, 78, 216, 0.9)
+    );
+  }
+
+  .badge.competition {
+    background: linear-gradient(135deg, 
+      rgba(16, 185, 129, 0.9), 
+      rgba(5, 150, 105, 0.9)
+    );
+  }
+
+  .badge.certification {
+    background: linear-gradient(135deg, 
+      rgba(139, 92, 246, 0.9), 
+      rgba(124, 58, 237, 0.9)
+    );
+  }
+
+  .badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .activity-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  :global(.dark) .activity-description {
+    color: rgba(255, 255, 255, 0.7);
   }
 
   /* 響應式設計 */
   @media (max-width: 768px) {
-    .timeline-item {
-      flex-direction: column !important;
+    .timeline-container {
+      padding: 2rem 1rem;
+    }
+
+    .year-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .year-badge {
+      margin-right: 0;
       text-align: center;
-      margin-bottom: 2rem;
     }
-    
-    .timeline-content {
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      margin-top: 1rem !important;
+
+    .year-text {
+      font-size: 1.25rem;
+      padding: 0.75rem 1.5rem;
+      min-width: auto;
     }
-    
-    .timeline-dot {
-      position: relative !important;
-      left: auto !important;
-      transform: none !important;
-      margin: 0 auto 1rem auto;
-      display: block;
+
+    .year-line {
+      height: 2px;
     }
-    
-    /* 移動端隱藏中央線 */
-    .timeline-container > .relative > .absolute {
-      display: none;
+
+    .activities-list {
+      padding-left: 1rem;
+      border-left-width: 2px;
     }
-  }
 
-  /* 深色模式增強 */
-  @media (prefers-color-scheme: dark) {
-    .timeline-content {
-      background: rgba(31, 41, 55, 0.9);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(75, 85, 99, 0.3);
+    .activity-item {
+      padding-left: 1.5rem;
     }
-    
-    .timeline-content:hover {
-      background: rgba(31, 41, 55, 0.95);
-      border-color: rgba(59, 130, 246, 0.5);
+
+    .activity-connector {
+      left: -6px;
+      width: 10px;
+      height: 10px;
+      border-width: 2px;
     }
-  }
 
-  /* 漸變線條增強 */
-  .timeline-line {
-    background: linear-gradient(
-      to bottom,
-      #3b82f6 0%,
-      #8b5cf6 25%,
-      #ec4899 50%,
-      #f59e0b 75%,
-      #10b981 100%
-    );
-    animation: gradientShift 8s ease-in-out infinite;
-  }
+    .activity-card {
+      padding: 1.25rem;
+    }
 
-  @keyframes gradientShift {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
-  }
+    .activity-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
 
-  /* 類型標籤動畫 */
-  .type-badge {
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
+    .activity-title {
+      font-size: 1rem;
+    }
 
-  .type-badge::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.6s;
-  }
-
-  .timeline-content:hover .type-badge::before {
-    left: 100%;
+    .type-badge {
+      align-self: flex-end;
+    }
   }
 </style>

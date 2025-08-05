@@ -1,0 +1,60 @@
+[build]
+  publish = "dist"
+  command = "pnpm run build"
+
+[build.environment]
+  NPM_FLAGS = "--version"
+  NODE_VERSION = "18"
+
+# API 路由重寫
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# SPA 路由支援
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# 安全標頭
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;"
+
+# 管理員路徑保護
+[[redirects]]
+  from = "/admin/*"
+  to = "/404"
+  status = 404
+  force = true
+
+# 隱藏的管理員路徑需要基本認證
+[[redirects]]
+  from = "/secure-admin-panel-x9z8k/*"
+  to = "/secure-admin-panel-x9z8k/:splat"
+  status = 200
+  headers = {WWW-Authenticate = "Basic realm=\"Admin Area\""}
+  conditions = {Role = ["admin"]}
+
+# 快取設定
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

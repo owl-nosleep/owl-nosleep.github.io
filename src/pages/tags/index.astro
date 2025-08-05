@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { siteConfig } from "@/config";
+
+const posts = await getCollection("posts");
+const uniqueTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+---
+
+<MainGridLayout
+	title="Tags"
+	description={`All tags on ${siteConfig.title}`}
+>
+	<h1 class="text-2xl font-bold mb-6">All Tags</h1>
+	<div class="flex flex-wrap gap-2">
+		{
+			uniqueTags.map((tag) => (
+				<a
+					href={`/tags/${tag}/`}
+					class="bg-accent/10 text-accent-foreground py-1 px-3 rounded-full text-sm hover:bg-accent/20 transition-colors"
+				>
+					{tag}
+				</a>
+			))
+		}
+	</div>
+</MainGridLayout>

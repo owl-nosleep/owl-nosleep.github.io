@@ -19,10 +19,23 @@ const postsCollection = defineCollection({
 		nextSlug: z.string().default(""),
 	}),
 });
+
+const experiencesCollection = defineCollection({
+	schema: z.object({
+		title: z.string(),
+		year: z.string(),
+		description: z.string().optional(),
+		type: z.enum(['achievement', 'education', 'competition', 'certification']).optional(),
+		order: z.number().optional(),
+	}),
+});
+
 const specCollection = defineCollection({
 	schema: z.object({}),
 });
+
 export const collections = {
 	posts: postsCollection,
+	experiences: experiencesCollection,
 	spec: specCollection,
 };

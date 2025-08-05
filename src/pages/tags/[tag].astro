@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import PostCard from "@/components/PostCard.astro";
+import { siteConfig } from "@/config";
+import { getPostUrlBySlug } from "@utils/url-utils";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("posts");
+	const uniqueTags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+	return uniqueTags.map((tag) => {
+		const filteredPosts = posts.filter((post) => post.data.tags.includes(tag));
+		return {
+			params: { tag },
+			props: { posts: filteredPosts },
+		};
+	});
+}
+
+interface Props {
+	posts: CollectionEntry<"posts">[];
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<MainGridLayout
+	title={`Tag: ${tag}`}
+	description={`Posts tagged with ${tag} on ${siteConfig.title}`}
+>
+	<h1 class="text-2xl font-bold mb-6">
+		Tagged in: <span class="text-accent">{tag}</span>
+	</h1>
+	<div class="grid gap-6">
+		{posts.map((post) => (
+			<PostCard
+				entry={post}
+				title={post.data.title}
+				tags={post.data.tags}
+				category={post.data.category}
+				published={post.data.published}
+				updated={post.data.updated}
+				url={getPostUrlBySlug(post.slug)}
+				image={post.data.image}
+				description={post.data.description}
+				draft={post.data.draft}
+				style=""
+			/>
+		))}
+	</div>
+</MainGridLayout>

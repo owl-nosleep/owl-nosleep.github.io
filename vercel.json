@@ -1,1 +1,4 @@
-{}
+{
+  "regions": ["hkg1"],
+  "framework": "astro"
+}
