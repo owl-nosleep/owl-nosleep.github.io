@@ -1,0 +1,63 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Enable Corepack and setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9 --activate
+        # Or use the official action:
+        # uses: pnpm/action-setup@v4
+        # with:
+        #   version: 9
+
+      - name: Install Vercel CLI
+        run: npm i -g vercel@latest
+
+      - name: Determine environment
+        id: env
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ] && [ "${{ github.event_name }}" = "push" ]; then
+            echo "VERCEL_ENV=production" >> $GITHUB_ENV
+            echo "VERCEL_ARGS=--prod" >> $GITHUB_ENV
+          else
+            echo "VERCEL_ENV=preview" >> $GITHUB_ENV
+            echo "VERCEL_ARGS=" >> $GITHUB_ENV
+          fi
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=${{ env.VERCEL_ENV }} --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build Project Artifacts (Vercel)
+        run: vercel build ${{ env.VERCEL_ARGS }} --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt ${{ env.VERCEL_ARGS }} --token=${{ secrets.VERCEL_TOKEN }}
