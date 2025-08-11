@@ -9,7 +9,7 @@ draft: false
 
 # 【30天學習新語言-Ruby】Day 3：Banner Grabbing 抓取服務資訊
 
-## 💡 為什麼 Banner Grabbing 在資安很重要？
+## 💡 幹嘛要做 Banner Grabbing？
 在偵查的時候，知道某個 Port 有沒有開還不夠，通常還會去看**背後是什麼服務**、**版本是多少**。  
 **Banner Grabbing** 就是透過連線到該服務，讀取它回傳的第一段訊息（Banner），來識別服務跟版本。
 
