@@ -1,6 +1,6 @@
 ---
 title: "【30天學習新語言-Ruby】Day 7：寫一個簡易字典攻擊器測試弱密碼"
-published: 2025-08-15T04:16:46.000Z
+published: 2025-08-16T04:16:46.000Z
 description: ""
 tags: [Learning, Ruby, 30天學Ruby挑戰]
 category: Learning
