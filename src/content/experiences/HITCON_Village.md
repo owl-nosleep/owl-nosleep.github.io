@@ -6,6 +6,4 @@ type: "achievement"
 order: 13
 ---
 
-.
-
 HITCON Village B33F50UP 攤位

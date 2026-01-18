@@ -123,10 +123,34 @@ export const experiences: Experience[] = [
 	},
 	{
 		year: "2025",
+		title: "HITCON Village B33F50UP 攤位",
+		description: "總負責人、出題者、架題",
+		type: "achievement",
+		order: 10,
+		content: ""
+	},
+	{
+		year: "2025",
 		title: "AIS3",
 		description: "軟體組",
 		type: "education",
-		order: 10,
+		order: 11,
 		content: "參加 AIS3 (Advanced Information Security Summer School) 課程，專注於軟體安全領域的深入研究與實踐。"
+	},
+	{
+		year: "2025",
+		title: "經濟部AI新秀計劃-滲透測試課程",
+		description: "課程講師",
+		type: "achievement",
+		order: 12,
+		content: ""
+	},
+	{
+		year: "2025",
+		title: "成大課程-資訊安全",
+		description: "Pwn 課程講師",
+		type: "achievement",
+		order: 13,
+		content: ""
 	}
 ];
