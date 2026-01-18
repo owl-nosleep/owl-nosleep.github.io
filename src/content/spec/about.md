@@ -18,16 +18,23 @@
 ## 🔬 研究領域
 
 - **LOLBAS**
-- **Linux Kernel eBPF**
+- **OpenBMC Vulns**
 - **AutoRecon Tools**
 - **RAG**
 
+## 💡 證照
+
+- **EC-Council CEH**
+- **Google Cybersecurity**
+- **OSCP（進行中）**
+- **CRTP（進行中）**
+
 ## 📞 聯繫方式
 
-|  平台  |                    帳號                    |
-| :----: | :----------------------------------------: |
+|  平台  |                     帳號                      |
+| :----: | :-------------------------------------------: |
 | GitHub | [owl-nosleep](https://github.com/owl-nosleep) |
-| Email |              owldtw@gmail.com              |
+| Email  |               owldtw@gmail.com                |
 | HackMD |       [@owl_d](https://hackmd.io/@owld)       |
 
 ---
