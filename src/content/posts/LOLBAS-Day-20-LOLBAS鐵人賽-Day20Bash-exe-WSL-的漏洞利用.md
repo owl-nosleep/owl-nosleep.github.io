@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽 Day20Bash.exe：WSL 的漏洞利用"
+title: "【LOLBAS鐵人賽Day20】Bash.exe：WSL 的漏洞利用"
 published: 2025-10-04T15:25:49.000Z
 description: "LOLBAS 系列第 20 天"
 tags: [LOLBAS, Windows, Security]
