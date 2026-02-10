@@ -1,0 +1,64 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+---
+
+<div class="flex flex-row items-center" id="view-count-container">
+    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+        <Icon name="material-symbols:visibility-rounded"></Icon>
+    </div>
+    <div class="text-sm">
+        <span id="view-count">-</span> views
+    </div>
+</div>
+
+<script define:vars={{ pathname }}>
+    function fetchViewCount() {
+        const viewCountElement = document.getElementById('view-count');
+        if (!viewCountElement) return;
+        
+        // Show loading state
+        viewCountElement.textContent = '-';
+        
+        // Fetch view count from GoatCounter API
+        const apiUrl = `https://owld.goatcounter.com/counter${pathname}.json`;
+        
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const count = data.count || '0';
+                viewCountElement.textContent = count;
+            })
+            .catch(error => {
+                console.log('ViewCount fetch error:', error);
+                viewCountElement.textContent = '0';
+            });
+    }
+
+    // Function to refresh view count (called by Swup)
+    window.refreshViewCount = function() {
+        fetchViewCount();
+    };
+
+    // Initial fetch
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchViewCount();
+    });
+
+    // Also run immediately if DOM is already loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fetchViewCount);
+    } else {
+        fetchViewCount();
+    }
+</script>
