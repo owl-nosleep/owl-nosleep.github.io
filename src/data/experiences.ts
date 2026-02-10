@@ -1,4 +1,4 @@
-// 經歷資料
+﻿// 經歷資料
 export interface Experience {
 	year: string;
 	title: string;
@@ -154,10 +154,10 @@ export const experiences: Experience[] = [
 		content: ""
 	},
 	{
-		year: "2026"
-		title: "TSCCTF_2026"
-		description: "出題組 組長"
-		type: "achievement"
+		year: "2026",
+		title: "TSCCTF_2026",
+		description: "出題組 組長",
+		type: "achievement",
 		order: 1,
 		content: ""
 	}
