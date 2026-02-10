@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day7Mshta.exe深度實戰：HTA應用程式的惡意執行"
+title: "【LOLBAS鐵人賽Day7】Mshta.exe深度實戰：HTA應用程式的惡意執行"
 published: 2025-09-21T02:58:36.000Z
 description: "LOLBAS 系列第 7 天"
 tags: [LOLBAS, Windows, Security]

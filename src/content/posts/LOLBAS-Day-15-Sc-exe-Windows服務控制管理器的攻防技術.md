@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day15Sc.exe：Windows服務控制管理器的攻防技術"
+title: "【LOLBAS鐵人賽Day15】Sc.exe：Windows服務控制管理器的攻防技術"
 published: 2025-09-29T15:54:04.000Z
 description: "LOLBAS 系列第 15 天"
 tags: [LOLBAS, Windows, Security]

@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day9Msiexec.exe：使用 WiX Toolset 打造惡意安裝包"
+title: "【LOLBAS鐵人賽Day9】Msiexec.exe：使用 WiX Toolset 打造惡意安裝包"
 published: 2025-09-23T14:20:49.000Z
 description: "LOLBAS 系列第 9 天"
 tags: [LOLBAS, Windows, Security]

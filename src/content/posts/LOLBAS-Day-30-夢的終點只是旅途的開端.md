@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day30夢的終點只是旅途的開端"
+title: "【LOLBAS鐵人賽Day30】夢的終點只是旅途的開端"
 published: 2025-10-14T08:50:59.000Z
 description: "LOLBAS 系列第 30 天"
 tags: [LOLBAS, Windows, Security]

@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day11Msdt.exe：微軟診斷工具的 RCE 漏洞"
+title: "【LOLBAS鐵人賽Day11】Msdt.exe：微軟診斷工具的 RCE 漏洞"
 published: 2025-09-25T11:17:46.000Z
 description: "LOLBAS 系列第 11 天"
 tags: [LOLBAS, Windows, Security]

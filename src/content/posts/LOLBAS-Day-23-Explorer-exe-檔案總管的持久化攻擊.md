@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day23Explorer.exe：檔案總管的持久化攻擊"
+title: "【LOLBAS鐵人賽Day23】Explorer.exe：檔案總管的持久化攻擊"
 published: 2025-10-07T04:01:14.000Z
 description: "LOLBAS 系列第 23 天"
 tags: [LOLBAS, Windows, Security]

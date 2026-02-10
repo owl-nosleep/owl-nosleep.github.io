@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day5Rundll32.exe深度實戰：DLL的萬能執行器"
+title: "【LOLBAS鐵人賽Day5】Rundll32.exe深度實戰：DLL的萬能執行器"
 published: 2025-09-19T14:24:21.000Z
 description: "LOLBAS 系列第 5 天"
 tags: [LOLBAS, Windows, Security]

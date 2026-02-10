@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day14Eventvwr.exe：UAC繞過的權限提升技術"
+title: "【LOLBAS鐵人賽Day14】Eventvwr.exe：UAC繞過的權限提升技術"
 published: 2025-09-28T15:19:10.000Z
 description: "LOLBAS 系列第 14 天"
 tags: [LOLBAS, Windows, Security]

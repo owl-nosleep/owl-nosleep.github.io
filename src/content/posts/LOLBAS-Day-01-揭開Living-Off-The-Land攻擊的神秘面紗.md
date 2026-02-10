@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day1揭開Living Off The Land攻擊的神秘面紗"
+title: "【LOLBAS鐵人賽Day1】揭開Living Off The Land攻擊的神秘面紗"
 published: 2025-09-15T10:44:41.000Z
 description: "LOLBAS 系列第 1 天"
 tags: [LOLBAS, Windows, Security]

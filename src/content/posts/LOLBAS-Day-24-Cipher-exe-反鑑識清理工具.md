@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day24Cipher.exe：反鑑識清理工具"
+title: "【LOLBAS鐵人賽Day24】Cipher.exe：反鑑識清理工具"
 published: 2025-10-08T13:58:06.000Z
 description: "LOLBAS 系列第 24 天"
 tags: [LOLBAS, Windows, Security]

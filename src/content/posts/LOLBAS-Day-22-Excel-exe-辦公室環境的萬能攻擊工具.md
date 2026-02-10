@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day22Excel.exe：辦公室環境的萬能攻擊工具"
+title: "【LOLBAS鐵人賽Day22】Excel.exe：辦公室環境的萬能攻擊工具"
 published: 2025-10-06T15:52:39.000Z
 description: "LOLBAS 系列第 22 天"
 tags: [LOLBAS, Windows, Security]

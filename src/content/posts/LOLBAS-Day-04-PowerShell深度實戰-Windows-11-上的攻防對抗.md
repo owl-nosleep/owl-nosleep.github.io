@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day4PowerShell深度實戰：Windows 11 上的攻防對抗"
+title: "【LOLBAS鐵人賽Day4】PowerShell深度實戰：Windows 11 上的攻防對抗"
 published: 2025-09-18T08:17:13.000Z
 description: "LOLBAS 系列第 4 天"
 tags: [LOLBAS, Windows, Security]

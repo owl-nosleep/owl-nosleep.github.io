@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day28附錄（二）：HTA 基礎語法與實戰應用"
+title: "【LOLBAS鐵人賽Day28】附錄（二）：HTA 基礎語法與實戰應用"
 published: 2025-10-12T04:35:45.000Z
 description: "LOLBAS 系列第 28 天"
 tags: [LOLBAS, Windows, Security]

@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day27附錄（一）：DLL 基礎語法與實戰應用"
+title: "【LOLBAS鐵人賽Day27】附錄（一）：DLL 基礎語法與實戰應用"
 published: 2025-10-10T19:01:49.000Z
 description: "LOLBAS 系列第 27 天"
 tags: [LOLBAS, Windows, Security]

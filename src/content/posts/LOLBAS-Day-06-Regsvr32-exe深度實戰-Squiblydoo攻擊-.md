@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day6Regsvr32.exe深度實戰：Squiblydoo攻擊！"
+title: "【LOLBAS鐵人賽Day6】Regsvr32.exe深度實戰：Squiblydoo攻擊！"
 published: 2025-09-20T15:53:43.000Z
 description: "LOLBAS 系列第 6 天"
 tags: [LOLBAS, Windows, Security]

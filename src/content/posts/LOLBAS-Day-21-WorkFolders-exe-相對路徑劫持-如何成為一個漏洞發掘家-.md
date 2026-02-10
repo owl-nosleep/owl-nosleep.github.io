@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day21WorkFolders.exe：相對路徑劫持＆如何成為一個漏洞發掘家！"
+title: "【LOLBAS鐵人賽Day21】WorkFolders.exe：相對路徑劫持＆如何成為一個漏洞發掘家！"
 published: 2025-10-05T14:30:18.000Z
 description: "LOLBAS 系列第 21 天"
 tags: [LOLBAS, Windows, Security]

@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day16Netsh.exe：透過 Helper DLL 注入執行惡意程式碼"
+title: "【LOLBAS鐵人賽Day16】Netsh.exe：透過 Helper DLL 注入執行惡意程式碼"
 published: 2025-09-30T15:23:23.000Z
 description: "LOLBAS 系列第 16 天"
 tags: [LOLBAS, Windows, Security]

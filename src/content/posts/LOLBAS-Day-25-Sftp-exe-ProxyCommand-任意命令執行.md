@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day25Sftp.exe：ProxyCommand 任意命令執行"
+title: "【LOLBAS鐵人賽Day25】Sftp.exe：ProxyCommand 任意命令執行"
 published: 2025-10-09T11:52:35.000Z
 description: "LOLBAS 系列第 25 天"
 tags: [LOLBAS, Windows, Security]

@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day12Forfiles.exe：批次檔案處理工具的命令執行技巧"
+title: "【LOLBAS鐵人賽Day12】Forfiles.exe：批次檔案處理工具的命令執行技巧"
 published: 2025-09-26T15:41:32.000Z
 description: "LOLBAS 系列第 12 天"
 tags: [LOLBAS, Windows, Security]

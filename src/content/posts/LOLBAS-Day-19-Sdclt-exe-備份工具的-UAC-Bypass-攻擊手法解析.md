@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day19Sdclt.exe：備份工具的 UAC Bypass 攻擊手法解析"
+title: "【LOLBAS鐵人賽Day19】Sdclt.exe：備份工具的 UAC Bypass 攻擊手法解析"
 published: 2025-10-03T09:13:04.000Z
 description: "LOLBAS 系列第 19 天"
 tags: [LOLBAS, Windows, Security]

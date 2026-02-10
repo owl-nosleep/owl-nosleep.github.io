@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day3Bitsadmin.exe深度實戰：Windows更新服務的暗黑面"
+title: "【LOLBAS鐵人賽Day3】Bitsadmin.exe深度實戰：Windows更新服務的暗黑面"
 published: 2025-09-17T08:49:15.000Z
 description: "LOLBAS 系列第 3 天"
 tags: [LOLBAS, Windows, Security]

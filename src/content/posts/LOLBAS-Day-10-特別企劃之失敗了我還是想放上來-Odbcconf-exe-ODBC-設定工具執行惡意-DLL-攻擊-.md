@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day10特別企劃之失敗了我還是想放上來（Odbcconf.exe：ODBC 設定工具執行惡意 DLL 攻擊）"
+title: "【LOLBAS鐵人賽Day10】特別企劃之失敗了我還是想放上來（Odbcconf.exe：ODBC 設定工具執行惡意 DLL 攻擊）"
 published: 2025-09-24T13:30:27.000Z
 description: "LOLBAS 系列第 10 天"
 tags: [LOLBAS, Windows, Security]

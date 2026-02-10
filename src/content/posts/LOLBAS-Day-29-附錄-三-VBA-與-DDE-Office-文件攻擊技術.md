@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day29附錄（三）：VBA 與 DDE - Office 文件攻擊技術"
+title: "【LOLBAS鐵人賽Day29】附錄（三）：VBA 與 DDE - Office 文件攻擊技術"
 published: 2025-10-12T17:23:07.000Z
 description: "LOLBAS 系列第 29 天"
 tags: [LOLBAS, Windows, Security]

@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day26LOLBAS 攻擊鏈：從 Excel 到完全控制"
+title: "【LOLBAS鐵人賽Day26】LOLBAS 攻擊鏈：從 Excel 到完全控制"
 published: 2025-10-10T09:58:34.000Z
 description: "LOLBAS 系列第 26 天"
 tags: [LOLBAS, Windows, Security]

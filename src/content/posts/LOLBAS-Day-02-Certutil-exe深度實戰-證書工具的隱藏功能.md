@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day2Certutil.exe深度實戰：證書工具的隱藏功能"
+title: "【LOLBAS鐵人賽Day2】Certutil.exe深度實戰：證書工具的隱藏功能"
 published: 2025-09-16T15:43:59.000Z
 description: "LOLBAS 系列第 2 天"
 tags: [LOLBAS, Windows, Security]

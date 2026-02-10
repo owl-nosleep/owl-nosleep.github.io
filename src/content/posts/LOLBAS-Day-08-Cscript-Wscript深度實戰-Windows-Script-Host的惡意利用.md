@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day8Cscript/Wscript深度實戰：Windows Script Host的惡意利用"
+title: "【LOLBAS鐵人賽Day8】Cscript/Wscript深度實戰：Windows Script Host的惡意利用"
 published: 2025-09-22T06:33:31.000Z
 description: "LOLBAS 系列第 8 天"
 tags: [LOLBAS, Windows, Security]

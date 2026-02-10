@@ -1,5 +1,5 @@
 ---
-title: "LOLBAS鐵人賽Day17TPMTool - 濫用TPM管理工具進行檔案操作"
+title: "【LOLBAS鐵人賽Day17】TPMTool - 濫用TPM管理工具進行檔案操作"
 published: 2025-10-01T15:59:37.000Z
 description: "LOLBAS 系列第 17 天"
 tags: [LOLBAS, Windows, Security]
